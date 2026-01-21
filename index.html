@@ -8,24 +8,26 @@
 
   <style>
     :root{
-      /* Inspired by the HUG Pharmacy recommendations palette (teal/green-forward) */
-      --hug-ink:#0b1320;
-      --hug-slate:#162235;
-      --hug-mist:#e8eef3;
-      --hug-card:rgba(255,255,255,.78);
-      --hug-card-strong:rgba(255,255,255,.9);
-      --hug-border:rgba(255,255,255,.18);
+      /* Clean, Stripe-inspired neutral system with HUG teal accent */
+      --ink:#0b1320;
+      --muted:#5a6779;
+      --muted2:#7a8699;
+      --bg:#ffffff;
+      --bg2:#f6f7f9;
+      --bg3:#eef1f5;
+      --card:#ffffff;
+      --border: rgba(11,19,32,.10);
+      --border2: rgba(11,19,32,.06);
+      --shadow: 0 14px 40px rgba(16,24,40,.10);
+      --shadow2: 0 10px 26px rgba(16,24,40,.08);
 
-      --hug-primary:#00755e;   /* teal-green */
-      --hug-primary-2:#00a58a; /* bright teal */
-      --hug-accent:#1e5aa8;    /* deep blue accent */
-      --hug-accent-2:#7dd3fc;  /* light blue glow */
+      /* HUG-inspired teal */
+      --hug-primary:#00755e;
+      --hug-primary-2:#00a58a;
+      --hug-accent:#1e5aa8;
 
-      --shadow: 0 18px 60px rgba(0,0,0,.25);
-      --shadow-soft: 0 10px 28px rgba(0,0,0,.18);
-      --radius: 22px;
-      --radius-sm: 14px;
-
+      --radius: 18px;
+      --radius-lg: 22px;
       --max: 1120px;
       --pad: clamp(18px, 2.4vw, 28px);
     }
@@ -35,280 +37,314 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--hug-ink);
-      background:
-        radial-gradient(1200px 600px at 18% 8%, rgba(0,165,138,.14), transparent 62%),
-        radial-gradient(900px 520px at 84% 12%, rgba(125,211,252,.14), transparent 60%),
-        radial-gradient(900px 600px at 70% 86%, rgba(30,90,168,.10), transparent 55%),
-        linear-gradient(180deg, #f6fbfa 0%, #eef6f4 38%, #f7fafc 100%);
-      min-height:100vh;
+      color: var(--ink);
+      background: var(--bg);
       overflow-x:hidden;
     }
 
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--pad)}
 
+    /* Subtle Stripe-like background: grid + soft blobs (very light) */
+    .bg-grid{
+      position:fixed; inset:0; z-index:-2;
+      background:
+        linear-gradient(to right, rgba(11,19,32,.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(11,19,32,.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity:.32;
+      pointer-events:none;
+      transform: translateZ(0);
+    }
+    .bg-blobs{
+      position:fixed; inset:-20vh -20vw; z-index:-3;
+      pointer-events:none;
+      background:
+        radial-gradient(600px 420px at 18% 10%, rgba(0,165,138,.10), transparent 62%),
+        radial-gradient(520px 380px at 84% 12%, rgba(30,90,168,.10), transparent 60%),
+        radial-gradient(520px 420px at 55% 88%, rgba(0,117,94,.06), transparent 65%);
+      filter: blur(10px);
+      opacity:.95;
+    }
+
     /* Top bar */
     .topbar{
-      position:sticky; top:0; z-index:20;
+      position:sticky; top:0; z-index:30;
+      background: rgba(255,255,255,.82);
       backdrop-filter: blur(14px);
-      background: rgba(255,255,255,.72);
-      border-bottom: 1px solid rgba(11,19,32,.08);
+      border-bottom: 1px solid var(--border2);
     }
-    .topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:14px; padding: 12px var(--pad)}
-    .brand{display:flex; align-items:center; gap:10px; min-width: 220px}
-    .logo{
-      width:36px; height:36px; border-radius: 14px;
-      background:
-        radial-gradient(18px 18px at 30% 28%, rgba(125,211,252,.55), transparent 60%),
-        linear-gradient(135deg, var(--hug-primary) 0%, var(--hug-primary-2) 52%, var(--hug-accent) 100%);
-      box-shadow: 0 12px 26px rgba(0,0,0,.35);
-      border: 1px solid rgba(255,255,255,.16);
-    }
-    .brand h1{margin:0; font-size:14px; letter-spacing:.35px; color: rgba(11,19,32,.92); font-weight:650}
-    .brand p{margin:0; font-size:12px; color: rgba(11,19,32,.58)}
+    .topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:14px; padding: 14px var(--pad)}
 
-    nav{display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+    .brand{display:flex; align-items:center; gap:12px; min-width: 240px}
+    .logo{
+      width:34px; height:34px; border-radius: 12px;
+      background:
+        radial-gradient(18px 18px at 30% 28%, rgba(30,90,168,.22), transparent 62%),
+        linear-gradient(135deg, rgba(0,117,94,.95) 0%, rgba(0,165,138,.80) 55%, rgba(30,90,168,.68) 100%);
+      box-shadow: 0 10px 22px rgba(16,24,40,.10);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .brand h1{margin:0; font-size:13px; letter-spacing:.25px; color: rgba(11,19,32,.92); font-weight:700}
+    .brand p{margin:2px 0 0; font-size:12px; color: var(--muted)}
+
+    nav{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
     nav a{
       font-size:13px;
-      color: rgba(11,19,32,.72);
+      color: rgba(11,19,32,.78);
       padding:10px 10px;
       border-radius: 12px;
       border: 1px solid transparent;
       transition: .18s ease;
     }
-    nav a:hover{color: rgba(11,19,32,.92); border-color: rgba(11,19,32,.10); background: rgba(255,255,255,.72)}
+    nav a:hover{border-color: var(--border); background: rgba(246,247,249,.85)}
 
     .lang-btn{
-      display:inline-flex; align-items:center; gap:8px;
-      border-radius: 999px;
+      display:inline-flex; align-items:center; gap:10px;
       padding: 10px 12px;
-      border: 1px solid rgba(11,19,32,.12);
-      color: rgba(11,19,32,.88);
-      background:
-        radial-gradient(24px 24px at 28% 25%, rgba(125,211,252,.18), transparent 60%),
-        linear-gradient(135deg, rgba(0,117,94,.10), rgba(30,90,168,.06));
-      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+      border-radius: 999px;
+      background: rgba(246,247,249,.92);
+      border: 1px solid var(--border);
+      color: rgba(11,19,32,.86);
       cursor:pointer;
-      transition: transform .12s ease, filter .12s ease, border-color .12s ease;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+      box-shadow: 0 10px 24px rgba(16,24,40,.06);
       user-select:none;
       white-space:nowrap;
     }
-    .lang-btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22); filter:brightness(1.05)}
+    .lang-btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.95)}
     .lang-pill{
       font-size:11px;
       padding:4px 8px;
       border-radius: 999px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(11,19,32,.10);
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--border2);
+      color: rgba(11,19,32,.72);
     }
+
+    /* Sections */
+    section{padding: clamp(34px, 5vw, 72px) 0}
+    .alt{background: linear-gradient(180deg, var(--bg2) 0%, rgba(246,247,249,.55) 100%)}
+
+    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin: 0 0 18px}
+    .section-head h3{margin:0; font-size: 16px; letter-spacing:.18px; font-weight: 800}
+    .section-head p{margin:6px 0 0; color: var(--muted); font-size: 13px; max-width: 64ch; line-height:1.5}
 
     /* Hero */
-    .hero{padding: clamp(36px, 6vw, 72px) 0 20px}
-    .hero-grid{display:grid; grid-template-columns: 1.08fr .92fr; gap: 22px; align-items:stretch}
+    .hero{padding: clamp(46px, 6vw, 90px) 0 46px}
+    .hero-grid{display:grid; grid-template-columns: 1.12fr .88fr; gap: 18px; align-items:stretch}
 
-    .glass{
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(11,19,32,.10);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .glass::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 260px at 22% 12%, rgba(0,165,138,.30), transparent 65%),
-        radial-gradient(420px 240px at 80% 20%, rgba(125,211,252,.22), transparent 62%),
-        radial-gradient(460px 320px at 70% 88%, rgba(30,90,168,.20), transparent 64%);
-      pointer-events:none;
-      opacity:.9;
-    }
-
-    .hero-card{padding: 26px 26px 22px}
-    .kicker{display:inline-flex; gap:10px; align-items:center; margin-bottom:14px}
-    .dot{width:9px; height:9px; border-radius:99px; background: var(--hug-primary-2); box-shadow: 0 0 0 6px rgba(0,165,138,.16)}
-    .kicker span{color: rgba(11,19,32,.66); font-size:12px; letter-spacing:.18px}
-
-    .title{
+    .headline{
+      font-size: clamp(34px, 4vw, 54px);
+      letter-spacing: -1px;
+      line-height: 1.04;
       margin:0;
-      color: rgba(11,19,32,.94);
-      font-size: clamp(28px, 3.4vw, 42px);
-      line-height:1.06;
-      letter-spacing:-.5px;
+      font-weight: 850;
     }
-    .subtitle{
-      margin: 12px 0 18px;
-      color: rgba(11,19,32,.68);
+    .headline .grad{
+      background: linear-gradient(90deg, rgba(0,117,94,1), rgba(0,165,138,1), rgba(30,90,168,.92));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .subhead{
+      margin: 14px 0 18px;
+      color: var(--muted);
       font-size: 15px;
-      line-height:1.55;
-      max-width: 62ch;
+      line-height: 1.6;
+      max-width: 72ch;
     }
 
-    .cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top: 14px}
+    .cta-row{display:flex; flex-wrap:wrap; gap:10px; margin-top: 8px}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
       padding: 12px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(11,19,32,.10);
-      background: rgba(255,255,255,.78);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.92);
       color: rgba(11,19,32,.88);
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
       font-size: 13px;
       cursor:pointer;
       user-select:none;
+      box-shadow: 0 10px 26px rgba(16,24,40,.06);
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.92); border-color: rgba(11,19,32,.16)}
-
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.98)}
     .btn.primary{
-      background: linear-gradient(135deg, rgba(0,117,94,.88), rgba(0,165,138,.78));
+      background: linear-gradient(135deg, rgba(0,117,94,.95), rgba(0,165,138,.85));
       border-color: rgba(0,165,138,.35);
-      color: rgba(255,255,255,.96);
+      color: rgba(255,255,255,.97);
+      box-shadow: 0 14px 40px rgba(0,165,138,.18);
     }
-    .btn.primary:hover{border-color: rgba(125,211,252,.35)}
+    .btn.primary:hover{box-shadow: 0 16px 44px rgba(0,165,138,.22)}
 
-    .mini{
-      color: rgba(11,19,32,.56);
-      font-size: 12px;
-      margin: 10px 0 0;
+    /* Bento cards */
+    .bento{
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .bento.pad{padding: 18px}
+
+    /* Gradient border accent (Stripe-like) */
+    .bento.border-grad{
+      border: 1px solid transparent;
+      background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(135deg, rgba(0,117,94,.55), rgba(0,165,138,.28), rgba(30,90,168,.22)) border-box;
     }
 
-    /* Right hero panel */
-    .profile{padding: 22px}
-    .profile-top{display:flex; gap:14px; align-items:center}
-    .avatar-img{
-      width:58px; height:58px; border-radius: 999px;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,.22);
-      box-shadow: 0 14px 30px rgba(0,0,0,.28);
-      background: rgba(255,255,255,.10);
-    }
-    .hero-avatar{display:flex; align-items:center; gap:12px; margin: 10px 0 12px}
+    .hero-left{padding: 22px 22px 20px}
+
+    .hero-avatar{display:flex; align-items:center; gap:12px; margin: 14px 0 10px}
     .hero-avatar img{
       width:76px; height:76px; border-radius: 999px;
       object-fit: cover;
-      border: 2px solid rgba(255,255,255,.22);
-      box-shadow: 0 18px 44px rgba(0,0,0,.35);
-      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(11,19,32,.10);
+      box-shadow: 0 18px 48px rgba(16,24,40,.12);
+      background: rgba(246,247,249,.9);
     }
-    .profile h2{margin:0; color: rgba(11,19,32,.92); font-size:16px; letter-spacing:.2px}
-    .profile p{margin:4px 0 0; color: rgba(11,19,32,.64); font-size:13px; line-height:1.45}
 
-    .chips{display:flex; flex-wrap:wrap; gap:8px; margin: 16px 0 14px}
+    .micro{
+      margin-top: 12px;
+      color: var(--muted2);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    /* Right hero panel */
+    .profile{padding: 18px}
+    .profile-top{display:flex; gap:12px; align-items:center}
+    .avatar-img{
+      width:54px; height:54px; border-radius: 999px;
+      object-fit: cover;
+      border: 1px solid rgba(11,19,32,.10);
+      box-shadow: 0 14px 38px rgba(16,24,40,.10);
+      background: rgba(246,247,249,.9);
+    }
+    .profile h2{margin:0; font-size:14px; font-weight: 850}
+    .profile p{margin:4px 0 0; color: var(--muted); font-size:13px; line-height:1.45}
+
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin: 14px 0 12px}
     .chip{
       font-size:12px;
       padding:8px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(11,19,32,.10);
-      color: rgba(11,19,32,.72);
+      background: rgba(246,247,249,.92);
+      border: 1px solid var(--border2);
+      color: rgba(11,19,32,.74);
+      white-space:nowrap;
     }
 
     .stats{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top: 10px}
     .stat{
-      background: rgba(255,255,255,.80);
-      border: 1px solid rgba(11,19,32,.10);
-      border-radius: 18px;
+      border-radius: 16px;
+      background: rgba(246,247,249,.86);
+      border: 1px solid var(--border2);
       padding: 12px 12px;
+      min-height: 58px;
     }
-    .stat b{display:block; color: rgba(11,19,32,.92); font-size:14px}
-    .stat span{display:block; color: rgba(11,19,32,.62); font-size:11px; margin-top:4px}
+    .stat b{display:block; font-size:13px}
+    .stat span{display:block; margin-top:4px; color: var(--muted2); font-size:11px}
 
-    /* Sections */
-    section{padding: 24px 0}
-    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin: 10px 0 14px}
-    .section-head h3{margin:0; color: rgba(11,19,32,.92); font-size: 18px; letter-spacing:.2px}
-    .section-head p{margin:0; color: rgba(11,19,32,.58); font-size: 13px}
-
-    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px}
-    .card{
-      background: var(--hug-card);
-      border: 1px solid rgba(255,255,255,.24);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-soft);
-      overflow:hidden;
-      position:relative;
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:0;
+    /* Decorative figure blocks */
+    .figure{
+      border-radius: 18px;
+      border: 1px solid var(--border2);
       background:
-        radial-gradient(520px 260px at 12% 10%, rgba(0,165,138,.12), transparent 60%),
-        radial-gradient(420px 240px at 88% 18%, rgba(30,90,168,.10), transparent 58%);
-      pointer-events:none;
+        radial-gradient(380px 220px at 20% 22%, rgba(0,165,138,.12), transparent 60%),
+        radial-gradient(360px 220px at 80% 28%, rgba(30,90,168,.10), transparent 60%),
+        linear-gradient(180deg, rgba(246,247,249,.92), rgba(255,255,255,.92));
+      overflow:hidden;
+      padding: 14px;
     }
-    .card > *{position:relative}
-    .card.pad{padding: 18px}
+    .figure-title{display:flex; align-items:center; justify-content:space-between; gap:10px; margin: 0 0 10px}
+    .figure-title b{font-size:12px; color: rgba(11,19,32,.78)}
+    .figure-title span{font-size:11px; color: var(--muted2)}
 
-    .two-col{grid-column: span 6}
+    .flow{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    /* Content grid */
+    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px}
     .span-5{grid-column: span 5}
     .span-7{grid-column: span 7}
     .span-12{grid-column: span 12}
 
-    .muted{color: rgba(11,19,32,.68)}
-    .strong{color: rgba(11,19,32,.92)}
-    .bullet{margin: 12px 0 0; padding-left: 18px; color: rgba(11,19,32,.78)}
+    .muted{color: var(--muted); line-height: 1.6}
+    .strong{color: rgba(11,19,32,.92); line-height: 1.6}
+
+    .bullet{margin: 12px 0 0; padding-left: 18px; color: rgba(11,19,32,.76)}
     .bullet li{margin: 6px 0}
 
-    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px}
-    .pill{
-      font-size:12px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,.08);
-      background: rgba(255,255,255,.66);
-      color: rgba(11,19,32,.82);
-    }
-
+    /* Module bento */
     .module-grid{display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 10px}
     .module{
-      border-radius: 18px;
-      background: rgba(255,255,255,.74);
-      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      background: rgba(246,247,249,.86);
+      border: 1px solid var(--border2);
       padding: 14px;
+      min-height: 92px;
     }
-    .module b{display:block; font-size:13px; color: rgba(11,19,32,.9)}
-    .module span{display:block; font-size:12px; color: rgba(11,19,32,.68); margin-top:4px; line-height:1.35}
+    .module b{display:block; font-size:13px; color: rgba(11,19,32,.92)}
+    .module span{display:block; font-size:12px; color: var(--muted); margin-top:6px; line-height:1.45}
 
-    .submissions{
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
+    /* Submission cards with progress bar placeholder */
+    .submissions{display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px}
     .submission{
-      border-radius: 18px;
+      border-radius: 16px;
       padding: 14px;
-      border: 1px solid rgba(0,0,0,.08);
-      background: rgba(255,255,255,.80);
-      transition: transform .12s ease, box-shadow .12s ease;
+      border: 1px solid var(--border2);
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 10px 26px rgba(16,24,40,.05);
+      transition: transform .14s ease, box-shadow .14s ease;
     }
-    .submission:hover{transform: translateY(-2px); box-shadow: 0 16px 34px rgba(0,0,0,.15)}
-    .submission b{display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:13px; color: rgba(11,19,32,.9)}
+    .submission:hover{transform: translateY(-2px); box-shadow: 0 16px 34px rgba(16,24,40,.08)}
+    .submission b{display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:13px}
     .badge{
       font-size:11px;
       padding: 4px 8px;
       border-radius: 999px;
-      background: linear-gradient(135deg, rgba(0,117,94,.14), rgba(30,90,168,.10));
-      border: 1px solid rgba(0,0,0,.06);
+      background: rgba(246,247,249,.92);
+      border: 1px solid var(--border2);
       color: rgba(11,19,32,.72);
       white-space:nowrap;
     }
-    .submission p{margin: 8px 0 0; font-size:12px; color: rgba(11,19,32,.68); line-height:1.45}
-
-    footer{padding: 26px 0 40px}
-    .foot{
-      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
-      color: rgba(11,19,32,.56);
-      font-size: 12px;
+    .submission p{margin: 8px 0 0; font-size:12px; color: var(--muted); line-height:1.55}
+    .bar{
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(11,19,32,.06);
+      overflow:hidden;
+      margin-top: 12px;
     }
+    .bar > i{
+      display:block;
+      height:100%;
+      width: 28%; /* placeholder */
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(0,117,94,.85), rgba(0,165,138,.75));
+    }
+
+    /* Footer */
+    footer{padding: 40px 0 56px}
+    .foot{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; color: var(--muted2); font-size: 12px}
+
+    /* Progressive reveal on scroll */
+    .reveal{opacity:0; transform: translateY(16px); filter: blur(1px); transition: opacity .6s ease, transform .6s ease, filter .6s ease}
+    .reveal.in{opacity:1; transform: translateY(0); filter: blur(0)}
 
     /* Responsive */
     @media (max-width: 980px){
       .hero-grid{grid-template-columns: 1fr}
       nav{display:none}
-      .two-col{grid-column: span 12}
       .span-5{grid-column: span 12}
       .span-7{grid-column: span 12}
       .submissions{grid-template-columns: repeat(2, minmax(0,1fr))}
@@ -318,18 +354,21 @@
       .stats{grid-template-columns: 1fr}
       .topbar-inner{gap:10px}
       .brand{min-width:unset}
+      .hero-left{padding: 18px}
     }
 
-    /* Subtle entrance animation */
-    @keyframes floatIn{from{opacity:0; transform: translateY(10px)} to{opacity:1; transform: translateY(0)}}
-    .animate{animation: floatIn .6s ease both}
-    .delay-1{animation-delay:.05s}
-    .delay-2{animation-delay:.12s}
-    .delay-3{animation-delay:.18s}
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .reveal{opacity:1; transform:none; filter:none; transition:none}
+    }
   </style>
 </head>
 
 <body>
+  <div class="bg-blobs" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
   <header class="topbar">
     <div class="topbar-inner wrap">
       <div class="brand">
@@ -357,32 +396,61 @@
     <section class="hero">
       <div class="wrap hero-grid">
 
-        <div class="glass animate">
-          <div class="hero-card">
-            <div class="kicker">
-              <span class="dot" aria-hidden="true"></span>
-              <span data-i18n="hero.kicker">Course portfolio</span>
+        <div class="bento border-grad hero-left reveal">
+          <div class="hero-avatar" aria-label="Avatar">
+            <img src="https://github.com/crisskala/graph-ai-portfolio/blob/main/015-Skala.jpg?raw=true" alt="Portrait of Christian Skalafouris" loading="eager" />
+          </div>
+
+          <h2 class="headline" data-i18n="hero.title">
+            From prompts to real workflows, every week.
+          </h2>
+          <p class="subhead" data-i18n="hero.subtitle">
+            A single-page hub for my work across the 8-week live cohort course: no-code AI tools for task automation, research acceleration, and practical deliverables.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="#submissions" data-i18n="hero.cta1">Explore weekly submissions</a>
+            <a class="btn" href="#course" data-i18n="hero.cta2">See course modules</a>
+          </div>
+
+          <p class="micro" data-i18n="hero.note">Links will be added progressively as submissions are completed.</p>
+
+          <div class="figure" style="margin-top:16px" aria-label="Workflow figure">
+            <div class="figure-title">
+              <b data-i18n="hero.figureTitle">Example workflow</b>
+              <span data-i18n="hero.figureHint">prompt → artifact → iteration</span>
             </div>
 
-            <div class="hero-avatar" aria-label="Avatar">
-              <img src="https://github.com/crisskala/graph-ai-portfolio/blob/main/015-Skala.jpg?raw=true" alt="Portrait of Christian Skalafouris" loading="eager" />
-            </div>
-
-            <h2 class="title" data-i18n="hero.title">From prompts to real workflows, every week.</h2>
-            <p class="subtitle" data-i18n="hero.subtitle">
-              A single-page hub for my work across the 8-week live cohort course: no-code AI tools for task automation, research acceleration, and practical deliverables.
-            </p>
-
-            <div class="cta-row">
-              <a class="btn primary" href="#submissions" data-i18n="hero.cta1">Explore weekly submissions</a>
-              <a class="btn" href="#course" data-i18n="hero.cta2">See course modules</a>
-            </div>
-
-            <p class="mini" data-i18n="hero.note">Links will be added progressively as submissions are completed.</p>
+            <!-- Simple, Stripe-like abstract flow diagram (SVG) -->
+            <svg class="flow" viewBox="0 0 680 170" role="img" aria-label="Workflow diagram">
+              <defs>
+                <linearGradient id="g" x1="0" x2="1">
+                  <stop offset="0" stop-color="rgba(0,117,94,.95)" />
+                  <stop offset=".55" stop-color="rgba(0,165,138,.75)" />
+                  <stop offset="1" stop-color="rgba(30,90,168,.55)" />
+                </linearGradient>
+              </defs>
+              <rect x="0" y="0" width="680" height="170" rx="18" fill="rgba(255,255,255,.0)" />
+              <path d="M60 92 C160 40, 240 145, 340 92 C440 40, 520 145, 620 92" fill="none" stroke="rgba(11,19,32,.12)" stroke-width="10" stroke-linecap="round" />
+              <path d="M60 92 C160 40, 240 145, 340 92 C440 40, 520 145, 620 92" fill="none" stroke="url(#g)" stroke-width="6" stroke-linecap="round" />
+              <g>
+                <circle cx="60" cy="92" r="12" fill="rgba(255,255,255,.95)" stroke="rgba(11,19,32,.10)" />
+                <circle cx="340" cy="92" r="12" fill="rgba(255,255,255,.95)" stroke="rgba(11,19,32,.10)" />
+                <circle cx="620" cy="92" r="12" fill="rgba(255,255,255,.95)" stroke="rgba(11,19,32,.10)" />
+                <circle cx="60" cy="92" r="6" fill="rgba(0,165,138,.85)" />
+                <circle cx="340" cy="92" r="6" fill="rgba(0,117,94,.85)" />
+                <circle cx="620" cy="92" r="6" fill="rgba(30,90,168,.60)" />
+              </g>
+              <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(11,19,32,.70)">
+                <text x="32" y="140" data-i18n="hero.figureA">Prompt</text>
+                <text x="308" y="140" data-i18n="hero.figureB">Artifact</text>
+                <text x="582" y="140" data-i18n="hero.figureC">Iteration</text>
+              </g>
+            </svg>
           </div>
         </div>
 
-        <aside class="glass animate delay-1" aria-label="Profile summary">
+        <aside class="bento pad reveal" aria-label="Profile summary">
           <div class="profile">
             <div class="profile-top">
               <img class="avatar-img" src="https://github.com/crisskala/graph-ai-portfolio/blob/main/015-Skala.jpg?raw=true" alt="Portrait of Christian Skalafouris" loading="lazy" decoding="async" />
@@ -413,15 +481,46 @@
                 <span data-i18n="profile.stat3.k">Final showcase</span>
               </div>
             </div>
+
+            <div class="figure" style="margin-top:14px">
+              <div class="figure-title">
+                <b data-i18n="profile.figureTitle">Focus areas</b>
+                <span data-i18n="profile.figureHint">bento snapshot</span>
+              </div>
+              <svg class="flow" viewBox="0 0 680 160" role="img" aria-label="Focus bento">
+                <rect x="0" y="0" width="680" height="160" rx="18" fill="rgba(255,255,255,.0)" />
+                <g>
+                  <rect x="16" y="16" width="210" height="60" rx="14" fill="rgba(255,255,255,.82)" stroke="rgba(11,19,32,.08)" />
+                  <rect x="240" y="16" width="200" height="60" rx="14" fill="rgba(255,255,255,.82)" stroke="rgba(11,19,32,.08)" />
+                  <rect x="454" y="16" width="210" height="60" rx="14" fill="rgba(255,255,255,.82)" stroke="rgba(11,19,32,.08)" />
+                  <rect x="16" y="90" width="260" height="54" rx="14" fill="rgba(255,255,255,.82)" stroke="rgba(11,19,32,.08)" />
+                  <rect x="292" y="90" width="372" height="54" rx="14" fill="rgba(255,255,255,.82)" stroke="rgba(11,19,32,.08)" />
+                </g>
+                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(11,19,32,.72)">
+                  <text x="44" y="52" data-i18n="profile.box1">CDSS</text>
+                  <text x="268" y="52" data-i18n="profile.box2">Data</text>
+                  <text x="482" y="52" data-i18n="profile.box3">Research</text>
+                  <text x="44" y="122" data-i18n="profile.box4">UX</text>
+                  <text x="320" y="122" data-i18n="profile.box5">Automation</text>
+                </g>
+                <g>
+                  <circle cx="32" cy="46" r="6" fill="rgba(0,165,138,.75)" />
+                  <circle cx="256" cy="46" r="6" fill="rgba(0,117,94,.72)" />
+                  <circle cx="470" cy="46" r="6" fill="rgba(30,90,168,.40)" />
+                  <circle cx="32" cy="116" r="6" fill="rgba(30,90,168,.35)" />
+                  <circle cx="308" cy="116" r="6" fill="rgba(0,165,138,.55)" />
+                </g>
+              </svg>
+            </div>
           </div>
         </aside>
 
       </div>
     </section>
 
-    <section id="about">
+    <section id="about" class="alt">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
             <h3 data-i18n="about.title">About me</h3>
             <p data-i18n="about.subtitle">Clinical pharmacy, data, and systems that help teams make safer decisions.</p>
@@ -429,7 +528,7 @@
         </div>
 
         <div class="grid">
-          <div class="card pad span-7 animate delay-2">
+          <div class="bento pad span-7 reveal">
             <p class="strong" style="margin:0 0 10px" data-i18n="about.p1">
               I am a hospital pharmacist and project lead at the Hôpitaux Universitaires de Genève (HUG), working at the interface between healthcare teams, IT engineers, and third-party drug knowledge providers.
             </p>
@@ -437,19 +536,47 @@
               My focus includes medication database governance for an institutional prescribing system, and the continuous development of a pharmaceutical decision support system (PharmaCheck) to detect high-risk situations and support clinical pharmacy activities.
             </p>
 
-            <div class="pillrow" aria-label="Core themes">
-              <span class="pill" data-i18n="about.pill1">Clinical decision support</span>
-              <span class="pill" data-i18n="about.pill2">Data pipelines</span>
-              <span class="pill" data-i18n="about.pill3">Medication safety</span>
-              <span class="pill" data-i18n="about.pill4">Interoperability</span>
-              <span class="pill" data-i18n="about.pill5">Applied AI</span>
+            <div class="figure" style="margin-top:14px">
+              <div class="figure-title">
+                <b data-i18n="about.figureTitle">What I build</b>
+                <span data-i18n="about.figureHint">systems + workflows</span>
+              </div>
+              <svg class="flow" viewBox="0 0 680 160" role="img" aria-label="Build blocks">
+                <defs>
+                  <linearGradient id="g2" x1="0" x2="1">
+                    <stop offset="0" stop-color="rgba(0,117,94,.28)" />
+                    <stop offset=".55" stop-color="rgba(0,165,138,.18)" />
+                    <stop offset="1" stop-color="rgba(30,90,168,.14)" />
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="680" height="160" rx="18" fill="rgba(255,255,255,.0)" />
+                <rect x="16" y="24" width="648" height="18" rx="9" fill="url(#g2)" />
+                <g>
+                  <rect x="16" y="56" width="210" height="88" rx="16" fill="rgba(255,255,255,.90)" stroke="rgba(11,19,32,.08)" />
+                  <rect x="240" y="56" width="210" height="88" rx="16" fill="rgba(255,255,255,.90)" stroke="rgba(11,19,32,.08)" />
+                  <rect x="454" y="56" width="210" height="88" rx="16" fill="rgba(255,255,255,.90)" stroke="rgba(11,19,32,.08)" />
+                </g>
+                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(11,19,32,.74)">
+                  <text x="40" y="92" data-i18n="about.block1">Rules & signals</text>
+                  <text x="40" y="114" fill="rgba(90,103,121,.95)" data-i18n="about.block1s">alerts, scoring, safety</text>
+                  <text x="264" y="92" data-i18n="about.block2">Data pipelines</text>
+                  <text x="264" y="114" fill="rgba(90,103,121,.95)" data-i18n="about.block2s">queries, aggregation, QA</text>
+                  <text x="478" y="92" data-i18n="about.block3">Interfaces</text>
+                  <text x="478" y="114" fill="rgba(90,103,121,.95)" data-i18n="about.block3s">UX, adoption, governance</text>
+                </g>
+                <g>
+                  <circle cx="32" cy="86" r="6" fill="rgba(0,165,138,.70)" />
+                  <circle cx="256" cy="86" r="6" fill="rgba(0,117,94,.65)" />
+                  <circle cx="470" cy="86" r="6" fill="rgba(30,90,168,.38)" />
+                </g>
+              </svg>
             </div>
           </div>
 
-          <div class="card pad span-5 animate delay-3">
+          <div class="bento pad span-5 reveal">
             <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom: 8px;">
-              <b style="font-size:14px; color: rgba(11,19,32,.9)" data-i18n="about.quick">Quick profile</b>
-              <span style="font-size:12px; color: rgba(11,19,32,.6)" data-i18n="about.location">Geneva region</span>
+              <b style="font-size:13px; color: rgba(11,19,32,.92)" data-i18n="about.quick">Quick profile</b>
+              <span style="font-size:12px; color: var(--muted2)" data-i18n="about.location">Geneva region</span>
             </div>
             <ul class="bullet">
               <li data-i18n="about.q1">Doctorate in pharmaceutical sciences (University of Geneva)</li>
@@ -457,6 +584,29 @@
               <li data-i18n="about.q3">Projects: medication database, prescribing system interfaces, PharmaCheck</li>
               <li data-i18n="about.q4">Teaching and supervision of research projects</li>
             </ul>
+
+            <div class="figure" style="margin-top:14px">
+              <div class="figure-title">
+                <b data-i18n="about.miniTitle">Operating principles</b>
+                <span data-i18n="about.miniHint">what I optimize</span>
+              </div>
+              <svg class="flow" viewBox="0 0 680 140" role="img" aria-label="Principles">
+                <rect x="0" y="0" width="680" height="140" rx="18" fill="rgba(255,255,255,.0)" />
+                <g>
+                  <path d="M40 92 C120 40, 160 120, 240 78" fill="none" stroke="rgba(11,19,32,.12)" stroke-width="10" stroke-linecap="round" />
+                  <path d="M40 92 C120 40, 160 120, 240 78" fill="none" stroke="rgba(0,165,138,.55)" stroke-width="6" stroke-linecap="round" />
+                  <path d="M260 92 C340 40, 380 120, 460 78" fill="none" stroke="rgba(11,19,32,.12)" stroke-width="10" stroke-linecap="round" />
+                  <path d="M260 92 C340 40, 380 120, 460 78" fill="none" stroke="rgba(0,117,94,.50)" stroke-width="6" stroke-linecap="round" />
+                  <path d="M480 92 C560 40, 600 120, 640 78" fill="none" stroke="rgba(11,19,32,.12)" stroke-width="10" stroke-linecap="round" />
+                  <path d="M480 92 C560 40, 600 120, 640 78" fill="none" stroke="rgba(30,90,168,.35)" stroke-width="6" stroke-linecap="round" />
+                </g>
+                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(11,19,32,.72)">
+                  <text x="34" y="126" data-i18n="about.pr1">Safety</text>
+                  <text x="252" y="126" data-i18n="about.pr2">Reliability</text>
+                  <text x="470" y="126" data-i18n="about.pr3">Adoption</text>
+                </g>
+              </svg>
+            </div>
           </div>
 
         </div>
@@ -465,7 +615,7 @@
 
     <section id="course">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
             <h3 data-i18n="course.title">About the course</h3>
             <p data-i18n="course.subtitle">An 8-week live cohort course focused on practical, no-code GenAI workflows.</p>
@@ -473,7 +623,7 @@
         </div>
 
         <div class="grid">
-          <div class="card pad span-7 animate">
+          <div class="bento pad span-7 reveal">
             <p class="strong" style="margin:0 0 10px" data-i18n="course.p1">
               “Generative AI for Work & Research” is an 8-week live cohort course built around no-code tools for task automation and research productivity.
             </p>
@@ -483,7 +633,7 @@
 
             <div class="module-grid" aria-label="Modules">
               <div class="module"><b data-i18n="course.m1.t">Module 1. Websites, Documents & Presentations</b><span data-i18n="course.m1.d">LLM basics; Markdown/LaTeX/HTML outputs; simple research websites; AI presentation tools.</span></div>
-              <div class="module"><b data-i18n="course.m2.t">Module 2. AI‑Automated Data Analysis</b><span data-i18n="course.m2.d">File transforms, dashboards, automated reports, quick analysis workflows.</span></div>
+              <div class="module"><b data-i18n="course.m2.t">Module 2. AI-Automated Data Analysis</b><span data-i18n="course.m2.d">File transforms, dashboards, automated reports, quick analysis workflows.</span></div>
               <div class="module"><b data-i18n="course.m3.t">Module 3. GenAI for Research & Text Analysis</b><span data-i18n="course.m3.d">Literature search, text classification, summarization, and knowledge mapping.</span></div>
               <div class="module"><b data-i18n="course.m4.t">Module 4. Custom GPTs & Chatbots</b><span data-i18n="course.m4.d">Context windows, RAG, custom assistants, chatbots with knowledge bases.</span></div>
               <div class="module"><b data-i18n="course.m5.t">Module 5. AI for Task Automation</b><span data-i18n="course.m5.d">Agents, automation flows, monitoring, and browser-control workflows.</span></div>
@@ -493,8 +643,8 @@
             </div>
           </div>
 
-          <div class="card pad span-5 animate delay-1">
-            <b style="display:block; font-size:14px; color: rgba(11,19,32,.9); margin-bottom:8px" data-i18n="course.features">Bootcamp features</b>
+          <div class="bento pad span-5 reveal">
+            <b style="display:block; font-size:13px; color: rgba(11,19,32,.92); margin-bottom:8px" data-i18n="course.features">Bootcamp features</b>
             <ul class="bullet">
               <li data-i18n="course.f1">Weekly live workshops</li>
               <li data-i18n="course.f2">Weekly live help sessions</li>
@@ -504,9 +654,36 @@
               <li data-i18n="course.f6">Shareable certificate + lifetime tutorial access</li>
             </ul>
 
-            <div style="margin-top:14px; padding:12px; border-radius: 18px; border: 1px solid rgba(0,0,0,.08); background: rgba(255,255,255,.72)">
-              <b style="display:block; font-size:13px; color: rgba(11,19,32,.9)" data-i18n="course.grading">Grading (overview)</b>
-              <p style="margin:8px 0 0; font-size:12px; color: rgba(11,19,32,.7); line-height:1.45" data-i18n="course.gradingNote">
+            <div class="figure" style="margin-top:14px">
+              <div class="figure-title">
+                <b data-i18n="course.figureTitle">Weekly rhythm</b>
+                <span data-i18n="course.figureHint">repeatable cadence</span>
+              </div>
+              <svg class="flow" viewBox="0 0 680 160" role="img" aria-label="Weekly rhythm">
+                <rect x="0" y="0" width="680" height="160" rx="18" fill="rgba(255,255,255,.0)" />
+                <g>
+                  <rect x="16" y="22" width="648" height="22" rx="11" fill="rgba(11,19,32,.06)" />
+                  <rect x="16" y="22" width="360" height="22" rx="11" fill="rgba(0,165,138,.40)" />
+                </g>
+                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(11,19,32,.72)">
+                  <text x="16" y="82" data-i18n="course.step1">Live workshop</text>
+                  <text x="16" y="108" fill="rgba(90,103,121,.95)" data-i18n="course.step1s">learn + build</text>
+                  <text x="250" y="82" data-i18n="course.step2">Help session</text>
+                  <text x="250" y="108" fill="rgba(90,103,121,.95)" data-i18n="course.step2s">debug + refine</text>
+                  <text x="460" y="82" data-i18n="course.step3">Submission</text>
+                  <text x="460" y="108" fill="rgba(90,103,121,.95)" data-i18n="course.step3s">ship an artifact</text>
+                </g>
+                <g>
+                  <circle cx="40" cy="64" r="8" fill="rgba(0,165,138,.55)" />
+                  <circle cx="274" cy="64" r="8" fill="rgba(0,117,94,.40)" />
+                  <circle cx="484" cy="64" r="8" fill="rgba(30,90,168,.26)" />
+                </g>
+              </svg>
+            </div>
+
+            <div style="margin-top:12px; padding:12px; border-radius: 16px; border: 1px solid var(--border2); background: rgba(246,247,249,.86)">
+              <b style="display:block; font-size:12px; color: rgba(11,19,32,.86)" data-i18n="course.grading">Grading (overview)</b>
+              <p style="margin:8px 0 0; font-size:12px; color: var(--muted); line-height:1.55" data-i18n="course.gradingNote">
                 Final grade combines quizzes, workshop assignments, attendance/participation, and a final project.
               </p>
             </div>
@@ -516,56 +693,64 @@
       </div>
     </section>
 
-    <section id="submissions">
+    <section id="submissions" class="alt">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
             <h3 data-i18n="subs.title">My weekly submissions</h3>
             <p data-i18n="subs.subtitle">Placeholders for now. We will add links to each submission later.</p>
           </div>
         </div>
 
-        <div class="card pad animate">
+        <div class="bento pad reveal">
           <div class="submissions" aria-label="Weekly submissions">
 
             <div class="submission">
               <b><span data-i18n="subs.w1">Week 1</span><span class="badge" data-i18n="subs.w1b">Websites & documents</span></b>
               <p data-i18n="subs.w1d">Deliverable placeholder: a structured document or mini-website created with Canvas.</p>
+              <div class="bar" aria-hidden="true"><i></i></div>
             </div>
 
             <div class="submission">
               <b><span data-i18n="subs.w2">Week 2</span><span class="badge" data-i18n="subs.w2b">Data analysis</span></b>
               <p data-i18n="subs.w2d">Deliverable placeholder: automated analysis workflow and a compact report.</p>
+              <div class="bar" aria-hidden="true"><i style="width:18%"></i></div>
             </div>
 
             <div class="submission">
               <b><span data-i18n="subs.w3">Week 3</span><span class="badge" data-i18n="subs.w3b">Research synthesis</span></b>
               <p data-i18n="subs.w3d">Deliverable placeholder: literature search and summarization pipeline.</p>
+              <div class="bar" aria-hidden="true"><i style="width:10%"></i></div>
             </div>
 
             <div class="submission">
               <b><span data-i18n="subs.w4">Week 4</span><span class="badge" data-i18n="subs.w4b">Custom GPT</span></b>
               <p data-i18n="subs.w4d">Deliverable placeholder: a tailored assistant with retrieval and guardrails.</p>
+              <div class="bar" aria-hidden="true"><i style="width:12%"></i></div>
             </div>
 
             <div class="submission">
               <b><span data-i18n="subs.w5">Week 5</span><span class="badge" data-i18n="subs.w5b">Automation</span></b>
               <p data-i18n="subs.w5d">Deliverable placeholder: an agent workflow for repetitive tasks and monitoring.</p>
+              <div class="bar" aria-hidden="true"><i style="width:8%"></i></div>
             </div>
 
             <div class="submission">
               <b><span data-i18n="subs.w6">Week 6</span><span class="badge" data-i18n="subs.w6b">Communication</span></b>
               <p data-i18n="subs.w6d">Deliverable placeholder: multi-audience summaries + visuals for dissemination.</p>
+              <div class="bar" aria-hidden="true"><i style="width:6%"></i></div>
             </div>
 
             <div class="submission">
               <b><span data-i18n="subs.w7">Week 7</span><span class="badge" data-i18n="subs.w7b">Capstone</span></b>
               <p data-i18n="subs.w7d">Deliverable placeholder: capstone progress, iterations, and peer feedback.</p>
+              <div class="bar" aria-hidden="true"><i style="width:6%"></i></div>
             </div>
 
             <div class="submission">
               <b><span data-i18n="subs.w8">Week 8</span><span class="badge" data-i18n="subs.w8b">Showcase</span></b>
               <p data-i18n="subs.w8d">Deliverable placeholder: final presentation, public Q&A, and takeaways.</p>
+              <div class="bar" aria-hidden="true"><i style="width:5%"></i></div>
             </div>
 
           </div>
@@ -574,9 +759,9 @@
         <div style="height:14px"></div>
 
         <div class="grid">
-          <div class="card pad span-12 animate delay-1">
-            <b style="display:block; font-size:14px; color: rgba(11,19,32,.9)" data-i18n="subs.noteTitle">How we’ll update this page</b>
-            <p style="margin:8px 0 0; font-size:12px; color: rgba(11,19,32,.7); line-height:1.55" data-i18n="subs.note">
+          <div class="bento pad span-12 reveal">
+            <b style="display:block; font-size:13px; color: rgba(11,19,32,.92)" data-i18n="subs.noteTitle">How we’ll update this page</b>
+            <p style="margin:8px 0 0; font-size:12px; color: var(--muted); line-height:1.65" data-i18n="subs.note">
               Each week card will later include: a short description, tool stack, artifacts (slides/docs/code), and a link to the submission.
             </p>
           </div>
@@ -602,12 +787,18 @@
         "nav.course":"Course",
         "nav.submissions":"Submissions",
         "lang.switch":"Français",
-        "hero.kicker":"Course portfolio",
+
         "hero.title":"From prompts to real workflows, every week.",
         "hero.subtitle":"A single-page hub for my work across the 8-week live cohort course: no-code AI tools for task automation, research acceleration, and practical deliverables.",
         "hero.cta1":"Explore weekly submissions",
         "hero.cta2":"See course modules",
         "hero.note":"Links will be added progressively as submissions are completed.",
+        "hero.figureTitle":"Example workflow",
+        "hero.figureHint":"prompt → artifact → iteration",
+        "hero.figureA":"Prompt",
+        "hero.figureB":"Artifact",
+        "hero.figureC":"Iteration",
+
         "profile.name":"Christian Skalafouris",
         "profile.role":"Hospital pharmacist, digital health and clinical decision support",
         "profile.chip1":"Medication databases",
@@ -620,22 +811,37 @@
         "profile.stat2.k":"Core workshops",
         "profile.stat3.v":"Capstone",
         "profile.stat3.k":"Final showcase",
+        "profile.figureTitle":"Focus areas",
+        "profile.figureHint":"bento snapshot",
+        "profile.box1":"CDSS",
+        "profile.box2":"Data",
+        "profile.box3":"Research",
+        "profile.box4":"UX",
+        "profile.box5":"Automation",
 
         "about.title":"About me",
         "about.subtitle":"Clinical pharmacy, data, and systems that help teams make safer decisions.",
         "about.p1":"I am a hospital pharmacist and project lead at the Hôpitaux Universitaires de Genève (HUG), working at the interface between healthcare teams, IT engineers, and third-party drug knowledge providers.",
         "about.p2":"My focus includes medication database governance for an institutional prescribing system, and the continuous development of a pharmaceutical decision support system (PharmaCheck) to detect high-risk situations and support clinical pharmacy activities.",
-        "about.pill1":"Clinical decision support",
-        "about.pill2":"Data pipelines",
-        "about.pill3":"Medication safety",
-        "about.pill4":"Interoperability",
-        "about.pill5":"Applied AI",
         "about.quick":"Quick profile",
         "about.location":"Geneva region",
         "about.q1":"Doctorate in pharmaceutical sciences (University of Geneva)",
         "about.q2":"Certificate of advanced studies in medical informatics",
         "about.q3":"Projects: medication database, prescribing system interfaces, PharmaCheck",
         "about.q4":"Teaching and supervision of research projects",
+        "about.figureTitle":"What I build",
+        "about.figureHint":"systems + workflows",
+        "about.block1":"Rules & signals",
+        "about.block1s":"alerts, scoring, safety",
+        "about.block2":"Data pipelines",
+        "about.block2s":"queries, aggregation, QA",
+        "about.block3":"Interfaces",
+        "about.block3s":"UX, adoption, governance",
+        "about.miniTitle":"Operating principles",
+        "about.miniHint":"what I optimize",
+        "about.pr1":"Safety",
+        "about.pr2":"Reliability",
+        "about.pr3":"Adoption",
 
         "course.title":"About the course",
         "course.subtitle":"An 8-week live cohort course focused on practical, no-code GenAI workflows.",
@@ -643,7 +849,7 @@
         "course.p2":"The program combines weekly live workshops, help sessions, community support, and a capstone project with coaching and feedback.",
         "course.m1.t":"Module 1. Websites, Documents & Presentations",
         "course.m1.d":"LLM basics; Markdown/LaTeX/HTML outputs; simple research websites; AI presentation tools.",
-        "course.m2.t":"Module 2. AI‑Automated Data Analysis",
+        "course.m2.t":"Module 2. AI-Automated Data Analysis",
         "course.m2.d":"File transforms, dashboards, automated reports, quick analysis workflows.",
         "course.m3.t":"Module 3. GenAI for Research & Text Analysis",
         "course.m3.d":"Literature search, text classification, summarization, and knowledge mapping.",
@@ -664,6 +870,14 @@
         "course.f4":"Personalized feedback on assessments",
         "course.f5":"Capstone project coaching",
         "course.f6":"Shareable certificate + lifetime tutorial access",
+        "course.figureTitle":"Weekly rhythm",
+        "course.figureHint":"repeatable cadence",
+        "course.step1":"Live workshop",
+        "course.step1s":"learn + build",
+        "course.step2":"Help session",
+        "course.step2s":"debug + refine",
+        "course.step3":"Submission",
+        "course.step3s":"ship an artifact",
         "course.grading":"Grading (overview)",
         "course.gradingNote":"Final grade combines quizzes, workshop assignments, attendance/participation, and a final project.",
 
@@ -706,15 +920,21 @@
         "nav.course":"Cours",
         "nav.submissions":"Rendus",
         "lang.switch":"English",
-        "hero.kicker":"Portfolio du cours",
+
         "hero.title":"Des prompts à des workflows concrets, chaque semaine.",
-        "hero.subtitle":"Une page unique pour regrouper mes travaux sur ce cours en cohorte de 8 semaines : outils GenAI no‑code, automatisation, recherche accélérée et livrables utilisables.",
+        "hero.subtitle":"Une page unique pour regrouper mes travaux sur ce cours en cohorte de 8 semaines : outils GenAI no-code, automatisation, recherche accélérée et livrables utilisables.",
         "hero.cta1":"Voir les rendus hebdomadaires",
         "hero.cta2":"Voir les modules",
         "hero.note":"Les liens seront ajoutés progressivement au fil des rendus.",
+        "hero.figureTitle":"Exemple de workflow",
+        "hero.figureHint":"prompt → artefact → itération",
+        "hero.figureA":"Prompt",
+        "hero.figureB":"Artefact",
+        "hero.figureC":"Itération",
+
         "profile.name":"Christian Skalafouris",
         "profile.role":"Pharmacien hospitalier, santé digitale et aide à la décision clinique",
-        "profile.chip1":"Bases de données médicaments",
+        "profile.chip1":"Base médicaments",
         "profile.chip2":"Aide à la décision",
         "profile.chip3":"Recherche et enseignement",
         "profile.chip4":"UX / design thinking",
@@ -722,28 +942,43 @@
         "profile.stat1.k":"Cours en cohorte",
         "profile.stat2.v":"7 modules",
         "profile.stat2.k":"Ateliers clés",
-        "profile.stat3.v":"Projet",
+        "profile.stat3.v":"Capstone",
         "profile.stat3.k":"Showcase final",
+        "profile.figureTitle":"Axes",
+        "profile.figureHint":"snapshot bento",
+        "profile.box1":"SADP",
+        "profile.box2":"Données",
+        "profile.box3":"Recherche",
+        "profile.box4":"UX",
+        "profile.box5":"Automatisation",
 
         "about.title":"À propos de moi",
-        "about.subtitle":"Pharmacie clinique, données, et systèmes qui améliorent la sécurité et la décision.",
+        "about.subtitle":"Pharmacie clinique, données et systèmes au service de décisions plus sûres.",
         "about.p1":"Je suis pharmacien hospitalier et chef de projet aux Hôpitaux Universitaires de Genève (HUG), à l’interface entre soignants, ingénieurs informaticiens et fournisseurs de bases de connaissances médicament.",
         "about.p2":"Mon activité couvre la gouvernance de la base médicaments d’un système institutionnel de prescription, ainsi que le développement continu d’un système d’aide à la décision pharmaceutique (PharmaCheck) pour détecter des situations à risque et soutenir la pharmacie clinique.",
-        "about.pill1":"Aide à la décision",
-        "about.pill2":"Pipelines de données",
-        "about.pill3":"Sécurité médicamenteuse",
-        "about.pill4":"Interopérabilité",
-        "about.pill5":"IA appliquée",
         "about.quick":"Profil rapide",
         "about.location":"Région genevoise",
         "about.q1":"Doctorat en sciences pharmaceutiques (Université de Genève)",
         "about.q2":"Certificat d’études avancées en informatique médicale",
         "about.q3":"Projets : base médicaments, interfaces de prescription, PharmaCheck",
         "about.q4":"Enseignement et encadrement de travaux de recherche",
+        "about.figureTitle":"Ce que je construis",
+        "about.figureHint":"systèmes + workflows",
+        "about.block1":"Règles & signaux",
+        "about.block1s":"alertes, scoring, sécurité",
+        "about.block2":"Pipelines de données",
+        "about.block2s":"requêtes, agrégations, QA",
+        "about.block3":"Interfaces",
+        "about.block3s":"UX, adoption, gouvernance",
+        "about.miniTitle":"Principes",
+        "about.miniHint":"ce que j’optimise",
+        "about.pr1":"Sécurité",
+        "about.pr2":"Fiabilité",
+        "about.pr3":"Adoption",
 
         "course.title":"À propos du cours",
-        "course.subtitle":"Un cours en cohorte de 8 semaines, orienté pratique et workflows GenAI no‑code.",
-        "course.p1":"« IA générative pour le travail et la recherche » est un cours en cohorte de 8 semaines centré sur des outils no‑code pour automatiser des tâches et augmenter la productivité en recherche.",
+        "course.subtitle":"Un cours en cohorte de 8 semaines, orienté pratique et workflows GenAI no-code.",
+        "course.p1":"« IA générative pour le travail et la recherche » est un cours en cohorte de 8 semaines centré sur des outils no-code pour automatiser des tâches et augmenter la productivité.",
         "course.p2":"Le programme combine des ateliers hebdomadaires, des sessions d’aide, une communauté, et un projet capstone avec coaching et feedback.",
         "course.m1.t":"Module 1. Sites, documents et présentations",
         "course.m1.d":"Bases des LLM ; sorties Markdown/LaTeX/HTML ; sites de recherche simples ; outils IA pour présentations.",
@@ -756,9 +991,9 @@
         "course.m5.t":"Module 5. Automatisation des tâches",
         "course.m5.d":"Agents, workflows d’automatisation, veille, automatisation de navigation web.",
         "course.m6.t":"Module 6. Communication et diffusion",
-        "course.m6.d":"Synthèses multi‑publics, visuels/figures, abstracts vidéo, vulgarisation.",
+        "course.m6.d":"Synthèses multi-publics, visuels/figures, abstracts vidéo, vulgarisation.",
         "course.m7.t":"Module 7. Capstone et showcase",
-        "course.m7.d":"Itérations avec feedback, finalisation d’un outil/solution, présentation publique.",
+        "course.m7.d":"Itérations, finalisation d’un outil/solution, présentation publique.",
         "course.assess.t":"Évaluation",
         "course.assess.d":"Quizz, devoirs d’atelier, participation, et projet final.",
         "course.features":"Fonctionnement type bootcamp",
@@ -768,35 +1003,43 @@
         "course.f4":"Feedback personnalisé sur les évaluations",
         "course.f5":"Coaching du projet capstone",
         "course.f6":"Certificat partageable et accès à vie aux tutoriels",
+        "course.figureTitle":"Rythme hebdomadaire",
+        "course.figureHint":"cadence répétable",
+        "course.step1":"Atelier live",
+        "course.step1s":"apprendre + construire",
+        "course.step2":"Session d’aide",
+        "course.step2s":"déboguer + affiner",
+        "course.step3":"Rendu",
+        "course.step3s":"livrer un artefact",
         "course.grading":"Notation (aperçu)",
         "course.gradingNote":"La note finale combine quizz, devoirs, participation et projet final.",
 
         "subs.title":"Mes rendus hebdomadaires",
-        "subs.subtitle":"Pour l’instant des placeholders. Nous ajouterons les liens vers chaque rendu ensuite.",
+        "subs.subtitle":"Pour l’instant des placeholders. Nous ajouterons ensuite les liens vers chaque rendu.",
         "subs.w1":"Semaine 1",
-        "subs.w1b":"Sites et documents",
+        "subs.w1b":"Sites & documents",
         "subs.w1d":"Placeholder : document structuré ou mini-site créé avec Canvas.",
         "subs.w2":"Semaine 2",
         "subs.w2b":"Analyse de données",
         "subs.w2d":"Placeholder : workflow d’analyse automatisée et rapport synthétique.",
         "subs.w3":"Semaine 3",
-        "subs.w3b":"Synthèse de recherche",
+        "subs.w3b":"Synthèse",
         "subs.w3d":"Placeholder : pipeline de recherche bibliographique et de résumé.",
         "subs.w4":"Semaine 4",
-        "subs.w4b":"GPT personnalisé",
-        "subs.w4d":"Placeholder : assistant sur mesure avec retrieval et garde‑fous.",
+        "subs.w4b":"GPT",
+        "subs.w4d":"Placeholder : assistant sur mesure avec retrieval et garde-fous.",
         "subs.w5":"Semaine 5",
         "subs.w5b":"Automatisation",
         "subs.w5d":"Placeholder : agent pour tâches répétitives et veille.",
         "subs.w6":"Semaine 6",
         "subs.w6b":"Communication",
-        "subs.w6d":"Placeholder : synthèses multi‑publics et visuels de diffusion.",
+        "subs.w6d":"Placeholder : synthèses multi-publics et visuels.",
         "subs.w7":"Semaine 7",
         "subs.w7b":"Capstone",
-        "subs.w7d":"Placeholder : progression du projet, itérations et feedback.",
+        "subs.w7d":"Placeholder : itérations et feedback.",
         "subs.w8":"Semaine 8",
         "subs.w8b":"Showcase",
-        "subs.w8d":"Placeholder : présentation finale, Q&A et apprentissages.",
+        "subs.w8d":"Placeholder : présentation finale et apprentissages.",
         "subs.noteTitle":"Comment cette page sera mise à jour",
         "subs.note":"Chaque carte contiendra ensuite : une description, le stack d’outils, les artefacts (slides/docs/code) et un lien vers le rendu.",
 
@@ -814,15 +1057,12 @@
         const key = el.getAttribute("data-i18n");
         const val = dict[key];
         if (typeof val !== "string") return;
-        // Allow a tiny bit of safe HTML only where we control the string.
         if (val.includes("<span")) el.innerHTML = val;
         else el.textContent = val;
       });
 
       const pill = document.getElementById("langPill");
       pill.textContent = lang.toUpperCase();
-
-      // Update the toggle label (what you'll switch to)
       document.getElementById("langLabel").textContent = dict["lang.switch"] || (lang === "en" ? "Français" : "English");
     }
 
@@ -833,6 +1073,18 @@
 
     document.getElementById("langToggle").addEventListener("click", toggleLang);
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Progressive reveal on scroll (Stripe-like)
+    const revealEls = Array.from(document.querySelectorAll('.reveal'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { root: null, threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(el => io.observe(el));
 
     // Initial render
     applyI18n(state.lang);
