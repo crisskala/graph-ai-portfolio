@@ -3,40 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio for the Generative AI for Work & Research course: profile, course overview, and weekly submissions." />
-  <title>Christian Skalafouris | Generative AI for Work & Research</title>
+  <meta name="description" content="One-page portfolio for the Generative AI for Work & Research course." />
+  <title>Generative AI for Work & Research | Portfolio</title>
 
   <style>
     :root{
-      /* HUG-inspired palette (approx). Adjust anytime. */
-      --brand-green:#0a7b66;
-      --brand-blue:#0b4aa3;
-      --ink:#0b1220;
-      --muted:#5a667a;
-      --paper:#ffffff;
-      --bg1:#f6fbff;
-      --bg2:#f3fff9;
-      --card:rgba(255,255,255,.72);
-      --stroke:rgba(12,18,32,.10);
-      --shadow:0 24px 60px rgba(10, 18, 32, .14);
-      --shadow2:0 10px 30px rgba(10, 18, 32, .10);
-      --radius:22px;
-      --radius2:30px;
-      --max:1120px;
-    }
+      /* Inspired by the HUG Pharmacy recommendations palette (teal/green-forward) */
+      --hug-ink:#0b1320;
+      --hug-slate:#162235;
+      --hug-mist:#e8eef3;
+      --hug-card:rgba(255,255,255,.78);
+      --hug-card-strong:rgba(255,255,255,.9);
+      --hug-border:rgba(255,255,255,.18);
 
-    @media (prefers-color-scheme: dark){
-      :root{
-        --ink:#eaf0ff;
-        --muted:#a7b2c6;
-        --paper:#0a0f1c;
-        --bg1:#070b14;
-        --bg2:#08151a;
-        --card:rgba(14, 20, 38, .62);
-        --stroke:rgba(255,255,255,.10);
-        --shadow:0 28px 70px rgba(0,0,0,.52);
-        --shadow2:0 12px 34px rgba(0,0,0,.40);
-      }
+      --hug-primary:#00755e;   /* teal-green */
+      --hug-primary-2:#00a58a; /* bright teal */
+      --hug-accent:#1e5aa8;    /* deep blue accent */
+      --hug-accent-2:#7dd3fc;  /* light blue glow */
+
+      --shadow: 0 18px 60px rgba(0,0,0,.25);
+      --shadow-soft: 0 10px 28px rgba(0,0,0,.18);
+      --radius: 22px;
+      --radius-sm: 14px;
+
+      --max: 1120px;
+      --pad: clamp(18px, 2.4vw, 28px);
     }
 
     *{box-sizing:border-box}
@@ -44,706 +35,806 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--ink);
+      color: #0b1320;
       background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(11,74,163,.22), transparent 60%),
-        radial-gradient(900px 500px at 105% 0%, rgba(10,123,102,.20), transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      line-height:1.55;
+        radial-gradient(1200px 600px at 15% 10%, rgba(0,165,138,.35), transparent 62%),
+        radial-gradient(900px 520px at 82% 18%, rgba(125,211,252,.28), transparent 60%),
+        radial-gradient(900px 600px at 70% 88%, rgba(30,90,168,.22), transparent 55%),
+        linear-gradient(180deg, #07101d 0%, #0b1320 55%, #07101d 100%);
+      min-height:100vh;
       overflow-x:hidden;
     }
 
-    a{color:inherit}
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--pad)}
 
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
-
-    /* Top nav */
+    /* Top bar */
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter:saturate(1.4) blur(14px);
-      background:linear-gradient(180deg, rgba(255,255,255,.74), rgba(255,255,255,.40));
-      border-bottom:1px solid var(--stroke);
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(16px);
+      background: rgba(7,16,29,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
-    @media (prefers-color-scheme: dark){
-      .topbar{background:linear-gradient(180deg, rgba(10,15,28,.76), rgba(10,15,28,.44));}
-    }
-
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:14px 0;
-      gap:14px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      text-decoration:none;
-    }
-
-    .mark{
-      width:42px; height:42px;
-      border-radius:14px;
-      display:grid; place-items:center;
-      font-weight:800;
-      letter-spacing:.5px;
-      color:white;
+    .topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:14px; padding: 12px var(--pad)}
+    .brand{display:flex; align-items:center; gap:10px; min-width: 220px}
+    .logo{
+      width:36px; height:36px; border-radius: 14px;
       background:
-        radial-gradient(14px 14px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
-        linear-gradient(135deg, var(--brand-blue), var(--brand-green));
-      box-shadow:0 10px 22px rgba(11,74,163,.18);
-      border:1px solid rgba(255,255,255,.24);
+        radial-gradient(18px 18px at 30% 28%, rgba(125,211,252,.55), transparent 60%),
+        linear-gradient(135deg, var(--hug-primary) 0%, var(--hug-primary-2) 52%, var(--hug-accent) 100%);
+      box-shadow: 0 12px 26px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.16);
     }
+    .brand h1{margin:0; font-size:14px; letter-spacing:.35px; color:rgba(255,255,255,.92); font-weight:650}
+    .brand p{margin:0; font-size:12px; color: rgba(255,255,255,.62)}
 
-    .brand .titles{display:flex; flex-direction:column; line-height:1.15}
-    .brand .titles strong{font-size:14px}
-    .brand .titles span{font-size:12px; color:var(--muted)}
-
-    .links{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
-    .links a{
-      text-decoration:none;
+    nav{display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+    nav a{
       font-size:13px;
-      color:var(--muted);
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid transparent;
-      transition:all .2s ease;
+      color: rgba(255,255,255,.78);
+      padding:10px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: .18s ease;
     }
-    .links a:hover{color:var(--ink); border-color:var(--stroke); background:rgba(255,255,255,.55)}
-    @media (prefers-color-scheme: dark){
-      .links a:hover{background:rgba(255,255,255,.06)}
-    }
+    nav a:hover{color: rgba(255,255,255,.96); border-color: rgba(255,255,255,.12); background: rgba(255,255,255,.06)}
 
-    .cta{
-      text-decoration:none;
-      padding:10px 12px;
-      border-radius:14px;
-      font-size:13px;
-      font-weight:650;
-      color:white;
-      background:linear-gradient(135deg, var(--brand-blue), var(--brand-green));
-      border:1px solid rgba(255,255,255,.22);
-      box-shadow:0 14px 34px rgba(11,74,163,.22);
-      transition:transform .18s ease, filter .18s ease;
+    .lang-btn{
+      display:inline-flex; align-items:center; gap:8px;
+      border-radius: 999px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.92);
+      background:
+        radial-gradient(24px 24px at 28% 25%, rgba(125,211,252,.32), transparent 60%),
+        linear-gradient(135deg, rgba(0,117,94,.55), rgba(30,90,168,.35));
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease, border-color .12s ease;
+      user-select:none;
       white-space:nowrap;
     }
-    .cta:hover{transform:translateY(-1px); filter:saturate(1.05)}
+    .lang-btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22); filter:brightness(1.05)}
+    .lang-pill{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.16);
+    }
 
     /* Hero */
-    .hero{padding:58px 0 24px}
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:22px;
-      align-items:stretch;
-    }
-    @media (max-width: 940px){
-      .heroGrid{grid-template-columns:1fr;}
-    }
+    .hero{padding: clamp(36px, 6vw, 72px) 0 20px}
+    .hero-grid{display:grid; grid-template-columns: 1.08fr .92fr; gap: 22px; align-items:stretch}
 
-    .panel{
-      border:1px solid var(--stroke);
-      background:var(--card);
-      border-radius:var(--radius2);
-      box-shadow:var(--shadow);
+    .glass{
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
     }
-
-    .panel::before{
+    .glass::before{
       content:"";
-      position:absolute;
-      inset:-2px;
+      position:absolute; inset:-2px;
       background:
-        radial-gradient(600px 160px at 0% 0%, rgba(11,74,163,.18), transparent 60%),
-        radial-gradient(600px 200px at 100% 0%, rgba(10,123,102,.16), transparent 60%);
+        radial-gradient(520px 260px at 22% 12%, rgba(0,165,138,.30), transparent 65%),
+        radial-gradient(420px 240px at 80% 20%, rgba(125,211,252,.22), transparent 62%),
+        radial-gradient(460px 320px at 70% 88%, rgba(30,90,168,.20), transparent 64%);
       pointer-events:none;
+      opacity:.9;
     }
 
-    .panelInner{position:relative; padding:28px 28px 26px}
+    .hero-card{padding: 26px 26px 22px}
+    .kicker{display:inline-flex; gap:10px; align-items:center; margin-bottom:14px}
+    .dot{width:9px; height:9px; border-radius:99px; background: var(--hug-primary-2); box-shadow: 0 0 0 6px rgba(0,165,138,.16)}
+    .kicker span{color: rgba(255,255,255,.78); font-size:12px; letter-spacing:.18px}
 
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:8px 12px;
-      border:1px solid var(--stroke);
-      border-radius:999px;
-      background:rgba(255,255,255,.50);
-      color:var(--muted);
-      font-size:12px;
-      letter-spacing:.2px;
+    .title{
+      margin:0;
+      color: rgba(255,255,255,.95);
+      font-size: clamp(28px, 3.4vw, 42px);
+      line-height:1.06;
+      letter-spacing:-.5px;
     }
-    @media (prefers-color-scheme: dark){
-      .kicker{background:rgba(255,255,255,.06)}
-    }
-
-    .dot{
-      width:9px; height:9px; border-radius:99px;
-      background:linear-gradient(135deg, var(--brand-blue), var(--brand-green));
-      box-shadow:0 0 0 4px rgba(11,74,163,.12);
+    .subtitle{
+      margin: 12px 0 18px;
+      color: rgba(255,255,255,.72);
+      font-size: 15px;
+      line-height:1.55;
+      max-width: 62ch;
     }
 
-    h1{
-      margin:14px 0 10px;
-      font-size:42px;
-      line-height:1.08;
-      letter-spacing:-.8px;
-    }
-    @media (max-width: 520px){h1{font-size:34px}}
-
-    .lead{font-size:16px; color:var(--muted); max-width:70ch; margin:0 0 18px}
-
-    .heroActions{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
-
+    .cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top: 14px}
     .btn{
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+      display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid var(--stroke);
-      background:rgba(255,255,255,.55);
-      color:var(--ink);
-      font-weight:650;
-      font-size:13px;
-      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.92);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
     }
-    .btn:hover{transform:translateY(-1px); border-color:rgba(11,74,163,.25)}
-    @media (prefers-color-scheme: dark){
-      .btn{background:rgba(255,255,255,.06)}
-      .btn:hover{border-color:rgba(255,255,255,.20)}
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.11); border-color: rgba(255,255,255,.24)}
+
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(0,117,94,.85), rgba(0,165,138,.75));
+      border-color: rgba(0,165,138,.35);
+    }
+    .btn.primary:hover{border-color: rgba(125,211,252,.35)}
+
+    .mini{
+      color: rgba(255,255,255,.62);
+      font-size: 12px;
+      margin: 10px 0 0;
     }
 
-    .btnPrimary{
-      background:linear-gradient(135deg, rgba(11,74,163,.98), rgba(10,123,102,.98));
-      color:white;
-      border-color:rgba(255,255,255,.18);
-      box-shadow:0 18px 44px rgba(11,74,163,.22);
+    /* Right hero panel */
+    .profile{padding: 22px}
+    .profile-top{display:flex; gap:14px; align-items:center}
+    .avatar-img{
+      width:58px; height:58px; border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,.22);
+      box-shadow: 0 14px 30px rgba(0,0,0,.28);
+      background: rgba(255,255,255,.10);
+    }
+    .hero-avatar{display:flex; align-items:center; gap:12px; margin: 10px 0 12px}
+    .hero-avatar img{
+      width:76px; height:76px; border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,.22);
+      box-shadow: 0 18px 44px rgba(0,0,0,.35);
+      background: rgba(255,255,255,.10);
+    }
+    .profile h2{margin:0; color: rgba(255,255,255,.92); font-size:16px; letter-spacing:.2px}
+    .profile p{margin:4px 0 0; color: rgba(255,255,255,.66); font-size:13px; line-height:1.45}
+
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin: 16px 0 14px}
+    .chip{
+      font-size:12px;
+      padding:8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.75);
     }
 
-    /* Side card */
-    .side{
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      gap:16px;
-      height:100%;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:10px;
-    }
+    .stats{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top: 10px}
     .stat{
-      border:1px solid var(--stroke);
-      background:rgba(255,255,255,.52);
-      border-radius:18px;
-      padding:14px 14px 12px;
-      box-shadow:var(--shadow2);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+      padding: 12px 12px;
     }
-    @media (prefers-color-scheme: dark){
-      .stat{background:rgba(255,255,255,.05)}
-    }
-    .stat strong{display:block; font-size:13px; margin-bottom:4px}
-    .stat span{display:block; font-size:12px; color:var(--muted)}
-
-    .mini{font-size:12px; color:var(--muted)}
+    .stat b{display:block; color: rgba(255,255,255,.92); font-size:14px}
+    .stat span{display:block; color: rgba(255,255,255,.62); font-size:11px; margin-top:4px}
 
     /* Sections */
-    section{padding:40px 0}
+    section{padding: 24px 0}
+    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin: 10px 0 14px}
+    .section-head h3{margin:0; color: rgba(255,255,255,.94); font-size: 18px; letter-spacing:.2px}
+    .section-head p{margin:0; color: rgba(255,255,255,.60); font-size: 13px}
 
-    .sectionHead{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom:16px}
-    .sectionHead h2{margin:0; font-size:22px; letter-spacing:-.3px}
-    .sectionHead p{margin:0; color:var(--muted); font-size:13px; max-width:70ch}
-
-    .grid3{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
-    @media (max-width: 940px){.grid3{grid-template-columns:1fr}}
-
+    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px}
     .card{
-      border:1px solid var(--stroke);
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow2);
-      padding:18px;
+      background: var(--hug-card);
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
       overflow:hidden;
       position:relative;
     }
-
     .card::before{
       content:"";
-      position:absolute;
-      inset:-1px;
+      position:absolute; inset:0;
       background:
-        radial-gradient(460px 140px at 0% 0%, rgba(11,74,163,.14), transparent 60%),
-        radial-gradient(420px 160px at 100% 0%, rgba(10,123,102,.12), transparent 58%);
+        radial-gradient(520px 260px at 12% 10%, rgba(0,165,138,.12), transparent 60%),
+        radial-gradient(420px 240px at 88% 18%, rgba(30,90,168,.10), transparent 58%);
       pointer-events:none;
-      opacity:.9;
     }
-
     .card > *{position:relative}
+    .card.pad{padding: 18px}
 
+    .two-col{grid-column: span 6}
+    .span-5{grid-column: span 5}
+    .span-7{grid-column: span 7}
+    .span-12{grid-column: span 12}
+
+    .muted{color: rgba(11,19,32,.68)}
+    .strong{color: rgba(11,19,32,.92)}
+    .bullet{margin: 12px 0 0; padding-left: 18px; color: rgba(11,19,32,.78)}
+    .bullet li{margin: 6px 0}
+
+    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px}
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
       font-size:12px;
-      color:var(--muted);
-      border:1px solid var(--stroke);
-      background:rgba(255,255,255,.50);
-      padding:7px 10px;
-      border-radius:999px;
-    }
-    @media (prefers-color-scheme: dark){
-      .pill{background:rgba(255,255,255,.06)}
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.66);
+      color: rgba(11,19,32,.82);
     }
 
-    .card h3{margin:10px 0 8px; font-size:16px}
-    .card p{margin:0; color:var(--muted); font-size:13px}
-
-    .list{margin:12px 0 0; padding:0 0 0 16px; color:var(--muted); font-size:13px}
-    .list li{margin:6px 0}
-
-    /* Course modules */
-    .timeline{display:grid; grid-template-columns:repeat(2, 1fr); gap:14px}
-    @media (max-width: 940px){.timeline{grid-template-columns:1fr}}
-
+    .module-grid{display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 10px}
     .module{
-      border:1px solid var(--stroke);
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow2);
-      padding:16px;
-      position:relative;
-      overflow:hidden;
+      border-radius: 18px;
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(0,0,0,.08);
+      padding: 14px;
     }
-    .module::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background:
-        radial-gradient(500px 160px at 0% 0%, rgba(10,123,102,.12), transparent 62%),
-        radial-gradient(520px 200px at 100% 0%, rgba(11,74,163,.12), transparent 62%);
-      pointer-events:none;
-      opacity:.9;
-    }
-    .module > *{position:relative}
+    .module b{display:block; font-size:13px; color: rgba(11,19,32,.9)}
+    .module span{display:block; font-size:12px; color: rgba(11,19,32,.68); margin-top:4px; line-height:1.35}
 
-    .moduleTop{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .submissions{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .submission{
+      border-radius: 18px;
+      padding: 14px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.80);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .submission:hover{transform: translateY(-2px); box-shadow: 0 16px 34px rgba(0,0,0,.15)}
+    .submission b{display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:13px; color: rgba(11,19,32,.9)}
     .badge{
-      font-size:12px;
-      font-weight:750;
-      padding:7px 10px;
-      border-radius:999px;
-      color:white;
-      background:linear-gradient(135deg, var(--brand-blue), var(--brand-green));
-      border:1px solid rgba(255,255,255,.18);
+      font-size:11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(0,117,94,.14), rgba(30,90,168,.10));
+      border: 1px solid rgba(0,0,0,.06);
+      color: rgba(11,19,32,.72);
+      white-space:nowrap;
     }
+    .submission p{margin: 8px 0 0; font-size:12px; color: rgba(11,19,32,.68); line-height:1.45}
 
-    .module h3{margin:10px 0 8px; font-size:15px}
-    .module p{margin:0; color:var(--muted); font-size:13px}
-
-    /* Weekly submissions */
-    .weeks{display:grid; grid-template-columns:repeat(4, 1fr); gap:12px}
-    @media (max-width: 980px){.weeks{grid-template-columns:repeat(2, 1fr)}}
-    @media (max-width: 520px){.weeks{grid-template-columns:1fr}}
-
-    .week{
-      border:1px solid var(--stroke);
-      background:var(--card);
-      border-radius:18px;
-      box-shadow:var(--shadow2);
-      padding:14px;
-      position:relative;
-      overflow:hidden;
-      min-height:122px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      gap:10px;
-    }
-
-    .week::after{
-      content:"";
-      position:absolute;
-      right:-40px; top:-40px;
-      width:120px; height:120px;
-      border-radius:999px;
-      background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.34), transparent 60%),
-                 linear-gradient(135deg, rgba(11,74,163,.22), rgba(10,123,102,.20));
-      filter:blur(1px);
-      pointer-events:none;
-    }
-
-    .weekTop{display:flex; align-items:center; justify-content:space-between; gap:10px; position:relative}
-    .weekTop strong{font-size:13px}
-    .status{font-size:11px; color:var(--muted); border:1px solid var(--stroke); padding:6px 8px; border-radius:999px; background:rgba(255,255,255,.50)}
-    @media (prefers-color-scheme: dark){.status{background:rgba(255,255,255,.06)}}
-
-    .week p{margin:0; color:var(--muted); font-size:12px; position:relative}
-
-    .week a{
-      position:relative;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:9px 10px;
-      border-radius:14px;
-      border:1px solid var(--stroke);
-      background:rgba(255,255,255,.55);
-      font-size:12px;
-      font-weight:650;
-      align-self:flex-start;
-    }
-    @media (prefers-color-scheme: dark){.week a{background:rgba(255,255,255,.06)}}
-
-    /* Footer */
-    footer{padding:34px 0 50px; color:var(--muted)}
+    footer{padding: 26px 0 40px}
     .foot{
-      border-top:1px solid var(--stroke);
-      padding-top:16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      font-size:12px;
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+      color: rgba(255,255,255,.58);
+      font-size: 12px;
     }
 
-    /* Small utilities */
-    .sr{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns: 1fr}
+      nav{display:none}
+      .two-col{grid-column: span 12}
+      .span-5{grid-column: span 12}
+      .span-7{grid-column: span 12}
+      .submissions{grid-template-columns: repeat(2, minmax(0,1fr))}
+    }
+    @media (max-width: 520px){
+      .submissions{grid-template-columns: 1fr}
+      .stats{grid-template-columns: 1fr}
+      .topbar-inner{gap:10px}
+      .brand{min-width:unset}
+    }
+
+    /* Subtle entrance animation */
+    @keyframes floatIn{from{opacity:0; transform: translateY(10px)} to{opacity:1; transform: translateY(0)}}
+    .animate{animation: floatIn .6s ease both}
+    .delay-1{animation-delay:.05s}
+    .delay-2{animation-delay:.12s}
+    .delay-3{animation-delay:.18s}
   </style>
 </head>
 
 <body>
-  <div class="topbar">
-    <div class="wrap">
-      <div class="nav">
-        <a class="brand" href="#top" aria-label="Home">
-          <div class="mark">CS</div>
-          <div class="titles">
-            <strong>Christian Skalafouris</strong>
-            <span>Generative AI for Work & Research</span>
-          </div>
-        </a>
-
-        <div class="links" aria-label="Primary navigation">
-          <a href="#about">About me</a>
-          <a href="#course">About the course</a>
-          <a href="#submissions">Weekly submissions</a>
-          <a class="cta" href="#submissions">View my work</a>
+  <header class="topbar">
+    <div class="topbar-inner wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1 data-i18n="brand.title">Generative AI for Work & Research</h1>
+          <p data-i18n="brand.subtitle">Portfolio and weekly submissions</p>
         </div>
       </div>
+
+      <nav aria-label="Primary">
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#course" data-i18n="nav.course">Course</a>
+        <a href="#submissions" data-i18n="nav.submissions">Submissions</a>
+      </nav>
+
+      <button id="langToggle" class="lang-btn" type="button" aria-label="Toggle language">
+        <span id="langLabel" data-i18n="lang.switch">Français</span>
+        <span class="lang-pill" id="langPill">EN</span>
+      </button>
     </div>
-  </div>
+  </header>
 
-  <main id="top">
-    <header class="hero">
-      <div class="wrap">
-        <div class="heroGrid">
-          <div class="panel">
-            <div class="panelInner">
-              <div class="kicker"><span class="dot"></span><span>Portfolio for an 8-week cohort course on no-code AI tools</span></div>
-              <h1>Generative AI for Work & Research</h1>
-              <p class="lead">
-                I design and deploy digital solutions at the intersection of clinical pharmacy, medication databases and decision support.
-                This website centralizes my course journey, weekly submissions, and ongoing work on safe, practical GenAI workflows.
-              </p>
-              <div class="heroActions">
-                <a class="btn btnPrimary" href="#course">Explore the course</a>
-                <a class="btn" href="#about">About my background</a>
-                <a class="btn" href="#submissions">Weekly submissions</a>
-              </div>
-              <p class="mini" style="margin-top:14px">Note: contact details are intentionally omitted to reduce spam exposure.</p>
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+
+        <div class="glass animate">
+          <div class="hero-card">
+            <div class="kicker">
+              <span class="dot" aria-hidden="true"></span>
+              <span data-i18n="hero.kicker">Course portfolio</span>
             </div>
-          </div>
 
-          <div class="panel">
-            <div class="panelInner side">
-              <div>
-                <div class="kicker"><span class="dot"></span><span>Current focus</span></div>
-                <div class="stats">
-                  <div class="stat">
-                    <strong>Clinical decision support</strong>
-                    <span>Screening rules, risk detection, workflows</span>
-                  </div>
-                  <div class="stat">
-                    <strong>Medication data</strong>
-                    <span>Governance, mapping, quality & updates</span>
-                  </div>
-                  <div class="stat">
-                    <strong>Applied research</strong>
-                    <span>Publications, evaluation, teaching</span>
-                  </div>
-                  <div class="stat">
-                    <strong>GenAI productivity</strong>
-                    <span>Automation, docs, analysis, prototypes</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card" style="padding:16px">
-                <div class="pill"><span class="dot" aria-hidden="true"></span><span>Quick highlights</span></div>
-                <h3 style="margin:10px 0 8px">Project Pharmacist, Geneva</h3>
-                <p style="margin:0; color:var(--muted); font-size:13px">
-                  Managing a hospital medication database and co-developing a pharmacy decision support system used for screening high-risk situations.
-                </p>
-                <ul class="list">
-                  <li>Doctorate in Pharmaceutical Sciences</li>
-                  <li>Medical informatics training</li>
-                  <li>Multiple peer-reviewed publications</li>
-                </ul>
-              </div>
+            <div class="hero-avatar" aria-label="Avatar">
+              <img src="https://github.com/crisskala/graph-ai-portfolio/blob/main/015-Skala.jpg?raw=true" alt="Portrait of Christian Skalafouris" loading="eager" />
             </div>
+
+            <h2 class="title" data-i18n="hero.title">From prompts to real workflows, every week.</h2>
+            <p class="subtitle" data-i18n="hero.subtitle">
+              A single-page hub for my work across the 8-week live cohort course: no-code AI tools for task automation, research acceleration, and practical deliverables.
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary" href="#submissions" data-i18n="hero.cta1">Explore weekly submissions</a>
+              <a class="btn" href="#course" data-i18n="hero.cta2">See course modules</a>
+            </div>
+
+            <p class="mini" data-i18n="hero.note">Links will be added progressively as submissions are completed.</p>
           </div>
         </div>
-      </div>
-    </header>
 
-    <!-- About me -->
+        <aside class="glass animate delay-1" aria-label="Profile summary">
+          <div class="profile">
+            <div class="profile-top">
+              <img class="avatar-img" src="https://github.com/crisskala/graph-ai-portfolio/blob/main/015-Skala.jpg?raw=true" alt="Portrait of Christian Skalafouris" loading="lazy" decoding="async" />
+              <div>
+                <h2 data-i18n="profile.name">Christian Skalafouris</h2>
+                <p data-i18n="profile.role">Hospital pharmacist, digital health and clinical decision support</p>
+              </div>
+            </div>
+
+            <div class="chips" aria-label="Focus areas">
+              <span class="chip" data-i18n="profile.chip1">Medication databases</span>
+              <span class="chip" data-i18n="profile.chip2">Clinical decision support</span>
+              <span class="chip" data-i18n="profile.chip3">Research & teaching</span>
+              <span class="chip" data-i18n="profile.chip4">UX / design thinking</span>
+            </div>
+
+            <div class="stats" aria-label="Highlights">
+              <div class="stat">
+                <b data-i18n="profile.stat1.v">8 weeks</b>
+                <span data-i18n="profile.stat1.k">Live cohort course</span>
+              </div>
+              <div class="stat">
+                <b data-i18n="profile.stat2.v">7 modules</b>
+                <span data-i18n="profile.stat2.k">Core workshops</span>
+              </div>
+              <div class="stat">
+                <b data-i18n="profile.stat3.v">Capstone</b>
+                <span data-i18n="profile.stat3.k">Final showcase</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
     <section id="about">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="section-head">
           <div>
-            <h2>About me</h2>
-            <p>Background, current role, and what I aim to build with GenAI in healthcare and research contexts.</p>
+            <h3 data-i18n="about.title">About me</h3>
+            <p data-i18n="about.subtitle">Clinical pharmacy, data, and systems that help teams make safer decisions.</p>
           </div>
         </div>
 
-        <div class="grid3">
-          <div class="card">
-            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Profile</span></div>
-            <h3>Clinical pharmacist with an IT edge</h3>
-            <p>
-              I work at Geneva University Hospitals (HUG), focusing on medication data governance and the operational use of clinical decision support
-              to prevent adverse drug events.
+        <div class="grid">
+          <div class="card pad span-7 animate delay-2">
+            <p class="strong" style="margin:0 0 10px" data-i18n="about.p1">
+              I am a hospital pharmacist and project lead at the Hôpitaux Universitaires de Genève (HUG), working at the interface between healthcare teams, IT engineers, and third-party drug knowledge providers.
             </p>
+            <p class="muted" style="margin:0" data-i18n="about.p2">
+              My focus includes medication database governance for an institutional prescribing system, and the continuous development of a pharmaceutical decision support system (PharmaCheck) to detect high-risk situations and support clinical pharmacy activities.
+            </p>
+
+            <div class="pillrow" aria-label="Core themes">
+              <span class="pill" data-i18n="about.pill1">Clinical decision support</span>
+              <span class="pill" data-i18n="about.pill2">Data pipelines</span>
+              <span class="pill" data-i18n="about.pill3">Medication safety</span>
+              <span class="pill" data-i18n="about.pill4">Interoperability</span>
+              <span class="pill" data-i18n="about.pill5">Applied AI</span>
+            </div>
           </div>
 
-          <div class="card">
-            <div class="pill"><span class="dot" aria-hidden="true"></span><span>What I do</span></div>
-            <h3>From data to impact</h3>
-            <ul class="list">
-              <li>Medication database management for e-prescribing</li>
-              <li>Decision support rules and monitoring workflows</li>
-              <li>Clinical pharmacy activities and risk mitigation</li>
-              <li>Research projects, publications and student mentoring</li>
+          <div class="card pad span-5 animate delay-3">
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom: 8px;">
+              <b style="font-size:14px; color: rgba(11,19,32,.9)" data-i18n="about.quick">Quick profile</b>
+              <span style="font-size:12px; color: rgba(11,19,32,.6)" data-i18n="about.location">Geneva region</span>
+            </div>
+            <ul class="bullet">
+              <li data-i18n="about.q1">Doctorate in pharmaceutical sciences (University of Geneva)</li>
+              <li data-i18n="about.q2">Certificate of advanced studies in medical informatics</li>
+              <li data-i18n="about.q3">Projects: medication database, prescribing system interfaces, PharmaCheck</li>
+              <li data-i18n="about.q4">Teaching and supervision of research projects</li>
             </ul>
           </div>
 
-          <div class="card">
-            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Why this course</span></div>
-            <h3>Practical GenAI, safely applied</h3>
-            <p>
-              I use GenAI to accelerate analysis, documentation, automation and prototyping, while staying mindful of quality, traceability
-              and the limits of tools in medical contexts.
-            </p>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- Course -->
     <section id="course">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="section-head">
           <div>
-            <h2>About the course</h2>
-            <p>
-              Generative AI for Work & Research is an 8-week live cohort course focused on no-code AI tools for task automation,
-              research workflows, and practical outputs.
+            <h3 data-i18n="course.title">About the course</h3>
+            <p data-i18n="course.subtitle">An 8-week live cohort course focused on practical, no-code GenAI workflows.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card pad span-7 animate">
+            <p class="strong" style="margin:0 0 10px" data-i18n="course.p1">
+              “Generative AI for Work & Research” is an 8-week live cohort course built around no-code tools for task automation and research productivity.
             </p>
-          </div>
-        </div>
-
-        <div class="grid3" style="margin-bottom:14px">
-          <div class="card">
-            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Bootcamp features</span></div>
-            <h3>Hands-on and guided</h3>
-            <ul class="list">
-              <li>Weekly live workshops and help sessions</li>
-              <li>Private community forums</li>
-              <li>Personalized feedback on assessments</li>
-              <li>Capstone project coaching and showcase</li>
-              <li>Shareable certificate and lifetime tutorial access</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Grading</span></div>
-            <h3>Clear expectations</h3>
-            <ul class="list">
-              <li>Online quizzes: 15%</li>
-              <li>Workshop assignments: 35%</li>
-              <li>Attendance & participation: 10%</li>
-              <li>Final project: 40%</li>
-              <li>Passing grade: 80%</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Outcome</span></div>
-            <h3>Workflows you can reuse</h3>
-            <p>
-              The goal is to leave with repeatable systems: structured prompting, toolchains, templates, and automation patterns
-              that translate into everyday work and research productivity.
+            <p class="muted" style="margin:0" data-i18n="course.p2">
+              The program combines weekly live workshops, help sessions, community support, and a capstone project with coaching and feedback.
             </p>
-          </div>
-        </div>
 
-        <div class="sectionHead" style="margin-top:10px">
-          <div>
-            <h2 style="font-size:18px; margin:0">Course modules</h2>
-            <p>High-level overview of the modules described in the course brochure.</p>
+            <div class="module-grid" aria-label="Modules">
+              <div class="module"><b data-i18n="course.m1.t">Module 1. Websites, Documents & Presentations</b><span data-i18n="course.m1.d">LLM basics; Markdown/LaTeX/HTML outputs; simple research websites; AI presentation tools.</span></div>
+              <div class="module"><b data-i18n="course.m2.t">Module 2. AI‑Automated Data Analysis</b><span data-i18n="course.m2.d">File transforms, dashboards, automated reports, quick analysis workflows.</span></div>
+              <div class="module"><b data-i18n="course.m3.t">Module 3. GenAI for Research & Text Analysis</b><span data-i18n="course.m3.d">Literature search, text classification, summarization, and knowledge mapping.</span></div>
+              <div class="module"><b data-i18n="course.m4.t">Module 4. Custom GPTs & Chatbots</b><span data-i18n="course.m4.d">Context windows, RAG, custom assistants, chatbots with knowledge bases.</span></div>
+              <div class="module"><b data-i18n="course.m5.t">Module 5. AI for Task Automation</b><span data-i18n="course.m5.d">Agents, automation flows, monitoring, and browser-control workflows.</span></div>
+              <div class="module"><b data-i18n="course.m6.t">Module 6. GenAI for Communication & Outreach</b><span data-i18n="course.m6.d">Research dissemination, visuals/figures, video abstracts, audience-adapted summaries.</span></div>
+              <div class="module"><b data-i18n="course.m7.t">Module 7. Capstone Project & Showcase</b><span data-i18n="course.m7.d">Iterate with feedback, finalize a solution/tool, and present it publicly.</span></div>
+              <div class="module"><b data-i18n="course.assess.t">Assessment</b><span data-i18n="course.assess.d">Quizzes, workshop assignments, participation, and a final project.</span></div>
+            </div>
           </div>
-        </div>
 
-        <div class="timeline">
-          <div class="module">
-            <div class="moduleTop"><span class="badge">Module 1</span><span class="status">Websites, docs & presentations</span></div>
-            <h3>Websites, documents & presentations</h3>
-            <p>LLM fundamentals, structured outputs (Markdown, LaTeX, HTML), and building simple research websites with Canvas.</p>
+          <div class="card pad span-5 animate delay-1">
+            <b style="display:block; font-size:14px; color: rgba(11,19,32,.9); margin-bottom:8px" data-i18n="course.features">Bootcamp features</b>
+            <ul class="bullet">
+              <li data-i18n="course.f1">Weekly live workshops</li>
+              <li data-i18n="course.f2">Weekly live help sessions</li>
+              <li data-i18n="course.f3">Private community forums</li>
+              <li data-i18n="course.f4">Personalized feedback on assessments</li>
+              <li data-i18n="course.f5">Capstone project coaching</li>
+              <li data-i18n="course.f6">Shareable certificate + lifetime tutorial access</li>
+            </ul>
+
+            <div style="margin-top:14px; padding:12px; border-radius: 18px; border: 1px solid rgba(0,0,0,.08); background: rgba(255,255,255,.72)">
+              <b style="display:block; font-size:13px; color: rgba(11,19,32,.9)" data-i18n="course.grading">Grading (overview)</b>
+              <p style="margin:8px 0 0; font-size:12px; color: rgba(11,19,32,.7); line-height:1.45" data-i18n="course.gradingNote">
+                Final grade combines quizzes, workshop assignments, attendance/participation, and a final project.
+              </p>
+            </div>
           </div>
-          <div class="module">
-            <div class="moduleTop"><span class="badge">Module 2</span><span class="status">AI-automated analysis</span></div>
-            <h3>AI-automated data analysis</h3>
-            <p>Use AI tools to analyze data, transform files, build dashboards, and generate automated reports.</p>
-          </div>
-          <div class="module">
-            <div class="moduleTop"><span class="badge">Module 3</span><span class="status">Research workflows</span></div>
-            <h3>GenAI for research & text analysis</h3>
-            <p>Literature workflows, classification, summarization, and synthesizing large document collections.</p>
-          </div>
-          <div class="module">
-            <div class="moduleTop"><span class="badge">Module 4</span><span class="status">Assistants</span></div>
-            <h3>Custom GPTs and chatbots</h3>
-            <p>Context windows, RAG, and building custom assistants and chatbots for knowledge work.</p>
-          </div>
-          <div class="module">
-            <div class="moduleTop"><span class="badge">Module 5</span><span class="status">Automation</span></div>
-            <h3>AI for task automation</h3>
-            <p>Agent-based flows, email automations, browser control agents, and orchestration patterns.</p>
-          </div>
-          <div class="module">
-            <div class="moduleTop"><span class="badge">Module 6</span><span class="status">Communication</span></div>
-            <h3>GenAI for communication & outreach</h3>
-            <p>Summaries for different audiences, visuals, diagrams, video abstracts and dissemination workflows.</p>
-          </div>
-          <div class="module">
-            <div class="moduleTop"><span class="badge">Module 7</span><span class="status">Capstone</span></div>
-            <h3>Capstone project & showcase</h3>
-            <p>Iterate on a final solution with peer feedback, coaching, troubleshooting, and a public showcase.</p>
-          </div>
-          <div class="module">
-            <div class="moduleTop"><span class="badge">8 weeks</span><span class="status">Live cohort</span></div>
-            <h3>Weekly rhythm</h3>
-            <p>Workshops, assessments and a portfolio of deliverables. This site will host my weekly submissions as links are added.</p>
-          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Weekly submissions -->
     <section id="submissions">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="section-head">
           <div>
-            <h2>My weekly submissions</h2>
-            <p>Placeholders for now. We will add links to each submission as the course progresses.</p>
+            <h3 data-i18n="subs.title">My weekly submissions</h3>
+            <p data-i18n="subs.subtitle">Placeholders for now. We will add links to each submission later.</p>
           </div>
         </div>
 
-        <div class="weeks" aria-label="Weekly submission cards">
-          <div class="week">
-            <div class="weekTop"><strong>Week 1</strong><span class="status">Placeholder</span></div>
-            <p>Foundations: structured prompting, outputs, and a first mini-deliverable.</p>
-            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
-          </div>
-          <div class="week">
-            <div class="weekTop"><strong>Week 2</strong><span class="status">Placeholder</span></div>
-            <p>Websites and documents: templates, formatting, and reproducible writing.</p>
-            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
-          </div>
-          <div class="week">
-            <div class="weekTop"><strong>Week 3</strong><span class="status">Placeholder</span></div>
-            <p>AI-assisted analysis: data exploration and automated reporting patterns.</p>
-            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
-          </div>
-          <div class="week">
-            <div class="weekTop"><strong>Week 4</strong><span class="status">Placeholder</span></div>
-            <p>Text and literature workflows: search, triage, extraction, synthesis.</p>
-            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
-          </div>
-          <div class="week">
-            <div class="weekTop"><strong>Week 5</strong><span class="status">Placeholder</span></div>
-            <p>Custom assistants: scopes, guardrails, and knowledge base structure.</p>
-            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
-          </div>
-          <div class="week">
-            <div class="weekTop"><strong>Week 6</strong><span class="status">Placeholder</span></div>
-            <p>Automation: agents, batching tasks, and reliability strategies.</p>
-            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
-          </div>
-          <div class="week">
-            <div class="weekTop"><strong>Week 7</strong><span class="status">Placeholder</span></div>
-            <p>Communication: figures, slide prompts, and audience-specific content.</p>
-            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
-          </div>
-          <div class="week">
-            <div class="weekTop"><strong>Week 8</strong><span class="status">Placeholder</span></div>
-            <p>Capstone: final deliverable, demo, and portfolio consolidation.</p>
-            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
+        <div class="card pad animate">
+          <div class="submissions" aria-label="Weekly submissions">
+
+            <div class="submission">
+              <b><span data-i18n="subs.w1">Week 1</span><span class="badge" data-i18n="subs.w1b">Websites & documents</span></b>
+              <p data-i18n="subs.w1d">Deliverable placeholder: a structured document or mini-website created with Canvas.</p>
+            </div>
+
+            <div class="submission">
+              <b><span data-i18n="subs.w2">Week 2</span><span class="badge" data-i18n="subs.w2b">Data analysis</span></b>
+              <p data-i18n="subs.w2d">Deliverable placeholder: automated analysis workflow and a compact report.</p>
+            </div>
+
+            <div class="submission">
+              <b><span data-i18n="subs.w3">Week 3</span><span class="badge" data-i18n="subs.w3b">Research synthesis</span></b>
+              <p data-i18n="subs.w3d">Deliverable placeholder: literature search and summarization pipeline.</p>
+            </div>
+
+            <div class="submission">
+              <b><span data-i18n="subs.w4">Week 4</span><span class="badge" data-i18n="subs.w4b">Custom GPT</span></b>
+              <p data-i18n="subs.w4d">Deliverable placeholder: a tailored assistant with retrieval and guardrails.</p>
+            </div>
+
+            <div class="submission">
+              <b><span data-i18n="subs.w5">Week 5</span><span class="badge" data-i18n="subs.w5b">Automation</span></b>
+              <p data-i18n="subs.w5d">Deliverable placeholder: an agent workflow for repetitive tasks and monitoring.</p>
+            </div>
+
+            <div class="submission">
+              <b><span data-i18n="subs.w6">Week 6</span><span class="badge" data-i18n="subs.w6b">Communication</span></b>
+              <p data-i18n="subs.w6d">Deliverable placeholder: multi-audience summaries + visuals for dissemination.</p>
+            </div>
+
+            <div class="submission">
+              <b><span data-i18n="subs.w7">Week 7</span><span class="badge" data-i18n="subs.w7b">Capstone</span></b>
+              <p data-i18n="subs.w7d">Deliverable placeholder: capstone progress, iterations, and peer feedback.</p>
+            </div>
+
+            <div class="submission">
+              <b><span data-i18n="subs.w8">Week 8</span><span class="badge" data-i18n="subs.w8b">Showcase</span></b>
+              <p data-i18n="subs.w8d">Deliverable placeholder: final presentation, public Q&A, and takeaways.</p>
+            </div>
+
           </div>
         </div>
+
+        <div style="height:14px"></div>
+
+        <div class="grid">
+          <div class="card pad span-12 animate delay-1">
+            <b style="display:block; font-size:14px; color: rgba(11,19,32,.9)" data-i18n="subs.noteTitle">How we’ll update this page</b>
+            <p style="margin:8px 0 0; font-size:12px; color: rgba(11,19,32,.7); line-height:1.55" data-i18n="subs.note">
+              Each week card will later include: a short description, tool stack, artifacts (slides/docs/code), and a link to the submission.
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <footer>
-      <div class="wrap">
-        <div class="foot">
-          <div>© <span id="year"></span> Christian Skalafouris</div>
-          <div>
-            Built as a single-page portfolio for the course “Generative AI for Work & Research”.
-          </div>
-        </div>
+      <div class="wrap foot">
+        <span data-i18n="footer.left">© <span id="year"></span> Portfolio page</span>
+        <span data-i18n="footer.right">No email displayed to reduce spam</span>
       </div>
     </footer>
   </main>
 
   <script>
-    // Small enhancements only (no framework)
-    document.getElementById('year').textContent = String(new Date().getFullYear());
+    const i18n = {
+      en: {
+        "brand.title":"Generative AI for Work & Research",
+        "brand.subtitle":"Portfolio and weekly submissions",
+        "nav.about":"About",
+        "nav.course":"Course",
+        "nav.submissions":"Submissions",
+        "lang.switch":"Français",
+        "hero.kicker":"Course portfolio",
+        "hero.title":"From prompts to real workflows, every week.",
+        "hero.subtitle":"A single-page hub for my work across the 8-week live cohort course: no-code AI tools for task automation, research acceleration, and practical deliverables.",
+        "hero.cta1":"Explore weekly submissions",
+        "hero.cta2":"See course modules",
+        "hero.note":"Links will be added progressively as submissions are completed.",
+        "profile.name":"Christian Skalafouris",
+        "profile.role":"Hospital pharmacist, digital health and clinical decision support",
+        "profile.chip1":"Medication databases",
+        "profile.chip2":"Clinical decision support",
+        "profile.chip3":"Research & teaching",
+        "profile.chip4":"UX / design thinking",
+        "profile.stat1.v":"8 weeks",
+        "profile.stat1.k":"Live cohort course",
+        "profile.stat2.v":"7 modules",
+        "profile.stat2.k":"Core workshops",
+        "profile.stat3.v":"Capstone",
+        "profile.stat3.k":"Final showcase",
 
-    // Active link highlight (subtle) for in-page navigation
-    const navLinks = Array.from(document.querySelectorAll('.links a')).filter(a => a.getAttribute('href')?.startsWith('#'));
-    const sections = navLinks
-      .map(a => document.querySelector(a.getAttribute('href')))
-      .filter(Boolean);
+        "about.title":"About me",
+        "about.subtitle":"Clinical pharmacy, data, and systems that help teams make safer decisions.",
+        "about.p1":"I am a hospital pharmacist and project lead at the Hôpitaux Universitaires de Genève (HUG), working at the interface between healthcare teams, IT engineers, and third-party drug knowledge providers.",
+        "about.p2":"My focus includes medication database governance for an institutional prescribing system, and the continuous development of a pharmaceutical decision support system (PharmaCheck) to detect high-risk situations and support clinical pharmacy activities.",
+        "about.pill1":"Clinical decision support",
+        "about.pill2":"Data pipelines",
+        "about.pill3":"Medication safety",
+        "about.pill4":"Interoperability",
+        "about.pill5":"Applied AI",
+        "about.quick":"Quick profile",
+        "about.location":"Geneva region",
+        "about.q1":"Doctorate in pharmaceutical sciences (University of Geneva)",
+        "about.q2":"Certificate of advanced studies in medical informatics",
+        "about.q3":"Projects: medication database, prescribing system interfaces, PharmaCheck",
+        "about.q4":"Teaching and supervision of research projects",
 
-    const setActive = () => {
-      const y = window.scrollY + 110;
-      let activeId = '#top';
-      for (const s of sections){
-        if (s.offsetTop <= y) activeId = '#' + s.id;
-      }
-      for (const a of navLinks){
-        const on = a.getAttribute('href') === activeId;
-        a.style.color = on ? 'var(--ink)' : 'var(--muted)';
-        a.style.borderColor = on ? 'rgba(11,74,163,.22)' : 'transparent';
-        a.style.background = on ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'rgba(255,255,255,.06)' : 'rgba(255,255,255,.55)') : 'transparent';
+        "course.title":"About the course",
+        "course.subtitle":"An 8-week live cohort course focused on practical, no-code GenAI workflows.",
+        "course.p1":"“Generative AI for Work & Research” is an 8-week live cohort course built around no-code tools for task automation and research productivity.",
+        "course.p2":"The program combines weekly live workshops, help sessions, community support, and a capstone project with coaching and feedback.",
+        "course.m1.t":"Module 1. Websites, Documents & Presentations",
+        "course.m1.d":"LLM basics; Markdown/LaTeX/HTML outputs; simple research websites; AI presentation tools.",
+        "course.m2.t":"Module 2. AI‑Automated Data Analysis",
+        "course.m2.d":"File transforms, dashboards, automated reports, quick analysis workflows.",
+        "course.m3.t":"Module 3. GenAI for Research & Text Analysis",
+        "course.m3.d":"Literature search, text classification, summarization, and knowledge mapping.",
+        "course.m4.t":"Module 4. Custom GPTs & Chatbots",
+        "course.m4.d":"Context windows, RAG, custom assistants, chatbots with knowledge bases.",
+        "course.m5.t":"Module 5. AI for Task Automation",
+        "course.m5.d":"Agents, automation flows, monitoring, and browser-control workflows.",
+        "course.m6.t":"Module 6. GenAI for Communication & Outreach",
+        "course.m6.d":"Research dissemination, visuals/figures, video abstracts, audience-adapted summaries.",
+        "course.m7.t":"Module 7. Capstone Project & Showcase",
+        "course.m7.d":"Iterate with feedback, finalize a solution/tool, and present it publicly.",
+        "course.assess.t":"Assessment",
+        "course.assess.d":"Quizzes, workshop assignments, participation, and a final project.",
+        "course.features":"Bootcamp features",
+        "course.f1":"Weekly live workshops",
+        "course.f2":"Weekly live help sessions",
+        "course.f3":"Private community forums",
+        "course.f4":"Personalized feedback on assessments",
+        "course.f5":"Capstone project coaching",
+        "course.f6":"Shareable certificate + lifetime tutorial access",
+        "course.grading":"Grading (overview)",
+        "course.gradingNote":"Final grade combines quizzes, workshop assignments, attendance/participation, and a final project.",
+
+        "subs.title":"My weekly submissions",
+        "subs.subtitle":"Placeholders for now. We will add links to each submission later.",
+        "subs.w1":"Week 1",
+        "subs.w1b":"Websites & documents",
+        "subs.w1d":"Deliverable placeholder: a structured document or mini-website created with Canvas.",
+        "subs.w2":"Week 2",
+        "subs.w2b":"Data analysis",
+        "subs.w2d":"Deliverable placeholder: automated analysis workflow and a compact report.",
+        "subs.w3":"Week 3",
+        "subs.w3b":"Research synthesis",
+        "subs.w3d":"Deliverable placeholder: literature search and summarization pipeline.",
+        "subs.w4":"Week 4",
+        "subs.w4b":"Custom GPT",
+        "subs.w4d":"Deliverable placeholder: a tailored assistant with retrieval and guardrails.",
+        "subs.w5":"Week 5",
+        "subs.w5b":"Automation",
+        "subs.w5d":"Deliverable placeholder: an agent workflow for repetitive tasks and monitoring.",
+        "subs.w6":"Week 6",
+        "subs.w6b":"Communication",
+        "subs.w6d":"Deliverable placeholder: multi-audience summaries + visuals for dissemination.",
+        "subs.w7":"Week 7",
+        "subs.w7b":"Capstone",
+        "subs.w7d":"Deliverable placeholder: capstone progress, iterations, and peer feedback.",
+        "subs.w8":"Week 8",
+        "subs.w8b":"Showcase",
+        "subs.w8d":"Deliverable placeholder: final presentation, public Q&A, and takeaways.",
+        "subs.noteTitle":"How we’ll update this page",
+        "subs.note":"Each week card will later include: a short description, tool stack, artifacts (slides/docs/code), and a link to the submission.",
+
+        "footer.left":"© <span id=\"year\"></span> Portfolio page",
+        "footer.right":"No email displayed to reduce spam"
+      },
+      fr: {
+        "brand.title":"IA générative pour le travail et la recherche",
+        "brand.subtitle":"Portfolio et rendus hebdomadaires",
+        "nav.about":"À propos",
+        "nav.course":"Cours",
+        "nav.submissions":"Rendus",
+        "lang.switch":"English",
+        "hero.kicker":"Portfolio du cours",
+        "hero.title":"Des prompts à des workflows concrets, chaque semaine.",
+        "hero.subtitle":"Une page unique pour regrouper mes travaux sur ce cours en cohorte de 8 semaines : outils GenAI no‑code, automatisation, recherche accélérée et livrables utilisables.",
+        "hero.cta1":"Voir les rendus hebdomadaires",
+        "hero.cta2":"Voir les modules",
+        "hero.note":"Les liens seront ajoutés progressivement au fil des rendus.",
+        "profile.name":"Christian Skalafouris",
+        "profile.role":"Pharmacien hospitalier, santé digitale et aide à la décision clinique",
+        "profile.chip1":"Bases de données médicaments",
+        "profile.chip2":"Aide à la décision",
+        "profile.chip3":"Recherche et enseignement",
+        "profile.chip4":"UX / design thinking",
+        "profile.stat1.v":"8 semaines",
+        "profile.stat1.k":"Cours en cohorte",
+        "profile.stat2.v":"7 modules",
+        "profile.stat2.k":"Ateliers clés",
+        "profile.stat3.v":"Projet",
+        "profile.stat3.k":"Showcase final",
+
+        "about.title":"À propos de moi",
+        "about.subtitle":"Pharmacie clinique, données, et systèmes qui améliorent la sécurité et la décision.",
+        "about.p1":"Je suis pharmacien hospitalier et chef de projet aux Hôpitaux Universitaires de Genève (HUG), à l’interface entre soignants, ingénieurs informaticiens et fournisseurs de bases de connaissances médicament.",
+        "about.p2":"Mon activité couvre la gouvernance de la base médicaments d’un système institutionnel de prescription, ainsi que le développement continu d’un système d’aide à la décision pharmaceutique (PharmaCheck) pour détecter des situations à risque et soutenir la pharmacie clinique.",
+        "about.pill1":"Aide à la décision",
+        "about.pill2":"Pipelines de données",
+        "about.pill3":"Sécurité médicamenteuse",
+        "about.pill4":"Interopérabilité",
+        "about.pill5":"IA appliquée",
+        "about.quick":"Profil rapide",
+        "about.location":"Région genevoise",
+        "about.q1":"Doctorat en sciences pharmaceutiques (Université de Genève)",
+        "about.q2":"Certificat d’études avancées en informatique médicale",
+        "about.q3":"Projets : base médicaments, interfaces de prescription, PharmaCheck",
+        "about.q4":"Enseignement et encadrement de travaux de recherche",
+
+        "course.title":"À propos du cours",
+        "course.subtitle":"Un cours en cohorte de 8 semaines, orienté pratique et workflows GenAI no‑code.",
+        "course.p1":"« IA générative pour le travail et la recherche » est un cours en cohorte de 8 semaines centré sur des outils no‑code pour automatiser des tâches et augmenter la productivité en recherche.",
+        "course.p2":"Le programme combine des ateliers hebdomadaires, des sessions d’aide, une communauté, et un projet capstone avec coaching et feedback.",
+        "course.m1.t":"Module 1. Sites, documents et présentations",
+        "course.m1.d":"Bases des LLM ; sorties Markdown/LaTeX/HTML ; sites de recherche simples ; outils IA pour présentations.",
+        "course.m2.t":"Module 2. Analyse de données automatisée",
+        "course.m2.d":"Transformations de fichiers, tableaux de bord, rapports automatisés, analyses rapides.",
+        "course.m3.t":"Module 3. Recherche et analyse de texte",
+        "course.m3.d":"Recherche bibliographique, classification, résumés, cartographie de connaissances.",
+        "course.m4.t":"Module 4. GPTs et chatbots personnalisés",
+        "course.m4.d":"Fenêtres de contexte, RAG, assistants sur mesure, chatbots et bases de connaissances.",
+        "course.m5.t":"Module 5. Automatisation des tâches",
+        "course.m5.d":"Agents, workflows d’automatisation, veille, automatisation de navigation web.",
+        "course.m6.t":"Module 6. Communication et diffusion",
+        "course.m6.d":"Synthèses multi‑publics, visuels/figures, abstracts vidéo, vulgarisation.",
+        "course.m7.t":"Module 7. Capstone et showcase",
+        "course.m7.d":"Itérations avec feedback, finalisation d’un outil/solution, présentation publique.",
+        "course.assess.t":"Évaluation",
+        "course.assess.d":"Quizz, devoirs d’atelier, participation, et projet final.",
+        "course.features":"Fonctionnement type bootcamp",
+        "course.f1":"Ateliers live hebdomadaires",
+        "course.f2":"Sessions d’aide live chaque semaine",
+        "course.f3":"Forums de communauté privés",
+        "course.f4":"Feedback personnalisé sur les évaluations",
+        "course.f5":"Coaching du projet capstone",
+        "course.f6":"Certificat partageable et accès à vie aux tutoriels",
+        "course.grading":"Notation (aperçu)",
+        "course.gradingNote":"La note finale combine quizz, devoirs, participation et projet final.",
+
+        "subs.title":"Mes rendus hebdomadaires",
+        "subs.subtitle":"Pour l’instant des placeholders. Nous ajouterons les liens vers chaque rendu ensuite.",
+        "subs.w1":"Semaine 1",
+        "subs.w1b":"Sites et documents",
+        "subs.w1d":"Placeholder : document structuré ou mini-site créé avec Canvas.",
+        "subs.w2":"Semaine 2",
+        "subs.w2b":"Analyse de données",
+        "subs.w2d":"Placeholder : workflow d’analyse automatisée et rapport synthétique.",
+        "subs.w3":"Semaine 3",
+        "subs.w3b":"Synthèse de recherche",
+        "subs.w3d":"Placeholder : pipeline de recherche bibliographique et de résumé.",
+        "subs.w4":"Semaine 4",
+        "subs.w4b":"GPT personnalisé",
+        "subs.w4d":"Placeholder : assistant sur mesure avec retrieval et garde‑fous.",
+        "subs.w5":"Semaine 5",
+        "subs.w5b":"Automatisation",
+        "subs.w5d":"Placeholder : agent pour tâches répétitives et veille.",
+        "subs.w6":"Semaine 6",
+        "subs.w6b":"Communication",
+        "subs.w6d":"Placeholder : synthèses multi‑publics et visuels de diffusion.",
+        "subs.w7":"Semaine 7",
+        "subs.w7b":"Capstone",
+        "subs.w7d":"Placeholder : progression du projet, itérations et feedback.",
+        "subs.w8":"Semaine 8",
+        "subs.w8b":"Showcase",
+        "subs.w8d":"Placeholder : présentation finale, Q&A et apprentissages.",
+        "subs.noteTitle":"Comment cette page sera mise à jour",
+        "subs.note":"Chaque carte contiendra ensuite : une description, le stack d’outils, les artefacts (slides/docs/code) et un lien vers le rendu.",
+
+        "footer.left":"© <span id=\"year\"></span> Page portfolio",
+        "footer.right":"Pas d’email affiché pour réduire le spam"
       }
     };
-    setActive();
-    window.addEventListener('scroll', setActive, {passive:true});
+
+    const state = { lang: "en" };
+
+    function applyI18n(lang){
+      document.documentElement.lang = lang;
+      const dict = i18n[lang];
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        const val = dict[key];
+        if (typeof val !== "string") return;
+        // Allow a tiny bit of safe HTML only where we control the string.
+        if (val.includes("<span")) el.innerHTML = val;
+        else el.textContent = val;
+      });
+
+      const pill = document.getElementById("langPill");
+      pill.textContent = lang.toUpperCase();
+
+      // Update the toggle label (what you'll switch to)
+      document.getElementById("langLabel").textContent = dict["lang.switch"] || (lang === "en" ? "Français" : "English");
+    }
+
+    function toggleLang(){
+      state.lang = (state.lang === "en") ? "fr" : "en";
+      applyI18n(state.lang);
+    }
+
+    document.getElementById("langToggle").addEventListener("click", toggleLang);
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Initial render
+    applyI18n(state.lang);
   </script>
 </body>
 </html>
