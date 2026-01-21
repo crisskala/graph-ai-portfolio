@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio for the Generative AI for Work & Research course: profile, course overview, and weekly submissions." />
+  <title>Christian Skalafouris | Generative AI for Work & Research</title>
+
+  <style>
+    :root{
+      /* HUG-inspired palette (approx). Adjust anytime. */
+      --brand-green:#0a7b66;
+      --brand-blue:#0b4aa3;
+      --ink:#0b1220;
+      --muted:#5a667a;
+      --paper:#ffffff;
+      --bg1:#f6fbff;
+      --bg2:#f3fff9;
+      --card:rgba(255,255,255,.72);
+      --stroke:rgba(12,18,32,.10);
+      --shadow:0 24px 60px rgba(10, 18, 32, .14);
+      --shadow2:0 10px 30px rgba(10, 18, 32, .10);
+      --radius:22px;
+      --radius2:30px;
+      --max:1120px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --ink:#eaf0ff;
+        --muted:#a7b2c6;
+        --paper:#0a0f1c;
+        --bg1:#070b14;
+        --bg2:#08151a;
+        --card:rgba(14, 20, 38, .62);
+        --stroke:rgba(255,255,255,.10);
+        --shadow:0 28px 70px rgba(0,0,0,.52);
+        --shadow2:0 12px 34px rgba(0,0,0,.40);
+      }
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(11,74,163,.22), transparent 60%),
+        radial-gradient(900px 500px at 105% 0%, rgba(10,123,102,.20), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      line-height:1.55;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit}
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+
+    /* Top nav */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:saturate(1.4) blur(14px);
+      background:linear-gradient(180deg, rgba(255,255,255,.74), rgba(255,255,255,.40));
+      border-bottom:1px solid var(--stroke);
+    }
+    @media (prefers-color-scheme: dark){
+      .topbar{background:linear-gradient(180deg, rgba(10,15,28,.76), rgba(10,15,28,.44));}
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+    }
+
+    .mark{
+      width:42px; height:42px;
+      border-radius:14px;
+      display:grid; place-items:center;
+      font-weight:800;
+      letter-spacing:.5px;
+      color:white;
+      background:
+        radial-gradient(14px 14px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
+        linear-gradient(135deg, var(--brand-blue), var(--brand-green));
+      box-shadow:0 10px 22px rgba(11,74,163,.18);
+      border:1px solid rgba(255,255,255,.24);
+    }
+
+    .brand .titles{display:flex; flex-direction:column; line-height:1.15}
+    .brand .titles strong{font-size:14px}
+    .brand .titles span{font-size:12px; color:var(--muted)}
+
+    .links{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .links a{
+      text-decoration:none;
+      font-size:13px;
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+      transition:all .2s ease;
+    }
+    .links a:hover{color:var(--ink); border-color:var(--stroke); background:rgba(255,255,255,.55)}
+    @media (prefers-color-scheme: dark){
+      .links a:hover{background:rgba(255,255,255,.06)}
+    }
+
+    .cta{
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:14px;
+      font-size:13px;
+      font-weight:650;
+      color:white;
+      background:linear-gradient(135deg, var(--brand-blue), var(--brand-green));
+      border:1px solid rgba(255,255,255,.22);
+      box-shadow:0 14px 34px rgba(11,74,163,.22);
+      transition:transform .18s ease, filter .18s ease;
+      white-space:nowrap;
+    }
+    .cta:hover{transform:translateY(-1px); filter:saturate(1.05)}
+
+    /* Hero */
+    .hero{padding:58px 0 24px}
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 940px){
+      .heroGrid{grid-template-columns:1fr;}
+    }
+
+    .panel{
+      border:1px solid var(--stroke);
+      background:var(--card);
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .panel::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(600px 160px at 0% 0%, rgba(11,74,163,.18), transparent 60%),
+        radial-gradient(600px 200px at 100% 0%, rgba(10,123,102,.16), transparent 60%);
+      pointer-events:none;
+    }
+
+    .panelInner{position:relative; padding:28px 28px 26px}
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border:1px solid var(--stroke);
+      border-radius:999px;
+      background:rgba(255,255,255,.50);
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.2px;
+    }
+    @media (prefers-color-scheme: dark){
+      .kicker{background:rgba(255,255,255,.06)}
+    }
+
+    .dot{
+      width:9px; height:9px; border-radius:99px;
+      background:linear-gradient(135deg, var(--brand-blue), var(--brand-green));
+      box-shadow:0 0 0 4px rgba(11,74,163,.12);
+    }
+
+    h1{
+      margin:14px 0 10px;
+      font-size:42px;
+      line-height:1.08;
+      letter-spacing:-.8px;
+    }
+    @media (max-width: 520px){h1{font-size:34px}}
+
+    .lead{font-size:16px; color:var(--muted); max-width:70ch; margin:0 0 18px}
+
+    .heroActions{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+
+    .btn{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.55);
+      color:var(--ink);
+      font-weight:650;
+      font-size:13px;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .btn:hover{transform:translateY(-1px); border-color:rgba(11,74,163,.25)}
+    @media (prefers-color-scheme: dark){
+      .btn{background:rgba(255,255,255,.06)}
+      .btn:hover{border-color:rgba(255,255,255,.20)}
+    }
+
+    .btnPrimary{
+      background:linear-gradient(135deg, rgba(11,74,163,.98), rgba(10,123,102,.98));
+      color:white;
+      border-color:rgba(255,255,255,.18);
+      box-shadow:0 18px 44px rgba(11,74,163,.22);
+    }
+
+    /* Side card */
+    .side{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:16px;
+      height:100%;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:10px;
+    }
+    .stat{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.52);
+      border-radius:18px;
+      padding:14px 14px 12px;
+      box-shadow:var(--shadow2);
+    }
+    @media (prefers-color-scheme: dark){
+      .stat{background:rgba(255,255,255,.05)}
+    }
+    .stat strong{display:block; font-size:13px; margin-bottom:4px}
+    .stat span{display:block; font-size:12px; color:var(--muted)}
+
+    .mini{font-size:12px; color:var(--muted)}
+
+    /* Sections */
+    section{padding:40px 0}
+
+    .sectionHead{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom:16px}
+    .sectionHead h2{margin:0; font-size:22px; letter-spacing:-.3px}
+    .sectionHead p{margin:0; color:var(--muted); font-size:13px; max-width:70ch}
+
+    .grid3{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
+    @media (max-width: 940px){.grid3{grid-template-columns:1fr}}
+
+    .card{
+      border:1px solid var(--stroke);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow2);
+      padding:18px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(460px 140px at 0% 0%, rgba(11,74,163,.14), transparent 60%),
+        radial-gradient(420px 160px at 100% 0%, rgba(10,123,102,.12), transparent 58%);
+      pointer-events:none;
+      opacity:.9;
+    }
+
+    .card > *{position:relative}
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.50);
+      padding:7px 10px;
+      border-radius:999px;
+    }
+    @media (prefers-color-scheme: dark){
+      .pill{background:rgba(255,255,255,.06)}
+    }
+
+    .card h3{margin:10px 0 8px; font-size:16px}
+    .card p{margin:0; color:var(--muted); font-size:13px}
+
+    .list{margin:12px 0 0; padding:0 0 0 16px; color:var(--muted); font-size:13px}
+    .list li{margin:6px 0}
+
+    /* Course modules */
+    .timeline{display:grid; grid-template-columns:repeat(2, 1fr); gap:14px}
+    @media (max-width: 940px){.timeline{grid-template-columns:1fr}}
+
+    .module{
+      border:1px solid var(--stroke);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow2);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .module::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(500px 160px at 0% 0%, rgba(10,123,102,.12), transparent 62%),
+        radial-gradient(520px 200px at 100% 0%, rgba(11,74,163,.12), transparent 62%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .module > *{position:relative}
+
+    .moduleTop{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .badge{
+      font-size:12px;
+      font-weight:750;
+      padding:7px 10px;
+      border-radius:999px;
+      color:white;
+      background:linear-gradient(135deg, var(--brand-blue), var(--brand-green));
+      border:1px solid rgba(255,255,255,.18);
+    }
+
+    .module h3{margin:10px 0 8px; font-size:15px}
+    .module p{margin:0; color:var(--muted); font-size:13px}
+
+    /* Weekly submissions */
+    .weeks{display:grid; grid-template-columns:repeat(4, 1fr); gap:12px}
+    @media (max-width: 980px){.weeks{grid-template-columns:repeat(2, 1fr)}}
+    @media (max-width: 520px){.weeks{grid-template-columns:1fr}}
+
+    .week{
+      border:1px solid var(--stroke);
+      background:var(--card);
+      border-radius:18px;
+      box-shadow:var(--shadow2);
+      padding:14px;
+      position:relative;
+      overflow:hidden;
+      min-height:122px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .week::after{
+      content:"";
+      position:absolute;
+      right:-40px; top:-40px;
+      width:120px; height:120px;
+      border-radius:999px;
+      background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.34), transparent 60%),
+                 linear-gradient(135deg, rgba(11,74,163,.22), rgba(10,123,102,.20));
+      filter:blur(1px);
+      pointer-events:none;
+    }
+
+    .weekTop{display:flex; align-items:center; justify-content:space-between; gap:10px; position:relative}
+    .weekTop strong{font-size:13px}
+    .status{font-size:11px; color:var(--muted); border:1px solid var(--stroke); padding:6px 8px; border-radius:999px; background:rgba(255,255,255,.50)}
+    @media (prefers-color-scheme: dark){.status{background:rgba(255,255,255,.06)}}
+
+    .week p{margin:0; color:var(--muted); font-size:12px; position:relative}
+
+    .week a{
+      position:relative;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 10px;
+      border-radius:14px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.55);
+      font-size:12px;
+      font-weight:650;
+      align-self:flex-start;
+    }
+    @media (prefers-color-scheme: dark){.week a{background:rgba(255,255,255,.06)}}
+
+    /* Footer */
+    footer{padding:34px 0 50px; color:var(--muted)}
+    .foot{
+      border-top:1px solid var(--stroke);
+      padding-top:16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      font-size:12px;
+    }
+
+    /* Small utilities */
+    .sr{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Home">
+          <div class="mark">CS</div>
+          <div class="titles">
+            <strong>Christian Skalafouris</strong>
+            <span>Generative AI for Work & Research</span>
+          </div>
+        </a>
+
+        <div class="links" aria-label="Primary navigation">
+          <a href="#about">About me</a>
+          <a href="#course">About the course</a>
+          <a href="#submissions">Weekly submissions</a>
+          <a class="cta" href="#submissions">View my work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <header class="hero">
+      <div class="wrap">
+        <div class="heroGrid">
+          <div class="panel">
+            <div class="panelInner">
+              <div class="kicker"><span class="dot"></span><span>Portfolio for an 8-week cohort course on no-code AI tools</span></div>
+              <h1>Generative AI for Work & Research</h1>
+              <p class="lead">
+                I design and deploy digital solutions at the intersection of clinical pharmacy, medication databases and decision support.
+                This website centralizes my course journey, weekly submissions, and ongoing work on safe, practical GenAI workflows.
+              </p>
+              <div class="heroActions">
+                <a class="btn btnPrimary" href="#course">Explore the course</a>
+                <a class="btn" href="#about">About my background</a>
+                <a class="btn" href="#submissions">Weekly submissions</a>
+              </div>
+              <p class="mini" style="margin-top:14px">Note: contact details are intentionally omitted to reduce spam exposure.</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panelInner side">
+              <div>
+                <div class="kicker"><span class="dot"></span><span>Current focus</span></div>
+                <div class="stats">
+                  <div class="stat">
+                    <strong>Clinical decision support</strong>
+                    <span>Screening rules, risk detection, workflows</span>
+                  </div>
+                  <div class="stat">
+                    <strong>Medication data</strong>
+                    <span>Governance, mapping, quality & updates</span>
+                  </div>
+                  <div class="stat">
+                    <strong>Applied research</strong>
+                    <span>Publications, evaluation, teaching</span>
+                  </div>
+                  <div class="stat">
+                    <strong>GenAI productivity</strong>
+                    <span>Automation, docs, analysis, prototypes</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card" style="padding:16px">
+                <div class="pill"><span class="dot" aria-hidden="true"></span><span>Quick highlights</span></div>
+                <h3 style="margin:10px 0 8px">Project Pharmacist, Geneva</h3>
+                <p style="margin:0; color:var(--muted); font-size:13px">
+                  Managing a hospital medication database and co-developing a pharmacy decision support system used for screening high-risk situations.
+                </p>
+                <ul class="list">
+                  <li>Doctorate in Pharmaceutical Sciences</li>
+                  <li>Medical informatics training</li>
+                  <li>Multiple peer-reviewed publications</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- About me -->
+    <section id="about">
+      <div class="wrap">
+        <div class="sectionHead">
+          <div>
+            <h2>About me</h2>
+            <p>Background, current role, and what I aim to build with GenAI in healthcare and research contexts.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Profile</span></div>
+            <h3>Clinical pharmacist with an IT edge</h3>
+            <p>
+              I work at Geneva University Hospitals (HUG), focusing on medication data governance and the operational use of clinical decision support
+              to prevent adverse drug events.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="pill"><span class="dot" aria-hidden="true"></span><span>What I do</span></div>
+            <h3>From data to impact</h3>
+            <ul class="list">
+              <li>Medication database management for e-prescribing</li>
+              <li>Decision support rules and monitoring workflows</li>
+              <li>Clinical pharmacy activities and risk mitigation</li>
+              <li>Research projects, publications and student mentoring</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Why this course</span></div>
+            <h3>Practical GenAI, safely applied</h3>
+            <p>
+              I use GenAI to accelerate analysis, documentation, automation and prototyping, while staying mindful of quality, traceability
+              and the limits of tools in medical contexts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course -->
+    <section id="course">
+      <div class="wrap">
+        <div class="sectionHead">
+          <div>
+            <h2>About the course</h2>
+            <p>
+              Generative AI for Work & Research is an 8-week live cohort course focused on no-code AI tools for task automation,
+              research workflows, and practical outputs.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid3" style="margin-bottom:14px">
+          <div class="card">
+            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Bootcamp features</span></div>
+            <h3>Hands-on and guided</h3>
+            <ul class="list">
+              <li>Weekly live workshops and help sessions</li>
+              <li>Private community forums</li>
+              <li>Personalized feedback on assessments</li>
+              <li>Capstone project coaching and showcase</li>
+              <li>Shareable certificate and lifetime tutorial access</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Grading</span></div>
+            <h3>Clear expectations</h3>
+            <ul class="list">
+              <li>Online quizzes: 15%</li>
+              <li>Workshop assignments: 35%</li>
+              <li>Attendance & participation: 10%</li>
+              <li>Final project: 40%</li>
+              <li>Passing grade: 80%</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Outcome</span></div>
+            <h3>Workflows you can reuse</h3>
+            <p>
+              The goal is to leave with repeatable systems: structured prompting, toolchains, templates, and automation patterns
+              that translate into everyday work and research productivity.
+            </p>
+          </div>
+        </div>
+
+        <div class="sectionHead" style="margin-top:10px">
+          <div>
+            <h2 style="font-size:18px; margin:0">Course modules</h2>
+            <p>High-level overview of the modules described in the course brochure.</p>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="module">
+            <div class="moduleTop"><span class="badge">Module 1</span><span class="status">Websites, docs & presentations</span></div>
+            <h3>Websites, documents & presentations</h3>
+            <p>LLM fundamentals, structured outputs (Markdown, LaTeX, HTML), and building simple research websites with Canvas.</p>
+          </div>
+          <div class="module">
+            <div class="moduleTop"><span class="badge">Module 2</span><span class="status">AI-automated analysis</span></div>
+            <h3>AI-automated data analysis</h3>
+            <p>Use AI tools to analyze data, transform files, build dashboards, and generate automated reports.</p>
+          </div>
+          <div class="module">
+            <div class="moduleTop"><span class="badge">Module 3</span><span class="status">Research workflows</span></div>
+            <h3>GenAI for research & text analysis</h3>
+            <p>Literature workflows, classification, summarization, and synthesizing large document collections.</p>
+          </div>
+          <div class="module">
+            <div class="moduleTop"><span class="badge">Module 4</span><span class="status">Assistants</span></div>
+            <h3>Custom GPTs and chatbots</h3>
+            <p>Context windows, RAG, and building custom assistants and chatbots for knowledge work.</p>
+          </div>
+          <div class="module">
+            <div class="moduleTop"><span class="badge">Module 5</span><span class="status">Automation</span></div>
+            <h3>AI for task automation</h3>
+            <p>Agent-based flows, email automations, browser control agents, and orchestration patterns.</p>
+          </div>
+          <div class="module">
+            <div class="moduleTop"><span class="badge">Module 6</span><span class="status">Communication</span></div>
+            <h3>GenAI for communication & outreach</h3>
+            <p>Summaries for different audiences, visuals, diagrams, video abstracts and dissemination workflows.</p>
+          </div>
+          <div class="module">
+            <div class="moduleTop"><span class="badge">Module 7</span><span class="status">Capstone</span></div>
+            <h3>Capstone project & showcase</h3>
+            <p>Iterate on a final solution with peer feedback, coaching, troubleshooting, and a public showcase.</p>
+          </div>
+          <div class="module">
+            <div class="moduleTop"><span class="badge">8 weeks</span><span class="status">Live cohort</span></div>
+            <h3>Weekly rhythm</h3>
+            <p>Workshops, assessments and a portfolio of deliverables. This site will host my weekly submissions as links are added.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Weekly submissions -->
+    <section id="submissions">
+      <div class="wrap">
+        <div class="sectionHead">
+          <div>
+            <h2>My weekly submissions</h2>
+            <p>Placeholders for now. We will add links to each submission as the course progresses.</p>
+          </div>
+        </div>
+
+        <div class="weeks" aria-label="Weekly submission cards">
+          <div class="week">
+            <div class="weekTop"><strong>Week 1</strong><span class="status">Placeholder</span></div>
+            <p>Foundations: structured prompting, outputs, and a first mini-deliverable.</p>
+            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
+          </div>
+          <div class="week">
+            <div class="weekTop"><strong>Week 2</strong><span class="status">Placeholder</span></div>
+            <p>Websites and documents: templates, formatting, and reproducible writing.</p>
+            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
+          </div>
+          <div class="week">
+            <div class="weekTop"><strong>Week 3</strong><span class="status">Placeholder</span></div>
+            <p>AI-assisted analysis: data exploration and automated reporting patterns.</p>
+            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
+          </div>
+          <div class="week">
+            <div class="weekTop"><strong>Week 4</strong><span class="status">Placeholder</span></div>
+            <p>Text and literature workflows: search, triage, extraction, synthesis.</p>
+            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
+          </div>
+          <div class="week">
+            <div class="weekTop"><strong>Week 5</strong><span class="status">Placeholder</span></div>
+            <p>Custom assistants: scopes, guardrails, and knowledge base structure.</p>
+            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
+          </div>
+          <div class="week">
+            <div class="weekTop"><strong>Week 6</strong><span class="status">Placeholder</span></div>
+            <p>Automation: agents, batching tasks, and reliability strategies.</p>
+            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
+          </div>
+          <div class="week">
+            <div class="weekTop"><strong>Week 7</strong><span class="status">Placeholder</span></div>
+            <p>Communication: figures, slide prompts, and audience-specific content.</p>
+            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
+          </div>
+          <div class="week">
+            <div class="weekTop"><strong>Week 8</strong><span class="status">Placeholder</span></div>
+            <p>Capstone: final deliverable, demo, and portfolio consolidation.</p>
+            <a href="#" aria-disabled="true" onclick="return false">Add link later</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <div>© <span id="year"></span> Christian Skalafouris</div>
+          <div>
+            Built as a single-page portfolio for the course “Generative AI for Work & Research”.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Small enhancements only (no framework)
+    document.getElementById('year').textContent = String(new Date().getFullYear());
+
+    // Active link highlight (subtle) for in-page navigation
+    const navLinks = Array.from(document.querySelectorAll('.links a')).filter(a => a.getAttribute('href')?.startsWith('#'));
+    const sections = navLinks
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    const setActive = () => {
+      const y = window.scrollY + 110;
+      let activeId = '#top';
+      for (const s of sections){
+        if (s.offsetTop <= y) activeId = '#' + s.id;
+      }
+      for (const a of navLinks){
+        const on = a.getAttribute('href') === activeId;
+        a.style.color = on ? 'var(--ink)' : 'var(--muted)';
+        a.style.borderColor = on ? 'rgba(11,74,163,.22)' : 'transparent';
+        a.style.background = on ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'rgba(255,255,255,.06)' : 'rgba(255,255,255,.55)') : 'transparent';
+      }
+    };
+    setActive();
+    window.addEventListener('scroll', setActive, {passive:true});
+  </script>
+</body>
+</html>
