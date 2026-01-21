@@ -35,12 +35,12 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: #0b1320;
+      color: var(--hug-ink);
       background:
-        radial-gradient(1200px 600px at 15% 10%, rgba(0,165,138,.35), transparent 62%),
-        radial-gradient(900px 520px at 82% 18%, rgba(125,211,252,.28), transparent 60%),
-        radial-gradient(900px 600px at 70% 88%, rgba(30,90,168,.22), transparent 55%),
-        linear-gradient(180deg, #07101d 0%, #0b1320 55%, #07101d 100%);
+        radial-gradient(1200px 600px at 18% 8%, rgba(0,165,138,.14), transparent 62%),
+        radial-gradient(900px 520px at 84% 12%, rgba(125,211,252,.14), transparent 60%),
+        radial-gradient(900px 600px at 70% 86%, rgba(30,90,168,.10), transparent 55%),
+        linear-gradient(180deg, #f6fbfa 0%, #eef6f4 38%, #f7fafc 100%);
       min-height:100vh;
       overflow-x:hidden;
     }
@@ -51,9 +51,9 @@
     /* Top bar */
     .topbar{
       position:sticky; top:0; z-index:20;
-      backdrop-filter: blur(16px);
-      background: rgba(7,16,29,.55);
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,.72);
+      border-bottom: 1px solid rgba(11,19,32,.08);
     }
     .topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:14px; padding: 12px var(--pad)}
     .brand{display:flex; align-items:center; gap:10px; min-width: 220px}
@@ -65,30 +65,30 @@
       box-shadow: 0 12px 26px rgba(0,0,0,.35);
       border: 1px solid rgba(255,255,255,.16);
     }
-    .brand h1{margin:0; font-size:14px; letter-spacing:.35px; color:rgba(255,255,255,.92); font-weight:650}
-    .brand p{margin:0; font-size:12px; color: rgba(255,255,255,.62)}
+    .brand h1{margin:0; font-size:14px; letter-spacing:.35px; color: rgba(11,19,32,.92); font-weight:650}
+    .brand p{margin:0; font-size:12px; color: rgba(11,19,32,.58)}
 
     nav{display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end}
     nav a{
       font-size:13px;
-      color: rgba(255,255,255,.78);
+      color: rgba(11,19,32,.72);
       padding:10px 10px;
       border-radius: 12px;
       border: 1px solid transparent;
       transition: .18s ease;
     }
-    nav a:hover{color: rgba(255,255,255,.96); border-color: rgba(255,255,255,.12); background: rgba(255,255,255,.06)}
+    nav a:hover{color: rgba(11,19,32,.92); border-color: rgba(11,19,32,.10); background: rgba(255,255,255,.72)}
 
     .lang-btn{
       display:inline-flex; align-items:center; gap:8px;
       border-radius: 999px;
       padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      color: rgba(255,255,255,.92);
+      border: 1px solid rgba(11,19,32,.12);
+      color: rgba(11,19,32,.88);
       background:
-        radial-gradient(24px 24px at 28% 25%, rgba(125,211,252,.32), transparent 60%),
-        linear-gradient(135deg, rgba(0,117,94,.55), rgba(30,90,168,.35));
-      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+        radial-gradient(24px 24px at 28% 25%, rgba(125,211,252,.18), transparent 60%),
+        linear-gradient(135deg, rgba(0,117,94,.10), rgba(30,90,168,.06));
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
       cursor:pointer;
       transition: transform .12s ease, filter .12s ease, border-color .12s ease;
       user-select:none;
@@ -99,8 +99,8 @@
       font-size:11px;
       padding:4px 8px;
       border-radius: 999px;
-      background: rgba(255,255,255,.14);
-      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(11,19,32,.10);
     }
 
     /* Hero */
@@ -108,8 +108,8 @@
     .hero-grid{display:grid; grid-template-columns: 1.08fr .92fr; gap: 22px; align-items:stretch}
 
     .glass{
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(11,19,32,.10);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
@@ -129,18 +129,18 @@
     .hero-card{padding: 26px 26px 22px}
     .kicker{display:inline-flex; gap:10px; align-items:center; margin-bottom:14px}
     .dot{width:9px; height:9px; border-radius:99px; background: var(--hug-primary-2); box-shadow: 0 0 0 6px rgba(0,165,138,.16)}
-    .kicker span{color: rgba(255,255,255,.78); font-size:12px; letter-spacing:.18px}
+    .kicker span{color: rgba(11,19,32,.66); font-size:12px; letter-spacing:.18px}
 
     .title{
       margin:0;
-      color: rgba(255,255,255,.95);
+      color: rgba(11,19,32,.94);
       font-size: clamp(28px, 3.4vw, 42px);
       line-height:1.06;
       letter-spacing:-.5px;
     }
     .subtitle{
       margin: 12px 0 18px;
-      color: rgba(255,255,255,.72);
+      color: rgba(11,19,32,.68);
       font-size: 15px;
       line-height:1.55;
       max-width: 62ch;
@@ -152,24 +152,25 @@
       gap:10px;
       padding: 12px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.08);
-      color: rgba(255,255,255,.92);
+      border: 1px solid rgba(11,19,32,.10);
+      background: rgba(255,255,255,.78);
+      color: rgba(11,19,32,.88);
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
       font-size: 13px;
       cursor:pointer;
       user-select:none;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.11); border-color: rgba(255,255,255,.24)}
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.92); border-color: rgba(11,19,32,.16)}
 
     .btn.primary{
-      background: linear-gradient(135deg, rgba(0,117,94,.85), rgba(0,165,138,.75));
+      background: linear-gradient(135deg, rgba(0,117,94,.88), rgba(0,165,138,.78));
       border-color: rgba(0,165,138,.35);
+      color: rgba(255,255,255,.96);
     }
     .btn.primary:hover{border-color: rgba(125,211,252,.35)}
 
     .mini{
-      color: rgba(255,255,255,.62);
+      color: rgba(11,19,32,.56);
       font-size: 12px;
       margin: 10px 0 0;
     }
@@ -192,34 +193,34 @@
       box-shadow: 0 18px 44px rgba(0,0,0,.35);
       background: rgba(255,255,255,.10);
     }
-    .profile h2{margin:0; color: rgba(255,255,255,.92); font-size:16px; letter-spacing:.2px}
-    .profile p{margin:4px 0 0; color: rgba(255,255,255,.66); font-size:13px; line-height:1.45}
+    .profile h2{margin:0; color: rgba(11,19,32,.92); font-size:16px; letter-spacing:.2px}
+    .profile p{margin:4px 0 0; color: rgba(11,19,32,.64); font-size:13px; line-height:1.45}
 
     .chips{display:flex; flex-wrap:wrap; gap:8px; margin: 16px 0 14px}
     .chip{
       font-size:12px;
       padding:8px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.14);
-      color: rgba(255,255,255,.75);
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(11,19,32,.10);
+      color: rgba(11,19,32,.72);
     }
 
     .stats{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top: 10px}
     .stat{
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.80);
+      border: 1px solid rgba(11,19,32,.10);
       border-radius: 18px;
       padding: 12px 12px;
     }
-    .stat b{display:block; color: rgba(255,255,255,.92); font-size:14px}
-    .stat span{display:block; color: rgba(255,255,255,.62); font-size:11px; margin-top:4px}
+    .stat b{display:block; color: rgba(11,19,32,.92); font-size:14px}
+    .stat span{display:block; color: rgba(11,19,32,.62); font-size:11px; margin-top:4px}
 
     /* Sections */
     section{padding: 24px 0}
     .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin: 10px 0 14px}
-    .section-head h3{margin:0; color: rgba(255,255,255,.94); font-size: 18px; letter-spacing:.2px}
-    .section-head p{margin:0; color: rgba(255,255,255,.60); font-size: 13px}
+    .section-head h3{margin:0; color: rgba(11,19,32,.92); font-size: 18px; letter-spacing:.2px}
+    .section-head p{margin:0; color: rgba(11,19,32,.58); font-size: 13px}
 
     .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px}
     .card{
@@ -299,7 +300,7 @@
     footer{padding: 26px 0 40px}
     .foot{
       display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
-      color: rgba(255,255,255,.58);
+      color: rgba(11,19,32,.56);
       font-size: 12px;
     }
 
