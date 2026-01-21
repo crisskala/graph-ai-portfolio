@@ -4,273 +4,365 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="One-page portfolio for the Generative AI for Work & Research course." />
+  <meta name="color-scheme" content="light" />
   <title>Generative AI for Work & Research | Portfolio</title>
 
   <style>
     :root{
-      /* Clean, Stripe-inspired neutral system with HUG teal accent */
-      --ink:#0b1320;
-      --muted:#5a6779;
-      --muted2:#7a8699;
-      --bg:#ffffff;
-      --bg2:#f6f7f9;
-      --bg3:#eef1f5;
-      --card:#ffffff;
-      --border: rgba(11,19,32,.10);
-      --border2: rgba(11,19,32,.06);
-      --shadow: 0 14px 40px rgba(16,24,40,.10);
-      --shadow2: 0 10px 26px rgba(16,24,40,.08);
+      /* Light-only, Apple-like neutral system + discreet HUG green */
+      --bg: #FAFAFA;
+      --surface: #FFFFFF;
+      --surface-2: #F4F5F7;
+      --surface-3: #F0F2F4;
 
-      /* HUG-inspired teal */
-      --hug-primary:#00755e;
-      --hug-primary-2:#00a58a;
-      --hug-accent:#1e5aa8;
+      --text: #111111;
+      --text-2: #444444;
+      --muted: #6B7280;
 
-      --radius: 18px;
-      --radius-lg: 22px;
-      --max: 1120px;
-      --pad: clamp(18px, 2.4vw, 28px);
+      --border: #E5E7EB;
+      --hairline: rgba(17,17,17,.10);
+
+      --accent: #90D79F;        /* soft */
+      --accent-strong: #2E6F40; /* CTA/hover */
+
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md: 0 10px 30px rgba(0,0,0,.06);
+
+      --radius: 16px;
+      --radius-lg: 20px;
+
+      --max: 1080px;
+      --pad: clamp(18px, 3vw, 28px);
+
+      --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI Variable", "Segoe UI",
+              Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--ink);
+      font-family: var(--font);
+      color: var(--text);
       background: var(--bg);
       overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: geometricPrecision;
     }
+
+    /* Hard-disable dark mode cues */
+    :root, body { color-scheme: light; }
 
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--pad)}
 
-    /* Subtle Stripe-like background: grid + soft blobs (very light) */
-    .bg-grid{
-      position:fixed; inset:0; z-index:-2;
+    /* Subtle premium background (very light, not decorative-heavy) */
+    .bg-wash{
+      position:fixed; inset:0; z-index:-2; pointer-events:none;
       background:
-        linear-gradient(to right, rgba(11,19,32,.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(11,19,32,.04) 1px, transparent 1px);
-      background-size: 64px 64px;
-      opacity:.32;
-      pointer-events:none;
-      transform: translateZ(0);
+        radial-gradient(1000px 520px at 15% 0%, rgba(0,0,0,.035), transparent 60%),
+        radial-gradient(900px 520px at 85% 10%, rgba(46,111,64,.06), transparent 62%),
+        linear-gradient(180deg, #FFFFFF 0%, var(--bg) 60%, var(--bg) 100%);
     }
-    .bg-blobs{
-      position:fixed; inset:-20vh -20vw; z-index:-3;
-      pointer-events:none;
-      background:
-        radial-gradient(600px 420px at 18% 10%, rgba(0,165,138,.10), transparent 62%),
-        radial-gradient(520px 380px at 84% 12%, rgba(30,90,168,.10), transparent 60%),
-        radial-gradient(520px 420px at 55% 88%, rgba(0,117,94,.06), transparent 65%);
-      filter: blur(10px);
-      opacity:.95;
+
+    /* Accessibility */
+    .skip-link{
+      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip-link:focus{
+      left: var(--pad);
+      top: 12px;
+      width:auto; height:auto;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      outline: none;
+      z-index: 9999;
+    }
+
+    /* Focus styles */
+    :focus-visible{
+      outline: 3px solid rgba(46,111,64,.35);
+      outline-offset: 3px;
+      border-radius: 12px;
     }
 
     /* Top bar */
     .topbar{
       position:sticky; top:0; z-index:30;
-      background: rgba(255,255,255,.82);
+      background: rgba(250,250,250,.78);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border2);
+      border-bottom: 1px solid var(--border);
     }
-    .topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:14px; padding: 14px var(--pad)}
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 14px;
+      padding: 14px var(--pad);
+    }
 
-    .brand{display:flex; align-items:center; gap:12px; min-width: 240px}
+    .brand{display:flex; align-items:center; gap:12px; min-width: 220px}
     .logo{
       width:34px; height:34px; border-radius: 12px;
-      background:
-        radial-gradient(18px 18px at 30% 28%, rgba(30,90,168,.22), transparent 62%),
-        linear-gradient(135deg, rgba(0,117,94,.95) 0%, rgba(0,165,138,.80) 55%, rgba(30,90,168,.68) 100%);
-      box-shadow: 0 10px 22px rgba(16,24,40,.10);
+      background: linear-gradient(135deg, rgba(46,111,64,.95), rgba(144,215,159,.75));
       border: 1px solid rgba(0,0,0,.06);
+      box-shadow: var(--shadow-sm);
     }
-    .brand h1{margin:0; font-size:13px; letter-spacing:.25px; color: rgba(11,19,32,.92); font-weight:700}
-    .brand p{margin:2px 0 0; font-size:12px; color: var(--muted)}
+    .brand h1{
+      margin:0;
+      font-size:12px;
+      letter-spacing:.25px;
+      color: rgba(17,17,17,.90);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    .brand p{
+      margin:3px 0 0;
+      font-size:12px;
+      color: var(--muted);
+      line-height: 1.2;
+    }
 
-    nav{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    nav{
+      display:flex; align-items:center; gap:6px;
+      flex-wrap:nowrap;
+      justify-content:flex-end;
+      overflow:auto;
+      scrollbar-width: none;
+    }
+    nav::-webkit-scrollbar{display:none}
     nav a{
       font-size:13px;
-      color: rgba(11,19,32,.78);
-      padding:10px 10px;
-      border-radius: 12px;
+      color: rgba(17,17,17,.78);
+      padding: 10px 12px;
+      border-radius: 999px;
       border: 1px solid transparent;
-      transition: .18s ease;
+      transition: background .18s ease, border-color .18s ease, color .18s ease;
+      white-space:nowrap;
     }
-    nav a:hover{border-color: var(--border); background: rgba(246,247,249,.85)}
+    nav a:hover{
+      border-color: var(--border);
+      background: rgba(255,255,255,.85);
+      color: rgba(17,17,17,.92);
+    }
 
     .lang-btn{
       display:inline-flex; align-items:center; gap:10px;
       padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(246,247,249,.92);
+      background: rgba(255,255,255,.86);
       border: 1px solid var(--border);
-      color: rgba(11,19,32,.86);
+      color: rgba(17,17,17,.86);
       cursor:pointer;
-      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
-      box-shadow: 0 10px 24px rgba(16,24,40,.06);
+      transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+      box-shadow: var(--shadow-sm);
       user-select:none;
       white-space:nowrap;
     }
-    .lang-btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.95)}
+    .lang-btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.96); box-shadow: var(--shadow-md)}
     .lang-pill{
       font-size:11px;
       padding:4px 8px;
       border-radius: 999px;
-      background: rgba(255,255,255,.9);
-      border: 1px solid var(--border2);
-      color: rgba(11,19,32,.72);
+      background: rgba(244,245,247,.9);
+      border: 1px solid var(--border);
+      color: rgba(17,17,17,.70);
     }
 
     /* Sections */
-    section{padding: clamp(34px, 5vw, 72px) 0}
-    .alt{background: linear-gradient(180deg, var(--bg2) 0%, rgba(246,247,249,.55) 100%)}
+    main{position:relative}
+    section{
+      padding: clamp(44px, 6vw, 92px) 0;
+      position:relative;
+    }
+    section + section::before{
+      content:"";
+      position:absolute; left:0; right:0; top:0;
+      height:1px;
+      background: linear-gradient(90deg, transparent 0%, var(--border) 10%, var(--border) 90%, transparent 100%);
+    }
+    .alt{background: #FFFFFF}
 
-    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin: 0 0 18px}
-    .section-head h3{margin:0; font-size: 16px; letter-spacing:.18px; font-weight: 800}
-    .section-head p{margin:6px 0 0; color: var(--muted); font-size: 13px; max-width: 64ch; line-height:1.5}
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 16px;
+      margin: 0 0 22px;
+    }
+    .section-head h3{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: .1px;
+      font-weight: 750;
+      color: rgba(17,17,17,.92);
+    }
+    .section-head p{
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 72ch;
+      line-height: 1.65;
+    }
 
     /* Hero */
-    .hero{padding: clamp(46px, 6vw, 90px) 0 46px}
-    .hero-grid{display:grid; grid-template-columns: 1.12fr .88fr; gap: 18px; align-items:stretch}
+    .hero{padding: clamp(54px, 7vw, 110px) 0 54px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items:start;
+    }
 
     .headline{
-      font-size: clamp(34px, 4vw, 54px);
-      letter-spacing: -1px;
+      font-size: clamp(36px, 4.2vw, 58px);
+      letter-spacing: -1.2px;
       line-height: 1.04;
-      margin:0;
-      font-weight: 850;
+      margin: 0;
+      font-weight: 820;
+      color: rgba(17,17,17,.96);
     }
     .headline .grad{
-      background: linear-gradient(90deg, rgba(0,117,94,1), rgba(0,165,138,1), rgba(30,90,168,.92));
+      background: linear-gradient(90deg, rgba(17,17,17,.96), rgba(17,17,17,.86) 55%, rgba(46,111,64,.90));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
     .subhead{
       margin: 14px 0 18px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
-      max-width: 72ch;
+      color: var(--text-2);
+      font-size: 16px;
+      line-height: 1.75;
+      max-width: 76ch;
     }
 
-    .cta-row{display:flex; flex-wrap:wrap; gap:10px; margin-top: 8px}
+    .cta-row{display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px}
+
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
-      padding: 12px 14px;
+      padding: 12px 16px;
       border-radius: 999px;
       border: 1px solid var(--border);
       background: rgba(255,255,255,.92);
-      color: rgba(11,19,32,.88);
-      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+      color: rgba(17,17,17,.88);
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
       font-size: 13px;
       cursor:pointer;
       user-select:none;
-      box-shadow: 0 10px 26px rgba(16,24,40,.06);
+      box-shadow: var(--shadow-sm);
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.98)}
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.98);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(17,17,17,.14);
+    }
     .btn.primary{
-      background: linear-gradient(135deg, rgba(0,117,94,.95), rgba(0,165,138,.85));
-      border-color: rgba(0,165,138,.35);
-      color: rgba(255,255,255,.97);
-      box-shadow: 0 14px 40px rgba(0,165,138,.18);
+      background: var(--accent-strong);
+      border-color: rgba(46,111,64,.35);
+      color: rgba(255,255,255,.98);
+      box-shadow: 0 12px 26px rgba(46,111,64,.18);
     }
-    .btn.primary:hover{box-shadow: 0 16px 44px rgba(0,165,138,.22)}
-
-    /* Bento cards */
-    .bento{
-      background: var(--card);
-      border: 1px solid var(--border2);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .bento.pad{padding: 18px}
-
-    /* Gradient border accent (Stripe-like) */
-    .bento.border-grad{
-      border: 1px solid transparent;
-      background:
-        linear-gradient(#fff, #fff) padding-box,
-        linear-gradient(135deg, rgba(0,117,94,.55), rgba(0,165,138,.28), rgba(30,90,168,.22)) border-box;
-    }
-
-    .hero-left{padding: 22px 22px 20px}
-
-    .hero-avatar{display:flex; align-items:center; gap:12px; margin: 14px 0 10px}
-    .hero-avatar img{
-      width:76px; height:76px; border-radius: 999px;
-      object-fit: cover;
-      border: 1px solid rgba(11,19,32,.10);
-      box-shadow: 0 18px 48px rgba(16,24,40,.12);
-      background: rgba(246,247,249,.9);
+    .btn.primary:hover{
+      background: #255a33;
+      box-shadow: 0 16px 34px rgba(46,111,64,.22);
     }
 
     .micro{
       margin-top: 12px;
-      color: var(--muted2);
-      font-size: 12px;
-      line-height: 1.45;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* Cards / Bento */
+    .bento{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow:hidden;
+      position:relative;
+    }
+    .bento.pad{padding: 22px}
+    .bento.subtle{
+      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(244,245,247,.75));
+    }
+
+    .hero-left{padding: 26px 26px 24px}
+
+    .hero-avatar{display:flex; align-items:center; gap:14px; margin: 4px 0 14px}
+    .hero-avatar img{
+      width:84px; height:84px; border-radius: 999px;
+      object-fit: cover;
+      border: 1px solid rgba(17,17,17,.10);
+      box-shadow: 0 14px 28px rgba(0,0,0,.10);
+      background: rgba(244,245,247,.9);
     }
 
     /* Right hero panel */
-    .profile{padding: 18px}
+    .profile{padding: 20px}
     .profile-top{display:flex; gap:12px; align-items:center}
     .avatar-img{
-      width:54px; height:54px; border-radius: 999px;
+      width:56px; height:56px; border-radius: 999px;
       object-fit: cover;
-      border: 1px solid rgba(11,19,32,.10);
-      box-shadow: 0 14px 38px rgba(16,24,40,.10);
-      background: rgba(246,247,249,.9);
+      border: 1px solid rgba(17,17,17,.10);
+      box-shadow: 0 12px 24px rgba(0,0,0,.08);
+      background: rgba(244,245,247,.9);
     }
-    .profile h2{margin:0; font-size:14px; font-weight: 850}
-    .profile p{margin:4px 0 0; color: var(--muted); font-size:13px; line-height:1.45}
+    .profile h2{
+      margin:0;
+      font-size: 15px;
+      font-weight: 780;
+      letter-spacing: .1px;
+      color: rgba(17,17,17,.92);
+    }
+    .profile p{
+      margin:4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.55;
+    }
 
-    .chips{display:flex; flex-wrap:wrap; gap:8px; margin: 14px 0 12px}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin: 16px 0 14px}
     .chip{
       font-size:12px;
       padding:8px 10px;
       border-radius: 999px;
-      background: rgba(246,247,249,.92);
-      border: 1px solid var(--border2);
-      color: rgba(11,19,32,.74);
+      background: rgba(244,245,247,.9);
+      border: 1px solid var(--border);
+      color: rgba(17,17,17,.74);
       white-space:nowrap;
     }
 
-    .stats{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top: 10px}
+    .stats{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top: 8px}
     .stat{
       border-radius: 16px;
-      background: rgba(246,247,249,.86);
-      border: 1px solid var(--border2);
+      background: rgba(244,245,247,.9);
+      border: 1px solid var(--border);
       padding: 12px 12px;
-      min-height: 58px;
+      min-height: 62px;
     }
-    .stat b{display:block; font-size:13px}
-    .stat span{display:block; margin-top:4px; color: var(--muted2); font-size:11px}
+    .stat b{display:block; font-size:13px; color: rgba(17,17,17,.92)}
+    .stat span{display:block; margin-top:4px; color: var(--muted); font-size:12px; line-height:1.35}
 
-    /* Decorative figure blocks */
+    /* Figures: keep, but make them more "premium / informative" */
     .figure{
       border-radius: 18px;
-      border: 1px solid var(--border2);
-      background:
-        radial-gradient(380px 220px at 20% 22%, rgba(0,165,138,.12), transparent 60%),
-        radial-gradient(360px 220px at 80% 28%, rgba(30,90,168,.10), transparent 60%),
-        linear-gradient(180deg, rgba(246,247,249,.92), rgba(255,255,255,.92));
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(244,245,247,.85), rgba(255,255,255,.92));
       overflow:hidden;
       padding: 14px;
     }
-    .figure-title{display:flex; align-items:center; justify-content:space-between; gap:10px; margin: 0 0 10px}
-    .figure-title b{font-size:12px; color: rgba(11,19,32,.78)}
-    .figure-title span{font-size:11px; color: var(--muted2)}
-
-    .flow{
-      width:100%;
-      height:auto;
-      display:block;
+    .figure-title{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; margin: 0 0 10px;
     }
+    .figure-title b{font-size:12px; color: rgba(17,17,17,.82)}
+    .figure-title span{font-size:12px; color: var(--muted)}
+
+    .flow{width:100%; height:auto; display:block}
 
     /* Content grid */
     .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px}
@@ -278,96 +370,139 @@
     .span-7{grid-column: span 7}
     .span-12{grid-column: span 12}
 
-    .muted{color: var(--muted); line-height: 1.6}
-    .strong{color: rgba(11,19,32,.92); line-height: 1.6}
+    .muted{color: var(--text-2); line-height: 1.75; font-size: 14px}
+    .strong{color: rgba(17,17,17,.92); line-height: 1.75; font-size: 14px}
 
-    .bullet{margin: 12px 0 0; padding-left: 18px; color: rgba(11,19,32,.76)}
-    .bullet li{margin: 6px 0}
+    .bullet{
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: rgba(17,17,17,.82);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .bullet li{margin: 8px 0}
+    .bullet li::marker{color: rgba(46,111,64,.55)}
 
     /* Module bento */
-    .module-grid{display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 10px}
+    .module-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
     .module{
       border-radius: 16px;
-      background: rgba(246,247,249,.86);
-      border: 1px solid var(--border2);
+      background: rgba(244,245,247,.9);
+      border: 1px solid var(--border);
       padding: 14px;
-      min-height: 92px;
+      min-height: 96px;
     }
-    .module b{display:block; font-size:13px; color: rgba(11,19,32,.92)}
-    .module span{display:block; font-size:12px; color: var(--muted); margin-top:6px; line-height:1.45}
+    .module b{display:block; font-size:13px; color: rgba(17,17,17,.92); line-height:1.3}
+    .module span{display:block; font-size:12px; color: var(--muted); margin-top:8px; line-height:1.55}
 
-    /* Submission cards with progress bar placeholder */
+    /* Submissions */
     .submissions{display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px}
     .submission{
       border-radius: 16px;
       padding: 14px;
-      border: 1px solid var(--border2);
+      border: 1px solid var(--border);
       background: rgba(255,255,255,.96);
-      box-shadow: 0 10px 26px rgba(16,24,40,.05);
-      transition: transform .14s ease, box-shadow .14s ease;
+      box-shadow: var(--shadow-sm);
+      transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
+      min-height: 132px;
     }
-    .submission:hover{transform: translateY(-2px); box-shadow: 0 16px 34px rgba(16,24,40,.08)}
-    .submission b{display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:13px}
+    .submission:hover{
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(17,17,17,.14);
+    }
+    .submission b{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; font-size:13px; color: rgba(17,17,17,.92)
+    }
     .badge{
       font-size:11px;
       padding: 4px 8px;
       border-radius: 999px;
-      background: rgba(246,247,249,.92);
-      border: 1px solid var(--border2);
-      color: rgba(11,19,32,.72);
+      background: rgba(244,245,247,.92);
+      border: 1px solid var(--border);
+      color: rgba(17,17,17,.70);
       white-space:nowrap;
     }
-    .submission p{margin: 8px 0 0; font-size:12px; color: var(--muted); line-height:1.55}
+    .submission p{
+      margin: 10px 0 0;
+      font-size:12px;
+      color: var(--muted);
+      line-height:1.65;
+    }
     .bar{
       height: 7px;
       border-radius: 999px;
-      background: rgba(11,19,32,.06);
+      background: rgba(17,17,17,.08);
       overflow:hidden;
-      margin-top: 12px;
+      margin-top: 14px;
     }
     .bar > i{
       display:block;
       height:100%;
-      width: 28%; /* placeholder */
+      width: 28%;
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(0,117,94,.85), rgba(0,165,138,.75));
+      background: linear-gradient(90deg, rgba(46,111,64,.92), rgba(144,215,159,.85));
     }
 
     /* Footer */
-    footer{padding: 40px 0 56px}
-    .foot{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; color: var(--muted2); font-size: 12px}
+    footer{padding: 44px 0 64px}
+    .foot{
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:10px;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
 
     /* Progressive reveal on scroll */
-    .reveal{opacity:0; transform: translateY(16px); filter: blur(1px); transition: opacity .6s ease, transform .6s ease, filter .6s ease}
-    .reveal.in{opacity:1; transform: translateY(0); filter: blur(0)}
+    .reveal{
+      opacity:0;
+      transform: translateY(10px);
+      transition: opacity .55s ease, transform .55s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.in{opacity:1; transform: translateY(0)}
 
     /* Responsive */
     @media (max-width: 980px){
       .hero-grid{grid-template-columns: 1fr}
-      nav{display:none}
       .span-5{grid-column: span 12}
       .span-7{grid-column: span 12}
       .submissions{grid-template-columns: repeat(2, minmax(0,1fr))}
+      .topbar-inner{gap:10px}
     }
     @media (max-width: 520px){
       .submissions{grid-template-columns: 1fr}
       .stats{grid-template-columns: 1fr}
-      .topbar-inner{gap:10px}
       .brand{min-width:unset}
-      .hero-left{padding: 18px}
+      .hero-left{padding: 20px}
+      nav a{padding: 10px 10px}
     }
 
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
-      .reveal{opacity:1; transform:none; filter:none; transition:none}
+      .reveal{opacity:1; transform:none; transition:none}
+      .btn, .submission, .lang-btn, nav a{transition:none}
     }
+
+    /* SVG tuning (keep figures useful, minimal, premium) */
+    svg text { fill: rgba(17,17,17,.72); }
+    .svg-stroke-soft { stroke: rgba(17,17,17,.14); }
+    .svg-accent { stroke: rgba(46,111,64,.75); }
   </style>
 </head>
 
 <body>
-  <div class="bg-blobs" aria-hidden="true"></div>
-  <div class="bg-grid" aria-hidden="true"></div>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="bg-wash" aria-hidden="true"></div>
 
   <header class="topbar">
     <div class="topbar-inner wrap">
@@ -385,18 +520,18 @@
         <a href="#submissions" data-i18n="nav.submissions">Submissions</a>
       </nav>
 
-      <button id="langToggle" class="lang-btn" type="button" aria-label="Toggle language">
+      <button id="langToggle" class="lang-btn" type="button" aria-label="Toggle language" aria-pressed="false">
         <span id="langLabel" data-i18n="lang.switch">Français</span>
         <span class="lang-pill" id="langPill">EN</span>
       </button>
     </div>
   </header>
 
-  <main>
+  <main id="content">
     <section class="hero">
       <div class="wrap hero-grid">
 
-        <div class="bento border-grad hero-left reveal">
+        <div class="bento subtle hero-left reveal">
           <div class="hero-avatar" aria-label="Avatar">
             <img src="https://github.com/crisskala/graph-ai-portfolio/blob/main/015-Skala.jpg?raw=true" alt="Portrait of Christian Skalafouris" loading="eager" />
           </div>
@@ -415,33 +550,32 @@
 
           <p class="micro" data-i18n="hero.note">Links will be added progressively as submissions are completed.</p>
 
-          <div class="figure" style="margin-top:16px" aria-label="Workflow figure">
+          <div class="figure" style="margin-top:18px" aria-label="Workflow figure">
             <div class="figure-title">
               <b data-i18n="hero.figureTitle">Example workflow</b>
               <span data-i18n="hero.figureHint">prompt → artifact → iteration</span>
             </div>
 
-            <!-- Simple, Stripe-like abstract flow diagram (SVG) -->
             <svg class="flow" viewBox="0 0 680 170" role="img" aria-label="Workflow diagram">
               <defs>
                 <linearGradient id="g" x1="0" x2="1">
-                  <stop offset="0" stop-color="rgba(0,117,94,.95)" />
-                  <stop offset=".55" stop-color="rgba(0,165,138,.75)" />
-                  <stop offset="1" stop-color="rgba(30,90,168,.55)" />
+                  <stop offset="0" stop-color="rgba(46,111,64,.92)" />
+                  <stop offset=".55" stop-color="rgba(144,215,159,.85)" />
+                  <stop offset="1" stop-color="rgba(17,17,17,.35)" />
                 </linearGradient>
               </defs>
-              <rect x="0" y="0" width="680" height="170" rx="18" fill="rgba(255,255,255,.0)" />
-              <path d="M60 92 C160 40, 240 145, 340 92 C440 40, 520 145, 620 92" fill="none" stroke="rgba(11,19,32,.12)" stroke-width="10" stroke-linecap="round" />
+              <rect x="0" y="0" width="680" height="170" rx="18" fill="rgba(255,255,255,0)" />
+              <path d="M60 92 C160 40, 240 145, 340 92 C440 40, 520 145, 620 92" fill="none" stroke="rgba(17,17,17,.12)" stroke-width="10" stroke-linecap="round" />
               <path d="M60 92 C160 40, 240 145, 340 92 C440 40, 520 145, 620 92" fill="none" stroke="url(#g)" stroke-width="6" stroke-linecap="round" />
               <g>
-                <circle cx="60" cy="92" r="12" fill="rgba(255,255,255,.95)" stroke="rgba(11,19,32,.10)" />
-                <circle cx="340" cy="92" r="12" fill="rgba(255,255,255,.95)" stroke="rgba(11,19,32,.10)" />
-                <circle cx="620" cy="92" r="12" fill="rgba(255,255,255,.95)" stroke="rgba(11,19,32,.10)" />
-                <circle cx="60" cy="92" r="6" fill="rgba(0,165,138,.85)" />
-                <circle cx="340" cy="92" r="6" fill="rgba(0,117,94,.85)" />
-                <circle cx="620" cy="92" r="6" fill="rgba(30,90,168,.60)" />
+                <circle cx="60" cy="92" r="12" fill="rgba(255,255,255,.98)" stroke="rgba(17,17,17,.12)" />
+                <circle cx="340" cy="92" r="12" fill="rgba(255,255,255,.98)" stroke="rgba(17,17,17,.12)" />
+                <circle cx="620" cy="92" r="12" fill="rgba(255,255,255,.98)" stroke="rgba(17,17,17,.12)" />
+                <circle cx="60" cy="92" r="6" fill="rgba(46,111,64,.88)" />
+                <circle cx="340" cy="92" r="6" fill="rgba(46,111,64,.72)" />
+                <circle cx="620" cy="92" r="6" fill="rgba(17,17,17,.45)" />
               </g>
-              <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(11,19,32,.70)">
+              <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(17,17,17,.70)">
                 <text x="32" y="140" data-i18n="hero.figureA">Prompt</text>
                 <text x="308" y="140" data-i18n="hero.figureB">Artifact</text>
                 <text x="582" y="140" data-i18n="hero.figureC">Iteration</text>
@@ -488,15 +622,15 @@
                 <span data-i18n="profile.figureHint">bento snapshot</span>
               </div>
               <svg class="flow" viewBox="0 0 680 160" role="img" aria-label="Focus bento">
-                <rect x="0" y="0" width="680" height="160" rx="18" fill="rgba(255,255,255,.0)" />
+                <rect x="0" y="0" width="680" height="160" rx="18" fill="rgba(255,255,255,0)" />
                 <g>
-                  <rect x="16" y="16" width="210" height="60" rx="14" fill="rgba(255,255,255,.82)" stroke="rgba(11,19,32,.08)" />
-                  <rect x="240" y="16" width="200" height="60" rx="14" fill="rgba(255,255,255,.82)" stroke="rgba(11,19,32,.08)" />
-                  <rect x="454" y="16" width="210" height="60" rx="14" fill="rgba(255,255,255,.82)" stroke="rgba(11,19,32,.08)" />
-                  <rect x="16" y="90" width="260" height="54" rx="14" fill="rgba(255,255,255,.82)" stroke="rgba(11,19,32,.08)" />
-                  <rect x="292" y="90" width="372" height="54" rx="14" fill="rgba(255,255,255,.82)" stroke="rgba(11,19,32,.08)" />
+                  <rect x="16" y="16" width="210" height="60" rx="14" fill="rgba(255,255,255,.92)" stroke="rgba(17,17,17,.10)" />
+                  <rect x="240" y="16" width="200" height="60" rx="14" fill="rgba(255,255,255,.92)" stroke="rgba(17,17,17,.10)" />
+                  <rect x="454" y="16" width="210" height="60" rx="14" fill="rgba(255,255,255,.92)" stroke="rgba(17,17,17,.10)" />
+                  <rect x="16" y="90" width="260" height="54" rx="14" fill="rgba(255,255,255,.92)" stroke="rgba(17,17,17,.10)" />
+                  <rect x="292" y="90" width="372" height="54" rx="14" fill="rgba(255,255,255,.92)" stroke="rgba(17,17,17,.10)" />
                 </g>
-                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(11,19,32,.72)">
+                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(17,17,17,.72)">
                   <text x="44" y="52" data-i18n="profile.box1">CDSS</text>
                   <text x="268" y="52" data-i18n="profile.box2">Data</text>
                   <text x="482" y="52" data-i18n="profile.box3">Research</text>
@@ -504,11 +638,11 @@
                   <text x="320" y="122" data-i18n="profile.box5">Automation</text>
                 </g>
                 <g>
-                  <circle cx="32" cy="46" r="6" fill="rgba(0,165,138,.75)" />
-                  <circle cx="256" cy="46" r="6" fill="rgba(0,117,94,.72)" />
-                  <circle cx="470" cy="46" r="6" fill="rgba(30,90,168,.40)" />
-                  <circle cx="32" cy="116" r="6" fill="rgba(30,90,168,.35)" />
-                  <circle cx="308" cy="116" r="6" fill="rgba(0,165,138,.55)" />
+                  <circle cx="32" cy="46" r="6" fill="rgba(46,111,64,.70)" />
+                  <circle cx="256" cy="46" r="6" fill="rgba(46,111,64,.55)" />
+                  <circle cx="470" cy="46" r="6" fill="rgba(17,17,17,.35)" />
+                  <circle cx="32" cy="116" r="6" fill="rgba(17,17,17,.30)" />
+                  <circle cx="308" cy="116" r="6" fill="rgba(144,215,159,.75)" />
                 </g>
               </svg>
             </div>
@@ -536,7 +670,7 @@
               My focus includes medication database governance for an institutional prescribing system, and the continuous development of a pharmaceutical decision support system (PharmaCheck) to detect high-risk situations and support clinical pharmacy activities.
             </p>
 
-            <div class="figure" style="margin-top:14px">
+            <div class="figure" style="margin-top:16px">
               <div class="figure-title">
                 <b data-i18n="about.figureTitle">What I build</b>
                 <span data-i18n="about.figureHint">systems + workflows</span>
@@ -544,39 +678,39 @@
               <svg class="flow" viewBox="0 0 680 160" role="img" aria-label="Build blocks">
                 <defs>
                   <linearGradient id="g2" x1="0" x2="1">
-                    <stop offset="0" stop-color="rgba(0,117,94,.28)" />
-                    <stop offset=".55" stop-color="rgba(0,165,138,.18)" />
-                    <stop offset="1" stop-color="rgba(30,90,168,.14)" />
+                    <stop offset="0" stop-color="rgba(46,111,64,.18)" />
+                    <stop offset=".55" stop-color="rgba(144,215,159,.16)" />
+                    <stop offset="1" stop-color="rgba(17,17,17,.10)" />
                   </linearGradient>
                 </defs>
-                <rect x="0" y="0" width="680" height="160" rx="18" fill="rgba(255,255,255,.0)" />
+                <rect x="0" y="0" width="680" height="160" rx="18" fill="rgba(255,255,255,0)" />
                 <rect x="16" y="24" width="648" height="18" rx="9" fill="url(#g2)" />
                 <g>
-                  <rect x="16" y="56" width="210" height="88" rx="16" fill="rgba(255,255,255,.90)" stroke="rgba(11,19,32,.08)" />
-                  <rect x="240" y="56" width="210" height="88" rx="16" fill="rgba(255,255,255,.90)" stroke="rgba(11,19,32,.08)" />
-                  <rect x="454" y="56" width="210" height="88" rx="16" fill="rgba(255,255,255,.90)" stroke="rgba(11,19,32,.08)" />
+                  <rect x="16" y="56" width="210" height="88" rx="16" fill="rgba(255,255,255,.94)" stroke="rgba(17,17,17,.10)" />
+                  <rect x="240" y="56" width="210" height="88" rx="16" fill="rgba(255,255,255,.94)" stroke="rgba(17,17,17,.10)" />
+                  <rect x="454" y="56" width="210" height="88" rx="16" fill="rgba(255,255,255,.94)" stroke="rgba(17,17,17,.10)" />
                 </g>
-                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(11,19,32,.74)">
+                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(17,17,17,.74)">
                   <text x="40" y="92" data-i18n="about.block1">Rules & signals</text>
-                  <text x="40" y="114" fill="rgba(90,103,121,.95)" data-i18n="about.block1s">alerts, scoring, safety</text>
+                  <text x="40" y="114" fill="rgba(107,114,128,.95)" data-i18n="about.block1s">alerts, scoring, safety</text>
                   <text x="264" y="92" data-i18n="about.block2">Data pipelines</text>
-                  <text x="264" y="114" fill="rgba(90,103,121,.95)" data-i18n="about.block2s">queries, aggregation, QA</text>
+                  <text x="264" y="114" fill="rgba(107,114,128,.95)" data-i18n="about.block2s">queries, aggregation, QA</text>
                   <text x="478" y="92" data-i18n="about.block3">Interfaces</text>
-                  <text x="478" y="114" fill="rgba(90,103,121,.95)" data-i18n="about.block3s">UX, adoption, governance</text>
+                  <text x="478" y="114" fill="rgba(107,114,128,.95)" data-i18n="about.block3s">UX, adoption, governance</text>
                 </g>
                 <g>
-                  <circle cx="32" cy="86" r="6" fill="rgba(0,165,138,.70)" />
-                  <circle cx="256" cy="86" r="6" fill="rgba(0,117,94,.65)" />
-                  <circle cx="470" cy="86" r="6" fill="rgba(30,90,168,.38)" />
+                  <circle cx="32" cy="86" r="6" fill="rgba(46,111,64,.70)" />
+                  <circle cx="256" cy="86" r="6" fill="rgba(144,215,159,.78)" />
+                  <circle cx="470" cy="86" r="6" fill="rgba(17,17,17,.30)" />
                 </g>
               </svg>
             </div>
           </div>
 
           <div class="bento pad span-5 reveal">
-            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom: 8px;">
-              <b style="font-size:13px; color: rgba(11,19,32,.92)" data-i18n="about.quick">Quick profile</b>
-              <span style="font-size:12px; color: var(--muted2)" data-i18n="about.location">Geneva region</span>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom: 10px;">
+              <b style="font-size:13px; color: rgba(17,17,17,.92)" data-i18n="about.quick">Quick profile</b>
+              <span style="font-size:12px; color: var(--muted)" data-i18n="about.location">Geneva region</span>
             </div>
             <ul class="bullet">
               <li data-i18n="about.q1">Doctorate in pharmaceutical sciences (University of Geneva)</li>
@@ -585,22 +719,22 @@
               <li data-i18n="about.q4">Teaching and supervision of research projects</li>
             </ul>
 
-            <div class="figure" style="margin-top:14px">
+            <div class="figure" style="margin-top:16px">
               <div class="figure-title">
                 <b data-i18n="about.miniTitle">Operating principles</b>
                 <span data-i18n="about.miniHint">what I optimize</span>
               </div>
               <svg class="flow" viewBox="0 0 680 140" role="img" aria-label="Principles">
-                <rect x="0" y="0" width="680" height="140" rx="18" fill="rgba(255,255,255,.0)" />
+                <rect x="0" y="0" width="680" height="140" rx="18" fill="rgba(255,255,255,0)" />
                 <g>
-                  <path d="M40 92 C120 40, 160 120, 240 78" fill="none" stroke="rgba(11,19,32,.12)" stroke-width="10" stroke-linecap="round" />
-                  <path d="M40 92 C120 40, 160 120, 240 78" fill="none" stroke="rgba(0,165,138,.55)" stroke-width="6" stroke-linecap="round" />
-                  <path d="M260 92 C340 40, 380 120, 460 78" fill="none" stroke="rgba(11,19,32,.12)" stroke-width="10" stroke-linecap="round" />
-                  <path d="M260 92 C340 40, 380 120, 460 78" fill="none" stroke="rgba(0,117,94,.50)" stroke-width="6" stroke-linecap="round" />
-                  <path d="M480 92 C560 40, 600 120, 640 78" fill="none" stroke="rgba(11,19,32,.12)" stroke-width="10" stroke-linecap="round" />
-                  <path d="M480 92 C560 40, 600 120, 640 78" fill="none" stroke="rgba(30,90,168,.35)" stroke-width="6" stroke-linecap="round" />
+                  <path d="M40 92 C120 40, 160 120, 240 78" fill="none" stroke="rgba(17,17,17,.12)" stroke-width="10" stroke-linecap="round" />
+                  <path d="M40 92 C120 40, 160 120, 240 78" fill="none" stroke="rgba(46,111,64,.55)" stroke-width="6" stroke-linecap="round" />
+                  <path d="M260 92 C340 40, 380 120, 460 78" fill="none" stroke="rgba(17,17,17,.12)" stroke-width="10" stroke-linecap="round" />
+                  <path d="M260 92 C340 40, 380 120, 460 78" fill="none" stroke="rgba(46,111,64,.45)" stroke-width="6" stroke-linecap="round" />
+                  <path d="M480 92 C560 40, 600 120, 640 78" fill="none" stroke="rgba(17,17,17,.12)" stroke-width="10" stroke-linecap="round" />
+                  <path d="M480 92 C560 40, 600 120, 640 78" fill="none" stroke="rgba(17,17,17,.30)" stroke-width="6" stroke-linecap="round" />
                 </g>
-                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(11,19,32,.72)">
+                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(17,17,17,.72)">
                   <text x="34" y="126" data-i18n="about.pr1">Safety</text>
                   <text x="252" y="126" data-i18n="about.pr2">Reliability</text>
                   <text x="470" y="126" data-i18n="about.pr3">Adoption</text>
@@ -644,7 +778,7 @@
           </div>
 
           <div class="bento pad span-5 reveal">
-            <b style="display:block; font-size:13px; color: rgba(11,19,32,.92); margin-bottom:8px" data-i18n="course.features">Bootcamp features</b>
+            <b style="display:block; font-size:13px; color: rgba(17,17,17,.92); margin-bottom:10px" data-i18n="course.features">Bootcamp features</b>
             <ul class="bullet">
               <li data-i18n="course.f1">Weekly live workshops</li>
               <li data-i18n="course.f2">Weekly live help sessions</li>
@@ -654,36 +788,36 @@
               <li data-i18n="course.f6">Shareable certificate + lifetime tutorial access</li>
             </ul>
 
-            <div class="figure" style="margin-top:14px">
+            <div class="figure" style="margin-top:16px">
               <div class="figure-title">
                 <b data-i18n="course.figureTitle">Weekly rhythm</b>
                 <span data-i18n="course.figureHint">repeatable cadence</span>
               </div>
               <svg class="flow" viewBox="0 0 680 160" role="img" aria-label="Weekly rhythm">
-                <rect x="0" y="0" width="680" height="160" rx="18" fill="rgba(255,255,255,.0)" />
+                <rect x="0" y="0" width="680" height="160" rx="18" fill="rgba(255,255,255,0)" />
                 <g>
-                  <rect x="16" y="22" width="648" height="22" rx="11" fill="rgba(11,19,32,.06)" />
-                  <rect x="16" y="22" width="360" height="22" rx="11" fill="rgba(0,165,138,.40)" />
+                  <rect x="16" y="22" width="648" height="22" rx="11" fill="rgba(17,17,17,.08)" />
+                  <rect x="16" y="22" width="360" height="22" rx="11" fill="rgba(46,111,64,.35)" />
                 </g>
-                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(11,19,32,.72)">
+                <g font-family="ui-sans-serif, system-ui" font-size="12" fill="rgba(17,17,17,.72)">
                   <text x="16" y="82" data-i18n="course.step1">Live workshop</text>
-                  <text x="16" y="108" fill="rgba(90,103,121,.95)" data-i18n="course.step1s">learn + build</text>
+                  <text x="16" y="108" fill="rgba(107,114,128,.95)" data-i18n="course.step1s">learn + build</text>
                   <text x="250" y="82" data-i18n="course.step2">Help session</text>
-                  <text x="250" y="108" fill="rgba(90,103,121,.95)" data-i18n="course.step2s">debug + refine</text>
+                  <text x="250" y="108" fill="rgba(107,114,128,.95)" data-i18n="course.step2s">debug + refine</text>
                   <text x="460" y="82" data-i18n="course.step3">Submission</text>
-                  <text x="460" y="108" fill="rgba(90,103,121,.95)" data-i18n="course.step3s">ship an artifact</text>
+                  <text x="460" y="108" fill="rgba(107,114,128,.95)" data-i18n="course.step3s">ship an artifact</text>
                 </g>
                 <g>
-                  <circle cx="40" cy="64" r="8" fill="rgba(0,165,138,.55)" />
-                  <circle cx="274" cy="64" r="8" fill="rgba(0,117,94,.40)" />
-                  <circle cx="484" cy="64" r="8" fill="rgba(30,90,168,.26)" />
+                  <circle cx="40" cy="64" r="8" fill="rgba(46,111,64,.55)" />
+                  <circle cx="274" cy="64" r="8" fill="rgba(144,215,159,.70)" />
+                  <circle cx="484" cy="64" r="8" fill="rgba(17,17,17,.25)" />
                 </g>
               </svg>
             </div>
 
-            <div style="margin-top:12px; padding:12px; border-radius: 16px; border: 1px solid var(--border2); background: rgba(246,247,249,.86)">
-              <b style="display:block; font-size:12px; color: rgba(11,19,32,.86)" data-i18n="course.grading">Grading (overview)</b>
-              <p style="margin:8px 0 0; font-size:12px; color: var(--muted); line-height:1.55" data-i18n="course.gradingNote">
+            <div style="margin-top:14px; padding:14px; border-radius: 16px; border: 1px solid var(--border); background: rgba(244,245,247,.9)">
+              <b style="display:block; font-size:12px; color: rgba(17,17,17,.86)" data-i18n="course.grading">Grading (overview)</b>
+              <p style="margin:10px 0 0; font-size:12px; color: var(--muted); line-height:1.65" data-i18n="course.gradingNote">
                 Final grade combines quizzes, workshop assignments, attendance/participation, and a final project.
               </p>
             </div>
@@ -756,12 +890,12 @@
           </div>
         </div>
 
-        <div style="height:14px"></div>
+        <div style="height:16px"></div>
 
         <div class="grid">
           <div class="bento pad span-12 reveal">
-            <b style="display:block; font-size:13px; color: rgba(11,19,32,.92)" data-i18n="subs.noteTitle">How we’ll update this page</b>
-            <p style="margin:8px 0 0; font-size:12px; color: var(--muted); line-height:1.65" data-i18n="subs.note">
+            <b style="display:block; font-size:13px; color: rgba(17,17,17,.92)" data-i18n="subs.noteTitle">How we’ll update this page</b>
+            <p style="margin:10px 0 0; font-size:12px; color: var(--muted); line-height:1.75" data-i18n="subs.note">
               Each week card will later include: a short description, tool stack, artifacts (slides/docs/code), and a link to the submission.
             </p>
           </div>
@@ -1063,7 +1197,12 @@
 
       const pill = document.getElementById("langPill");
       pill.textContent = lang.toUpperCase();
-      document.getElementById("langLabel").textContent = dict["lang.switch"] || (lang === "en" ? "Français" : "English");
+
+      const label = document.getElementById("langLabel");
+      label.textContent = dict["lang.switch"] || (lang === "en" ? "Français" : "English");
+
+      const btn = document.getElementById("langToggle");
+      btn.setAttribute("aria-pressed", lang === "fr" ? "true" : "false");
     }
 
     function toggleLang(){
@@ -1074,7 +1213,7 @@
     document.getElementById("langToggle").addEventListener("click", toggleLang);
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Progressive reveal on scroll (Stripe-like)
+    // Progressive reveal on scroll (lightweight)
     const revealEls = Array.from(document.querySelectorAll('.reveal'));
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -1083,7 +1222,7 @@
           io.unobserve(e.target);
         }
       });
-    }, { root: null, threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    }, { root: null, threshold: 0.14, rootMargin: '0px 0px -10% 0px' });
     revealEls.forEach(el => io.observe(el));
 
     // Initial render
