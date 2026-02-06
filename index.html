@@ -4,336 +4,421 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="One-page portfolio for the Generative AI for Work & Research course." />
+  <meta name="color-scheme" content="light dark" />
   <title>Generative AI for Work & Research | Portfolio</title>
+
+  <!-- Modern, readable font (optional but recommended). Falls back to system fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Inspired by the HUG Pharmacy recommendations palette (teal/green-forward) */
-      --hug-ink:#0b1320;
-      --hug-slate:#162235;
-      --hug-mist:#e8eef3;
-      --hug-card:rgba(255,255,255,.78);
-      --hug-card-strong:rgba(255,255,255,.9);
-      --hug-border:rgba(255,255,255,.18);
+      --bg: #ffffff;
+      --bg-soft: #f7f7f8;
+      --surface: #ffffff;
 
-      --hug-primary:#00755e;   /* teal-green */
-      --hug-primary-2:#00a58a; /* bright teal */
-      --hug-accent:#1e5aa8;    /* deep blue accent */
-      --hug-accent-2:#7dd3fc;  /* light blue glow */
+      --text: #111827;        /* near-black */
+      --muted: #4b5563;       /* readable gray */
+      --muted-2: #6b7280;
 
-      --shadow: 0 18px 60px rgba(0,0,0,.25);
-      --shadow-soft: 0 10px 28px rgba(0,0,0,.18);
-      --radius: 22px;
-      --radius-sm: 14px;
+      --border: #e5e7eb;
+      --shadow: 0 10px 30px rgba(17, 24, 39, .06);
+      --shadow-sm: 0 6px 18px rgba(17, 24, 39, .06);
 
-      --max: 1120px;
+      --accent: #00755e;      /* your teal */
+      --accent-ink: #065f46;
+      --focus: #2563eb;
+
+      --radius: 14px;
+      --radius-sm: 12px;
+
+      --max: 1080px;
       --pad: clamp(18px, 2.4vw, 28px);
+
+      --lh: 1.6;
+    }
+
+    /* Dark mode support (kept subtle). */
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0b0f16;
+        --bg-soft: #0f1520;
+        --surface: #0f1520;
+
+        --text: #e5e7eb;
+        --muted: #aab2bf;
+        --muted-2: #c3cad6;
+
+        --border: rgba(229,231,235,.14);
+        --shadow: 0 10px 30px rgba(0,0,0,.35);
+        --shadow-sm: 0 6px 18px rgba(0,0,0,.28);
+
+        --focus: #60a5fa;
+      }
+      img{filter:saturate(.98) contrast(1.02)}
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--hug-ink);
-      background:
-        radial-gradient(1200px 600px at 18% 8%, rgba(0,165,138,.14), transparent 62%),
-        radial-gradient(900px 520px at 84% 12%, rgba(125,211,252,.14), transparent 60%),
-        radial-gradient(900px 600px at 70% 86%, rgba(30,90,168,.10), transparent 55%),
-        linear-gradient(180deg, #f6fbfa 0%, #eef6f4 38%, #f7fafc 100%);
-      min-height:100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
+      line-height: var(--lh);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
       overflow-x:hidden;
     }
 
     a{color:inherit; text-decoration:none}
+    a:focus-visible, button:focus-visible{
+      outline: 3px solid color-mix(in srgb, var(--focus) 75%, transparent);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
     .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--pad)}
-
-    /* Top bar */
-    .topbar{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter: blur(14px);
-      background: rgba(255,255,255,.72);
-      border-bottom: 1px solid rgba(11,19,32,.08);
+    .skip-link{
+      position:absolute; left:-999px; top:auto;
+      width:1px; height:1px; overflow:hidden;
     }
-    .topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:14px; padding: 12px var(--pad)}
-    .brand{display:flex; align-items:center; gap:10px; min-width: 220px}
-    .logo{
-      width:36px; height:36px; border-radius: 14px;
-      background:
-        radial-gradient(18px 18px at 30% 28%, rgba(125,211,252,.55), transparent 60%),
-        linear-gradient(135deg, var(--hug-primary) 0%, var(--hug-primary-2) 52%, var(--hug-accent) 100%);
-      box-shadow: 0 12px 26px rgba(0,0,0,.35);
-      border: 1px solid rgba(255,255,255,.16);
-    }
-    .brand h1{margin:0; font-size:14px; letter-spacing:.35px; color: rgba(11,19,32,.92); font-weight:650}
-    .brand p{margin:0; font-size:12px; color: rgba(11,19,32,.58)}
-
-    nav{display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end}
-    nav a{
-      font-size:13px;
-      color: rgba(11,19,32,.72);
-      padding:10px 10px;
+    .skip-link:focus{
+      left: var(--pad); top: 12px;
+      width:auto; height:auto;
+      padding: 10px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      border: 1px solid transparent;
-      transition: .18s ease;
+      box-shadow: var(--shadow-sm);
+      z-index: 1000;
     }
-    nav a:hover{color: rgba(11,19,32,.92); border-color: rgba(11,19,32,.10); background: rgba(255,255,255,.72)}
+
+    /* Top bar (clean, no blur) */
+    header.topbar{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: saturate(120%) blur(8px);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 14px var(--pad);
+    }
+
+    .brand{display:flex; align-items:center; gap:12px; min-width: 220px}
+    .mark{
+      width: 34px; height: 34px;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+      border: 1px solid var(--border);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .mark svg{width: 18px; height: 18px; color: var(--accent)}
+    .brand h1{margin:0; font-size: 14px; font-weight: 650; letter-spacing: .2px}
+    .brand p{margin:0; font-size: 12px; color: var(--muted)}
+
+    nav{display:flex; align-items:center; gap: 10px; flex-wrap:wrap; justify-content:flex-end}
+    nav a{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: background .15s ease, border-color .15s ease, color .15s ease;
+    }
+    nav a:hover{
+      color: var(--text);
+      background: var(--bg-soft);
+      border-color: var(--border);
+    }
 
     .lang-btn{
-      display:inline-flex; align-items:center; gap:8px;
+      display:inline-flex; align-items:center; gap:10px;
       border-radius: 999px;
       padding: 10px 12px;
-      border: 1px solid rgba(11,19,32,.12);
-      color: rgba(11,19,32,.88);
-      background:
-        radial-gradient(24px 24px at 28% 25%, rgba(125,211,252,.18), transparent 60%),
-        linear-gradient(135deg, rgba(0,117,94,.10), rgba(30,90,168,.06));
-      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: none;
       cursor:pointer;
-      transition: transform .12s ease, filter .12s ease, border-color .12s ease;
       user-select:none;
+      transition: background .15s ease, border-color .15s ease, transform .12s ease;
       white-space:nowrap;
     }
-    .lang-btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22); filter:brightness(1.05)}
+    .lang-btn:hover{background: var(--bg-soft); border-color: color-mix(in srgb, var(--border) 60%, var(--text))}
     .lang-pill{
-      font-size:11px;
-      padding:4px 8px;
+      font-size: 11px;
+      padding: 4px 8px;
       border-radius: 999px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(11,19,32,.10);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
     }
 
-    /* Hero */
-    .hero{padding: clamp(36px, 6vw, 72px) 0 20px}
-    .hero-grid{display:grid; grid-template-columns: 1.08fr .92fr; gap: 22px; align-items:stretch}
+    /* Layout */
+    main{display:block}
+    section{padding: clamp(44px, 6vw, 84px) 0}
+    section.alt{background: var(--bg-soft)}
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 14px;
+      margin: 0 0 18px;
+    }
+    .section-head h2,
+    .section-head h3{margin:0; font-size: 20px; letter-spacing: .1px}
+    .section-head p{margin: 6px 0 0; color: var(--muted); font-size: 14px; max-width: 72ch}
 
-    .glass{
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(11,19,32,.10);
+    /* Hero */
+    .hero{padding: clamp(44px, 7vw, 92px) 0 18px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card{
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
-      position:relative;
     }
-    .glass::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 260px at 22% 12%, rgba(0,165,138,.30), transparent 65%),
-        radial-gradient(420px 240px at 80% 20%, rgba(125,211,252,.22), transparent 62%),
-        radial-gradient(460px 320px at 70% 88%, rgba(30,90,168,.20), transparent 64%);
-      pointer-events:none;
-      opacity:.9;
+    .pad{padding: 22px}
+    .hero-title{
+      margin: 0;
+      font-size: clamp(30px, 3.8vw, 48px);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
     }
-
-    .hero-card{padding: 26px 26px 22px}
-    .kicker{display:inline-flex; gap:10px; align-items:center; margin-bottom:14px}
-    .dot{width:9px; height:9px; border-radius:99px; background: var(--hug-primary-2); box-shadow: 0 0 0 6px rgba(0,165,138,.16)}
-    .kicker span{color: rgba(11,19,32,.66); font-size:12px; letter-spacing:.18px}
-
-    .title{
-      margin:0;
-      color: rgba(11,19,32,.94);
-      font-size: clamp(28px, 3.4vw, 42px);
-      line-height:1.06;
-      letter-spacing:-.5px;
+    .hero-subtitle{
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 64ch;
     }
-    .subtitle{
-      margin: 12px 0 18px;
-      color: rgba(11,19,32,.68);
-      font-size: 15px;
-      line-height:1.55;
-      max-width: 62ch;
+    .hero-meta{
+      margin-top: 16px;
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      flex-wrap:wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .hero-meta .dot{
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      display:inline-block;
+      transform: translateY(-1px);
     }
 
-    .cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top: 14px}
+    .cta-row{display:flex; flex-wrap:wrap; gap: 10px; margin-top: 18px}
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
       padding: 12px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(11,19,32,.10);
-      background: rgba(255,255,255,.78);
-      color: rgba(11,19,32,.88);
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
       font-size: 13px;
+      font-weight: 550;
       cursor:pointer;
-      user-select:none;
+      transition: background .15s ease, border-color .15s ease, transform .12s ease;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.92); border-color: rgba(11,19,32,.16)}
-
+    .btn:hover{background: var(--bg-soft); border-color: color-mix(in srgb, var(--border) 55%, var(--text)); transform: translateY(-1px)}
     .btn.primary{
-      background: linear-gradient(135deg, rgba(0,117,94,.88), rgba(0,165,138,.78));
-      border-color: rgba(0,165,138,.35);
-      color: rgba(255,255,255,.96);
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
     }
-    .btn.primary:hover{border-color: rgba(125,211,252,.35)}
-
-    .mini{
-      color: rgba(11,19,32,.56);
-      font-size: 12px;
-      margin: 10px 0 0;
+    .btn.primary:hover{background: color-mix(in srgb, var(--accent) 92%, #000); border-color: color-mix(in srgb, var(--accent) 92%, #000)}
+    .btn.secondary{
+      border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+      color: var(--accent);
     }
 
-    /* Right hero panel */
-    .profile{padding: 22px}
-    .profile-top{display:flex; gap:14px; align-items:center}
-    .avatar-img{
-      width:58px; height:58px; border-radius: 999px;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,.22);
-      box-shadow: 0 14px 30px rgba(0,0,0,.28);
-      background: rgba(255,255,255,.10);
-    }
-    .hero-avatar{display:flex; align-items:center; gap:12px; margin: 10px 0 12px}
-    .hero-avatar img{
-      width:76px; height:76px; border-radius: 999px;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,.22);
-      box-shadow: 0 18px 44px rgba(0,0,0,.35);
-      background: rgba(255,255,255,.10);
-    }
-    .profile h2{margin:0; color: rgba(11,19,32,.92); font-size:16px; letter-spacing:.2px}
-    .profile p{margin:4px 0 0; color: rgba(11,19,32,.64); font-size:13px; line-height:1.45}
-
-    .chips{display:flex; flex-wrap:wrap; gap:8px; margin: 16px 0 14px}
-    .chip{
-      font-size:12px;
-      padding:8px 10px;
+    .profile-top{display:flex; align-items:center; gap: 14px}
+    .avatar{
+      width: 72px; height: 72px;
       border-radius: 999px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(11,19,32,.10);
-      color: rgba(11,19,32,.72);
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      flex: 0 0 auto;
     }
+    .profile h2{margin:0; font-size: 16px; font-weight: 650}
+    .profile p{margin: 4px 0 0; color: var(--muted); font-size: 13px}
 
-    .stats{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top: 10px}
-    .stat{
-      background: rgba(255,255,255,.80);
-      border: 1px solid rgba(11,19,32,.10);
-      border-radius: 18px;
-      padding: 12px 12px;
-    }
-    .stat b{display:block; color: rgba(11,19,32,.92); font-size:14px}
-    .stat span{display:block; color: rgba(11,19,32,.62); font-size:11px; margin-top:4px}
-
-    /* Sections */
-    section{padding: 24px 0}
-    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin: 10px 0 14px}
-    .section-head h3{margin:0; color: rgba(11,19,32,.92); font-size: 18px; letter-spacing:.2px}
-    .section-head p{margin:0; color: rgba(11,19,32,.58); font-size: 13px}
-
-    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px}
-    .card{
-      background: var(--hug-card);
-      border: 1px solid rgba(255,255,255,.24);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-soft);
-      overflow:hidden;
-      position:relative;
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(520px 260px at 12% 10%, rgba(0,165,138,.12), transparent 60%),
-        radial-gradient(420px 240px at 88% 18%, rgba(30,90,168,.10), transparent 58%);
-      pointer-events:none;
-    }
-    .card > *{position:relative}
-    .card.pad{padding: 18px}
-
-    .two-col{grid-column: span 6}
-    .span-5{grid-column: span 5}
-    .span-7{grid-column: span 7}
-    .span-12{grid-column: span 12}
-
-    .muted{color: rgba(11,19,32,.68)}
-    .strong{color: rgba(11,19,32,.92)}
-    .bullet{margin: 12px 0 0; padding-left: 18px; color: rgba(11,19,32,.78)}
-    .bullet li{margin: 6px 0}
-
-    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px}
-    .pill{
-      font-size:12px;
+    .chips{display:flex; flex-wrap:wrap; gap: 8px; margin: 14px 0 10px}
+    .chip{
+      font-size: 12px;
       padding: 8px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(0,0,0,.08);
-      background: rgba(255,255,255,.66);
-      color: rgba(11,19,32,.82);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
     }
 
-    .module-grid{display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 10px}
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .stat{
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .stat b{display:block; font-size: 14px}
+    .stat span{display:block; margin-top: 4px; font-size: 12px; color: var(--muted)}
+
+    /* Grid blocks */
+    .grid{display:grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 14px}
+    .span-12{grid-column: span 12}
+    .span-7{grid-column: span 7}
+    .span-5{grid-column: span 5}
+
+    .muted{color: var(--muted)}
+    .strong{color: var(--text); font-weight: 600}
+    ul.bullet{margin: 12px 0 0; padding-left: 18px; color: var(--muted)}
+    ul.bullet li{margin: 6px 0}
+
+    .pillrow{display:flex; flex-wrap:wrap; gap: 10px; margin-top: 12px}
+    .pill{
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+    }
+
+    .module-grid{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 12px}
     .module{
-      border-radius: 18px;
-      background: rgba(255,255,255,.74);
-      border: 1px solid rgba(0,0,0,.08);
+      border: 1px solid var(--border);
+      border-radius: 12px;
       padding: 14px;
+      background: var(--surface);
+      box-shadow: none;
     }
-    .module b{display:block; font-size:13px; color: rgba(11,19,32,.9)}
-    .module span{display:block; font-size:12px; color: rgba(11,19,32,.68); margin-top:4px; line-height:1.35}
+    .module b{display:block; font-size: 13px}
+    .module span{display:block; font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.45}
 
+    /* Submissions */
     .submissions{
       display:grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
     }
     .submission{
-      border-radius: 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
       padding: 14px;
-      border: 1px solid rgba(0,0,0,.08);
-      background: rgba(255,255,255,.80);
-      transition: transform .12s ease, box-shadow .12s ease;
+      background: var(--surface);
+      box-shadow: none;
+      transition: box-shadow .15s ease, transform .12s ease, border-color .15s ease;
     }
-    .submission:hover{transform: translateY(-2px); box-shadow: 0 16px 34px rgba(0,0,0,.15)}
-    .submission b{display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:13px; color: rgba(11,19,32,.9)}
+    .submission:hover{
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--border) 55%, var(--text));
+    }
+    .submission h4{
+      margin:0;
+      font-size: 13px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
     .badge{
-      font-size:11px;
+      font-size: 11px;
       padding: 4px 8px;
       border-radius: 999px;
-      background: linear-gradient(135deg, rgba(0,117,94,.14), rgba(30,90,168,.10));
-      border: 1px solid rgba(0,0,0,.06);
-      color: rgba(11,19,32,.72);
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--muted);
       white-space:nowrap;
+      font-weight: 500;
     }
-    .submission p{margin: 8px 0 0; font-size:12px; color: rgba(11,19,32,.68); line-height:1.45}
+    .submission p{margin: 8px 0 0; font-size: 12px; color: var(--muted); line-height: 1.5}
+    .submission .link{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .submission .link svg{width: 14px; height: 14px}
 
     footer{padding: 26px 0 40px}
     .foot{
-      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
-      color: rgba(11,19,32,.56);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap: 10px;
+      color: var(--muted);
       font-size: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
     }
 
     /* Responsive */
     @media (max-width: 980px){
-      .hero-grid{grid-template-columns: 1fr}
       nav{display:none}
-      .two-col{grid-column: span 12}
-      .span-5{grid-column: span 12}
-      .span-7{grid-column: span 12}
+      .hero-grid{grid-template-columns: 1fr}
+      .span-7,.span-5{grid-column: span 12}
       .submissions{grid-template-columns: repeat(2, minmax(0,1fr))}
+      .stats{grid-template-columns: 1fr}
     }
     @media (max-width: 520px){
       .submissions{grid-template-columns: 1fr}
-      .stats{grid-template-columns: 1fr}
-      .topbar-inner{gap:10px}
-      .brand{min-width:unset}
+      .topbar-inner{gap: 10px}
+      .brand{min-width: unset}
+      .avatar{width: 64px; height: 64px}
     }
 
-    /* Subtle entrance animation */
-    @keyframes floatIn{from{opacity:0; transform: translateY(10px)} to{opacity:1; transform: translateY(0)}}
-    .animate{animation: floatIn .6s ease both}
-    .delay-1{animation-delay:.05s}
-    .delay-2{animation-delay:.12s}
-    .delay-3{animation-delay:.18s}
+    /* Motion accessibility */
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{transition:none !important; animation:none !important}
+    }
   </style>
 </head>
 
 <body>
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
   <header class="topbar">
     <div class="topbar-inner wrap">
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
+        <div class="mark" aria-hidden="true">
+          <!-- simple mark -->
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 17l5-10 5 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9.2 13h5.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
         <div>
           <h1 data-i18n="brand.title">Generative AI for Work & Research</h1>
           <p data-i18n="brand.subtitle">Portfolio and weekly submissions</p>
@@ -353,73 +438,72 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
+    <!-- HERO -->
     <section class="hero">
       <div class="wrap hero-grid">
+        <article class="card pad" aria-label="Intro">
+          <h2 class="hero-title" data-i18n="hero.title">From prompts to real workflows, every week.</h2>
+          <p class="hero-subtitle" data-i18n="hero.subtitle">
+            A single-page hub for my work across the 8-week live cohort course: no-code AI tools for task automation, research acceleration, and practical deliverables.
+          </p>
 
-        <div class="glass animate">
-          <div class="hero-card">
-            <div class="kicker">
-              <span class="dot" aria-hidden="true"></span>
-              <span data-i18n="hero.kicker">Course portfolio</span>
-            </div>
-
-            <div class="hero-avatar" aria-label="Avatar">
-              <img src="https://github.com/crisskala/graph-ai-portfolio/blob/main/015-Skala.jpg?raw=true" alt="Portrait of Christian Skalafouris" loading="eager" />
-            </div>
-
-            <h2 class="title" data-i18n="hero.title">From prompts to real workflows, every week.</h2>
-            <p class="subtitle" data-i18n="hero.subtitle">
-              A single-page hub for my work across the 8-week live cohort course: no-code AI tools for task automation, research acceleration, and practical deliverables.
-            </p>
-
-            <div class="cta-row">
-              <a class="btn primary" href="#submissions" data-i18n="hero.cta1">Explore weekly submissions</a>
-              <a class="btn" href="#course" data-i18n="hero.cta2">See course modules</a>
-            </div>
-
-            <p class="mini" data-i18n="hero.note">Links will be added progressively as submissions are completed.</p>
+          <div class="hero-meta" aria-label="Highlights">
+            <span class="dot" aria-hidden="true"></span><span data-i18n="hero.meta1">Course portfolio</span>
+            <span class="dot" aria-hidden="true"></span><span data-i18n="hero.meta2">Weekly deliverables</span>
+            <span class="dot" aria-hidden="true"></span><span data-i18n="hero.meta3">Capstone showcase</span>
           </div>
-        </div>
 
-        <aside class="glass animate delay-1" aria-label="Profile summary">
-          <div class="profile">
-            <div class="profile-top">
-              <img class="avatar-img" src="https://github.com/crisskala/graph-ai-portfolio/blob/main/015-Skala.jpg?raw=true" alt="Portrait of Christian Skalafouris" loading="lazy" decoding="async" />
-              <div>
-                <h2 data-i18n="profile.name">Christian Skalafouris</h2>
-                <p data-i18n="profile.role">Hospital pharmacist, digital health and clinical decision support</p>
-              </div>
+          <div class="cta-row">
+            <a class="btn primary" href="#submissions" data-i18n="hero.cta1">Explore weekly submissions</a>
+            <a class="btn secondary" href="#course" data-i18n="hero.cta2">See course modules</a>
+          </div>
+
+          <p class="muted" style="margin:14px 0 0; font-size: 13px" data-i18n="hero.note">
+            Links will be added progressively as submissions are completed.
+          </p>
+        </article>
+
+        <aside class="card pad profile" aria-label="Profile summary">
+          <div class="profile-top">
+            <img class="avatar"
+                 src="https://github.com/crisskala/graph-ai-portfolio/blob/main/015-Skala.jpg?raw=true"
+                 alt="Portrait of Christian Skalafouris"
+                 loading="lazy"
+                 decoding="async" />
+            <div>
+              <h2 data-i18n="profile.name">Christian Skalafouris</h2>
+              <p data-i18n="profile.role">Hospital pharmacist, digital health and clinical decision support</p>
             </div>
+          </div>
 
-            <div class="chips" aria-label="Focus areas">
-              <span class="chip" data-i18n="profile.chip1">Medication databases</span>
-              <span class="chip" data-i18n="profile.chip2">Clinical decision support</span>
-              <span class="chip" data-i18n="profile.chip3">Research & teaching</span>
-              <span class="chip" data-i18n="profile.chip4">UX / design thinking</span>
+          <div class="chips" aria-label="Focus areas">
+            <span class="chip" data-i18n="profile.chip1">Medication databases</span>
+            <span class="chip" data-i18n="profile.chip2">Clinical decision support</span>
+            <span class="chip" data-i18n="profile.chip3">Research & teaching</span>
+            <span class="chip" data-i18n="profile.chip4">UX / design thinking</span>
+          </div>
+
+          <div class="stats" aria-label="Course stats">
+            <div class="stat">
+              <b data-i18n="profile.stat1.v">8 weeks</b>
+              <span data-i18n="profile.stat1.k">Live cohort course</span>
             </div>
-
-            <div class="stats" aria-label="Highlights">
-              <div class="stat">
-                <b data-i18n="profile.stat1.v">8 weeks</b>
-                <span data-i18n="profile.stat1.k">Live cohort course</span>
-              </div>
-              <div class="stat">
-                <b data-i18n="profile.stat2.v">7 modules</b>
-                <span data-i18n="profile.stat2.k">Core workshops</span>
-              </div>
-              <div class="stat">
-                <b data-i18n="profile.stat3.v">Capstone</b>
-                <span data-i18n="profile.stat3.k">Final showcase</span>
-              </div>
+            <div class="stat">
+              <b data-i18n="profile.stat2.v">7 modules</b>
+              <span data-i18n="profile.stat2.k">Core workshops</span>
+            </div>
+            <div class="stat">
+              <b data-i18n="profile.stat3.v">Capstone</b>
+              <span data-i18n="profile.stat3.k">Final showcase</span>
             </div>
           </div>
         </aside>
-
       </div>
     </section>
 
-    <section id="about">
+    <!-- ABOUT -->
+    <section id="about" class="alt">
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -429,7 +513,7 @@
         </div>
 
         <div class="grid">
-          <div class="card pad span-7 animate delay-2">
+          <article class="card pad span-7">
             <p class="strong" style="margin:0 0 10px" data-i18n="about.p1">
               I am a hospital pharmacist and project lead at the Hôpitaux Universitaires de Genève (HUG), working at the interface between healthcare teams, IT engineers, and third-party drug knowledge providers.
             </p>
@@ -444,12 +528,12 @@
               <span class="pill" data-i18n="about.pill4">Interoperability</span>
               <span class="pill" data-i18n="about.pill5">Applied AI</span>
             </div>
-          </div>
+          </article>
 
-          <div class="card pad span-5 animate delay-3">
+          <aside class="card pad span-5" aria-label="Quick profile">
             <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom: 8px;">
-              <b style="font-size:14px; color: rgba(11,19,32,.9)" data-i18n="about.quick">Quick profile</b>
-              <span style="font-size:12px; color: rgba(11,19,32,.6)" data-i18n="about.location">Geneva region</span>
+              <b style="font-size:14px" data-i18n="about.quick">Quick profile</b>
+              <span style="font-size:12px; color: var(--muted)" data-i18n="about.location">Geneva region</span>
             </div>
             <ul class="bullet">
               <li data-i18n="about.q1">Doctorate in pharmaceutical sciences (University of Geneva)</li>
@@ -457,12 +541,12 @@
               <li data-i18n="about.q3">Projects: medication database, prescribing system interfaces, PharmaCheck</li>
               <li data-i18n="about.q4">Teaching and supervision of research projects</li>
             </ul>
-          </div>
-
+          </aside>
         </div>
       </div>
     </section>
 
+    <!-- COURSE -->
     <section id="course">
       <div class="wrap">
         <div class="section-head">
@@ -473,7 +557,7 @@
         </div>
 
         <div class="grid">
-          <div class="card pad span-7 animate">
+          <article class="card pad span-7">
             <p class="strong" style="margin:0 0 10px" data-i18n="course.p1">
               “Generative AI for Work & Research” is an 8-week live cohort course built around no-code tools for task automation and research productivity.
             </p>
@@ -491,10 +575,10 @@
               <div class="module"><b data-i18n="course.m7.t">Module 7. Capstone Project & Showcase</b><span data-i18n="course.m7.d">Iterate with feedback, finalize a solution/tool, and present it publicly.</span></div>
               <div class="module"><b data-i18n="course.assess.t">Assessment</b><span data-i18n="course.assess.d">Quizzes, workshop assignments, participation, and a final project.</span></div>
             </div>
-          </div>
+          </article>
 
-          <div class="card pad span-5 animate delay-1">
-            <b style="display:block; font-size:14px; color: rgba(11,19,32,.9); margin-bottom:8px" data-i18n="course.features">Bootcamp features</b>
+          <aside class="card pad span-5" aria-label="Course features">
+            <b style="display:block; font-size:14px; margin-bottom:10px" data-i18n="course.features">Bootcamp features</b>
             <ul class="bullet">
               <li data-i18n="course.f1">Weekly live workshops</li>
               <li data-i18n="course.f2">Weekly live help sessions</li>
@@ -504,19 +588,19 @@
               <li data-i18n="course.f6">Shareable certificate + lifetime tutorial access</li>
             </ul>
 
-            <div style="margin-top:14px; padding:12px; border-radius: 18px; border: 1px solid rgba(0,0,0,.08); background: rgba(255,255,255,.72)">
-              <b style="display:block; font-size:13px; color: rgba(11,19,32,.9)" data-i18n="course.grading">Grading (overview)</b>
-              <p style="margin:8px 0 0; font-size:12px; color: rgba(11,19,32,.7); line-height:1.45" data-i18n="course.gradingNote">
+            <div style="margin-top:14px; padding:14px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-soft)">
+              <b style="display:block; font-size:13px" data-i18n="course.grading">Grading (overview)</b>
+              <p style="margin:8px 0 0; font-size:12px; color: var(--muted); line-height:1.55" data-i18n="course.gradingNote">
                 Final grade combines quizzes, workshop assignments, attendance/participation, and a final project.
               </p>
             </div>
-          </div>
-
+          </aside>
         </div>
       </div>
     </section>
 
-    <section id="submissions">
+    <!-- SUBMISSIONS -->
+    <section id="submissions" class="alt">
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -525,81 +609,66 @@
           </div>
         </div>
 
-        <div class="card pad animate">
+        <div class="card pad">
           <div class="submissions" aria-label="Weekly submissions">
 
-            <div class="submission">
-              <b><span data-i18n="subs.w1">Week 1</span><span class="badge" data-i18n="subs.w1b">Websites & documents</span></b>
+            <article class="submission">
+              <h4><span data-i18n="subs.w1">Week 1</span><span class="badge" data-i18n="subs.w1b">Websites & documents</span></h4>
               <p data-i18n="subs.w1d">Deliverable placeholder: a structured document or mini-website created with Canvas.</p>
-            </div>
+            </article>
 
-            <div class="submission">
-              <b>
-                <span data-i18n="subs.w2">Week 2</span>
-                <span class="badge" data-i18n="subs.w2b">Data analysis</span>
-              </b>
-
+            <article class="submission">
+              <h4><span data-i18n="subs.w2">Week 2</span><span class="badge" data-i18n="subs.w2b">Data analysis</span></h4>
               <p data-i18n="subs.w2d">
                 Automated analysis of Gapminder data exploring the relationship between CO2 emissions per capita and Internet use, using AI-assisted workflows.
               </p>
-
-              <a
-                href="https://crisskala.github.io/graph-ai-portfolio/rapport-CO2_internet.html"
-                target="_blank"
-                rel="noopener"
-                style="display:inline-block; margin-top:8px; font-size:12px; color:#00755e;"
-                data-i18n="subs.w2link"
-              >
-                View project report
+              <a class="link" href="https://crisskala.github.io/graph-ai-portfolio/rapport-CO2_internet.html" target="_blank" rel="noopener" data-i18n="subs.w2link">
+                <span>View project report</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M10 7h7v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </a>
-            </div>
+            </article>
 
-            <!-- UPDATED: Workshop 3 link + description -->
-            <div class="submission">
-              <b>
-                <span data-i18n="subs.w3">Week 3</span>
-                <span class="badge" data-i18n="subs.w3b">Job market data analysis</span>
-              </b>
-
+            <article class="submission">
+              <h4><span data-i18n="subs.w3">Week 3</span><span class="badge" data-i18n="subs.w3b">Job market data analysis</span></h4>
               <p data-i18n="subs.w3d">
                 Workshop 3: Job Market Data Analysis. I used LLMs in Google Sheets to extract structured signals from job postings, then analyzed relationships between experience requirements, programming languages, and salaries.
               </p>
-
-              <a
-                href="https://crisskala.github.io/graph-ai-portfolio/Job_Analysis_Report.html"
-                target="_blank"
-                rel="noopener"
-                style="display:inline-block; margin-top:8px; font-size:12px; color:#00755e;"
-                data-i18n="subs.w3link"
-              >
-                View project report
+              <a class="link" href="https://crisskala.github.io/graph-ai-portfolio/Job_Analysis_Report.html" target="_blank" rel="noopener" data-i18n="subs.w3link">
+                <span>View project report</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M10 7h7v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </a>
-            </div>
+            </article>
 
-            <div class="submission">
-              <b><span data-i18n="subs.w4">Week 4</span><span class="badge" data-i18n="subs.w4b">Custom GPT</span></b>
+            <article class="submission">
+              <h4><span data-i18n="subs.w4">Week 4</span><span class="badge" data-i18n="subs.w4b">Custom GPT</span></h4>
               <p data-i18n="subs.w4d">Deliverable placeholder: a tailored assistant with retrieval and guardrails.</p>
-            </div>
+            </article>
 
-            <div class="submission">
-              <b><span data-i18n="subs.w5">Week 5</span><span class="badge" data-i18n="subs.w5b">Automation</span></b>
+            <article class="submission">
+              <h4><span data-i18n="subs.w5">Week 5</span><span class="badge" data-i18n="subs.w5b">Automation</span></h4>
               <p data-i18n="subs.w5d">Deliverable placeholder: an agent workflow for repetitive tasks and monitoring.</p>
-            </div>
+            </article>
 
-            <div class="submission">
-              <b><span data-i18n="subs.w6">Week 6</span><span class="badge" data-i18n="subs.w6b">Communication</span></b>
+            <article class="submission">
+              <h4><span data-i18n="subs.w6">Week 6</span><span class="badge" data-i18n="subs.w6b">Communication</span></h4>
               <p data-i18n="subs.w6d">Deliverable placeholder: multi-audience summaries + visuals for dissemination.</p>
-            </div>
+            </article>
 
-            <div class="submission">
-              <b><span data-i18n="subs.w7">Week 7</span><span class="badge" data-i18n="subs.w7b">Capstone</span></b>
+            <article class="submission">
+              <h4><span data-i18n="subs.w7">Week 7</span><span class="badge" data-i18n="subs.w7b">Capstone</span></h4>
               <p data-i18n="subs.w7d">Deliverable placeholder: capstone progress, iterations, and peer feedback.</p>
-            </div>
+            </article>
 
-            <div class="submission">
-              <b><span data-i18n="subs.w8">Week 8</span><span class="badge" data-i18n="subs.w8b">Showcase</span></b>
+            <article class="submission">
+              <h4><span data-i18n="subs.w8">Week 8</span><span class="badge" data-i18n="subs.w8b">Showcase</span></h4>
               <p data-i18n="subs.w8d">Deliverable placeholder: final presentation, public Q&A, and takeaways.</p>
-            </div>
+            </article>
 
           </div>
         </div>
@@ -607,14 +676,13 @@
         <div style="height:14px"></div>
 
         <div class="grid">
-          <div class="card pad span-12 animate delay-1">
-            <b style="display:block; font-size:14px; color: rgba(11,19,32,.9)" data-i18n="subs.noteTitle">How we’ll update this page</b>
-            <p style="margin:8px 0 0; font-size:12px; color: rgba(11,19,32,.7); line-height:1.55" data-i18n="subs.note">
+          <div class="card pad span-12">
+            <b style="display:block; font-size:14px" data-i18n="subs.noteTitle">How we’ll update this page</b>
+            <p style="margin:8px 0 0; font-size:12px; color: var(--muted); line-height:1.55" data-i18n="subs.note">
               Each week card will later include: a short description, tool stack, artifacts (slides/docs/code), and a link to the submission.
             </p>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -629,18 +697,24 @@
   <script>
     const i18n = {
       en: {
+        "a11y.skip":"Skip to content",
+
         "brand.title":"Generative AI for Work & Research",
         "brand.subtitle":"Portfolio and weekly submissions",
         "nav.about":"About",
         "nav.course":"Course",
         "nav.submissions":"Submissions",
         "lang.switch":"Français",
-        "hero.kicker":"Course portfolio",
+
         "hero.title":"From prompts to real workflows, every week.",
         "hero.subtitle":"A single-page hub for my work across the 8-week live cohort course: no-code AI tools for task automation, research acceleration, and practical deliverables.",
+        "hero.meta1":"Course portfolio",
+        "hero.meta2":"Weekly deliverables",
+        "hero.meta3":"Capstone showcase",
         "hero.cta1":"Explore weekly submissions",
         "hero.cta2":"See course modules",
         "hero.note":"Links will be added progressively as submissions are completed.",
+
         "profile.name":"Christian Skalafouris",
         "profile.role":"Hospital pharmacist, digital health and clinical decision support",
         "profile.chip1":"Medication databases",
@@ -705,6 +779,7 @@
         "subs.w1":"Week 1",
         "subs.w1b":"Websites & documents",
         "subs.w1d":"Deliverable placeholder: a structured document or mini-website created with Canvas.",
+
         "subs.w2":"Week 2",
         "subs.w2b":"Data analysis",
         "subs.w2d":"Automated analysis of Gapminder data exploring the relationship between CO2 emissions per capita and Internet use, using AI-assisted workflows.",
@@ -730,25 +805,33 @@
         "subs.w8":"Week 8",
         "subs.w8b":"Showcase",
         "subs.w8d":"Deliverable placeholder: final presentation, public Q&A, and takeaways.",
+
         "subs.noteTitle":"How we’ll update this page",
         "subs.note":"Each week card will later include: a short description, tool stack, artifacts (slides/docs/code), and a link to the submission.",
 
         "footer.left":"© <span id=\"year\"></span> Portfolio page",
         "footer.right":"No email displayed to reduce spam"
       },
+
       fr: {
+        "a11y.skip":"Aller au contenu",
+
         "brand.title":"IA générative pour le travail et la recherche",
         "brand.subtitle":"Portfolio et rendus hebdomadaires",
         "nav.about":"À propos",
         "nav.course":"Cours",
         "nav.submissions":"Rendus",
         "lang.switch":"English",
-        "hero.kicker":"Portfolio du cours",
+
         "hero.title":"Des prompts à des workflows concrets, chaque semaine.",
         "hero.subtitle":"Une page unique pour regrouper mes travaux sur ce cours en cohorte de 8 semaines : outils GenAI no-code, automatisation, recherche accélérée et livrables utilisables.",
+        "hero.meta1":"Portfolio du cours",
+        "hero.meta2":"Rendus hebdomadaires",
+        "hero.meta3":"Showcase capstone",
         "hero.cta1":"Voir les rendus hebdomadaires",
         "hero.cta2":"Voir les modules",
         "hero.note":"Les liens seront ajoutés progressivement au fil des rendus.",
+
         "profile.name":"Christian Skalafouris",
         "profile.role":"Pharmacien hospitalier, santé digitale et aide à la décision clinique",
         "profile.chip1":"Bases de données médicaments",
@@ -759,7 +842,7 @@
         "profile.stat1.k":"Cours en cohorte",
         "profile.stat2.v":"7 modules",
         "profile.stat2.k":"Ateliers clés",
-        "profile.stat3.v":"Projet",
+        "profile.stat3.v":"Capstone",
         "profile.stat3.k":"Showcase final",
 
         "about.title":"À propos de moi",
@@ -813,13 +896,14 @@
         "subs.w1":"Semaine 1",
         "subs.w1b":"Sites et documents",
         "subs.w1d":"Placeholder : document structuré ou mini-site créé avec Canvas.",
+
         "subs.w2":"Semaine 2",
         "subs.w2b":"Analyse de données",
         "subs.w2d":"Analyse automatisée de données Gapminder explorant la relation entre les émissions de CO2 par habitant et l’usage d’Internet, via des workflows assistés par IA.",
         "subs.w2link":"Voir le rapport",
 
         "subs.w3":"Semaine 3",
-        "subs.w3b":"Analyse de données du marché de l’emploi",
+        "subs.w3b":"Analyse du marché de l’emploi",
         "subs.w3d":"Atelier 3 : analyse d’offres d’emploi. J’ai utilisé des LLM dans Google Sheets pour extraire des informations à partir d’annonces, puis j’ai analysé les relations entre l’expérience demandée, les langages de programmation et les salaires.",
         "subs.w3link":"Voir le rapport",
 
@@ -838,6 +922,7 @@
         "subs.w8":"Semaine 8",
         "subs.w8b":"Showcase",
         "subs.w8d":"Placeholder : présentation finale, Q&A et apprentissages.",
+
         "subs.noteTitle":"Comment cette page sera mise à jour",
         "subs.note":"Chaque carte contiendra ensuite : une description, le stack d’outils, les artefacts (slides/docs/code) et un lien vers le rendu.",
 
@@ -855,7 +940,6 @@
         const key = el.getAttribute("data-i18n");
         const val = dict[key];
         if (typeof val !== "string") return;
-        // Allow a tiny bit of safe HTML only where we control the string.
         if (val.includes("<span")) el.innerHTML = val;
         else el.textContent = val;
       });
@@ -863,20 +947,28 @@
       const pill = document.getElementById("langPill");
       pill.textContent = lang.toUpperCase();
 
-      // Update the toggle label (what you'll switch to)
-      document.getElementById("langLabel").textContent = dict["lang.switch"] || (lang === "en" ? "Français" : "English");
+      document.getElementById("langLabel").textContent =
+        dict["lang.switch"] || (lang === "en" ? "Français" : "English");
     }
 
     function toggleLang(){
       state.lang = (state.lang === "en") ? "fr" : "en";
       applyI18n(state.lang);
+      // optional: persist preference
+      try{ localStorage.setItem("portfolio_lang", state.lang); }catch(e){}
     }
 
-    document.getElementById("langToggle").addEventListener("click", toggleLang);
+    // Init
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Initial render
+    // Restore preference if available
+    try{
+      const saved = localStorage.getItem("portfolio_lang");
+      if (saved === "fr" || saved === "en") state.lang = saved;
+    }catch(e){}
+
     applyI18n(state.lang);
+    document.getElementById("langToggle").addEventListener("click", toggleLang);
   </script>
 </body>
 </html>
