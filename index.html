@@ -374,6 +374,27 @@
     }
     .submission .link svg{width: 14px; height: 14px}
 
+    /* Consultation form */
+    .form-embed{
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .form-embed iframe{
+      width: 100%;
+      height: 780px;
+      border: 0;
+      display: block;
+    }
+    .form-note{
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
     footer{padding: 26px 0 40px}
     .foot{
       display:flex;
@@ -394,12 +415,14 @@
       .span-7,.span-5{grid-column: span 12}
       .submissions{grid-template-columns: repeat(2, minmax(0,1fr))}
       .stats{grid-template-columns: 1fr}
+      .form-embed iframe{height: 860px;}
     }
     @media (max-width: 520px){
       .submissions{grid-template-columns: 1fr}
       .topbar-inner{gap: 10px}
       .brand{min-width: unset}
       .avatar{width: 64px; height: 64px}
+      .form-embed iframe{height: 920px;}
     }
 
     /* Motion accessibility */
@@ -433,6 +456,7 @@
         <a href="#about" data-i18n="nav.about">About</a>
         <a href="#course" data-i18n="nav.course">Course</a>
         <a href="#submissions" data-i18n="nav.submissions">Submissions</a>
+        <a href="#consultation" data-i18n="nav.consultation">Consultation</a>
       </nav>
 
       <button id="langToggle" class="lang-btn" type="button" aria-label="Toggle language">
@@ -461,6 +485,7 @@
           <div class="cta-row">
             <a class="btn primary" href="#submissions" data-i18n="hero.cta1">Explore weekly submissions</a>
             <a class="btn secondary" href="#course" data-i18n="hero.cta2">See course modules</a>
+            <a class="btn" href="#consultation" data-i18n="hero.cta3">Contact for consultation</a>
           </div>
 
           <p class="muted" style="margin:14px 0 0; font-size: 13px" data-i18n="hero.note">
@@ -690,6 +715,29 @@
       </div>
     </section>
 
+    <!-- CONTACT FOR CONSULTATION -->
+    <section id="consultation">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3 data-i18n="consult.title">Contact for Consultation</h3>
+            <p data-i18n="consult.subtitle">Use this form to reach out about consulting opportunities, collaboration, or project support.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="span-12">
+            <div class="form-embed" aria-label="Consultation form">
+              <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfGUyUPpojFox5IuZ-2SMznrGhjpzzG7LpTCSalGVTKuZdoTw/viewform?embedded=true" width="640" height="780" frameborder="0" marginheight="0" marginwidth="0">Chargement…</iframe>
+            </div>
+            <p class="form-note" data-i18n="consult.note">
+              If the form does not load (some browsers or privacy settings may block it), please open it in a new tab from the embedded view.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <div class="wrap foot">
         <span data-i18n="footer.left">© <span id="year"></span> Portfolio page</span>
@@ -708,6 +756,7 @@
         "nav.about":"About",
         "nav.course":"Course",
         "nav.submissions":"Submissions",
+        "nav.consultation":"Consultation",
         "lang.switch":"Français",
 
         "hero.title":"From prompts to real workflows, every week.",
@@ -717,6 +766,7 @@
         "hero.meta3":"Capstone showcase",
         "hero.cta1":"Explore weekly submissions",
         "hero.cta2":"See course modules",
+        "hero.cta3":"Contact for consultation",
         "hero.note":"Links will be added progressively as submissions are completed.",
 
         "profile.name":"Christian Skalafouris",
@@ -813,6 +863,10 @@
         "subs.noteTitle":"How we’ll update this page",
         "subs.note":"Each week card will later include: a short description, tool stack, artifacts (slides/docs/code), and a link to the submission.",
 
+        "consult.title":"Contact for Consultation",
+        "consult.subtitle":"Use this form to reach out about consulting opportunities, collaboration, or project support.",
+        "consult.note":"If the form does not load (some browsers or privacy settings may block it), please open it in a new tab from the embedded view.",
+
         "footer.left":"© <span id=\"year\"></span> Portfolio page",
         "footer.right":"No email displayed to reduce spam"
       },
@@ -825,6 +879,7 @@
         "nav.about":"À propos",
         "nav.course":"Cours",
         "nav.submissions":"Rendus",
+        "nav.consultation":"Consultation",
         "lang.switch":"English",
 
         "hero.title":"Des prompts à des workflows concrets, chaque semaine.",
@@ -834,6 +889,7 @@
         "hero.meta3":"Showcase capstone",
         "hero.cta1":"Voir les rendus hebdomadaires",
         "hero.cta2":"Voir les modules",
+        "hero.cta3":"Contacter pour une consultation",
         "hero.note":"Les liens seront ajoutés progressivement au fil des rendus.",
 
         "profile.name":"Christian Skalafouris",
@@ -929,6 +985,10 @@
 
         "subs.noteTitle":"Comment cette page sera mise à jour",
         "subs.note":"Chaque carte contiendra ensuite : une description, le stack d’outils, les artefacts (slides/docs/code) et un lien vers le rendu.",
+
+        "consult.title":"Contact pour une consultation",
+        "consult.subtitle":"Utilisez ce formulaire pour me contacter à propos d’une mission de conseil, d’une collaboration ou d’un appui projet.",
+        "consult.note":"Si le formulaire ne s’affiche pas (selon le navigateur ou les réglages de confidentialité), ouvrez-le dans un nouvel onglet depuis la vue intégrée.",
 
         "footer.left":"© <span id=\"year\"></span> Page portfolio",
         "footer.right":"Pas d’email affiché pour réduire le spam"
